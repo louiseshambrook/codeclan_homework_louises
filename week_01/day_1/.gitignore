@@ -1,4 +1,4 @@
 
 # ignore file_to_ignore
 
-file_to_*.txt
+file_to_ignore.txt
