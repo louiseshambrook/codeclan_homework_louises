@@ -1,0 +1,121 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(CodeClanData)
+
+starbucks_data <- drinks_content
+
+library(tidyverse)
+```
+```{r}
+# 1  Load in the dataset and have a look at it. What are the dimensions, variable types, variable names, etc.?
+
+dim(starbucks_data)
+glimpse(starbucks_data)
+head(starbucks_data)
+str(starbucks_data)
+#rows - 242
+#columns - 18
+#variable types - chr (characters), dbl (numeric)
+#variable names - beverage category, beverage, beverage_prep, Calories, and then
+#it breaks down into nutritional information.
+
+```
+
+```{r}
+# 2 Let’s first investigate the calories of different drinks. Select the variables Beverage_category, Beverage, Beverage_prep and Calories from your data. Since we are interested in the calorie content, check if there are any NA values in the data, and drop them if there are.
+
+selected_beverages <- select(starbucks_data, Beverage_category,
+                             Beverage, Beverage_prep, Calories) %>%
+  filter(Calories != is.na(Calories))
+selected_beverages
+
+```
+
+```{r}
+# 3 Create a new variable (column) called calorie_diff, which stores the difference between 135 calories (135 calories = 10 cubes of sugar!) and the calories in each drink. (hint: you’ll want to subtract 135 from the calories to see which drink have more or less than 10 cups of sugar).
+
+mutate(selected_beverages, calorie_diff = Calories - 135)
+```
+
+```{r}
+# 4 - Summarise the mean number of calories in each beverage_category. Which 3 category of drinks have the most calories? Which 3 drinks have the least? Write a small summary of your findings.
+
+mean_beverages <- selected_beverages %>%
+  group_by(Beverage_category) %>%
+  summarise(mean(Calories))
+mean_beverages
+
+#Coffee, Frappuccino® Light Blended Coffee, and Classic Espresso Drinks have
+#the fewest calories.
+# Frappuccino® Blended Coffee, Smoothies, and Signature Espresso Drinks have the most.
+
+# I was unable to sort the mean Calories as R would only read this as a
+# function and I could not find a way to convert it to a character (or similar)
+# that could be then be arranged. The head and tail below is how I would have found
+#the top/bottom 3 had I been able to arrange the data. I have manually read my results.
+
+#head(mean_beverages, 3)
+#tail(mean_beverages, 3)
+
+```
+
+```{r}
+# 5 Let’s look at this a different way. What is the average number of calories in each Beverage_prep type?
+
+mean_beverages_prep <- selected_beverages %>%
+  group_by(Beverage_prep) %>%
+  summarise(mean(Calories))
+mean_beverages_prep
+
+
+
+```
+
+```{r}
+# 6 - Which Beverage_prep type contains more than the average calories of all drinks?
+#Hint
+#: to answer this, you’ll have to first figure out what the average calories across all drinks are, and then use that as a filter for the grouped data.
+
+total_mean <- mean(starbucks_data[["Calories"]])
+total_mean
+
+# 193.8719
+
+# I had the same problem as I q4, where it either gives an error,
+# when I write the code not as a string (as below)
+
+# higher_avg <- filter(mean_beverages_prep, mean(Calories) > total_mean)
+# higher_avg
+
+# and when writing it as a string, the code runs but doesn't filter correctly. 
+
+higher_avg <- filter(mean_beverages_prep, "mean(Calories)" < total_mean)
+higher_avg
+
+# I have hard-coded to compare all the numbers 
+
+hard_code_higher <- 193.8719 < c(218.00000, 10.00000, 100.00000, 209.61538, 49.33333, 99.16667,
+            5.00000, 207.27273, 74.00000, 147.82609, 138.33333, 260.00000, 283.75000)
+hard_code_higher
+
+#rows 1, 4, 8, 12, 13 are true, i.e 2% Milk, Grande Nonfat Milk, Soymilk, Venti Nonfat Milk, Whole Milk.
+
+```
+
+```{r}
+# 7 Which is the best type of coffee drink to get if you’re worried about consuming too many calories?
+lowest_beverage <- selected_beverages %>%
+  group_by(Calories, Beverage_category,) %>%
+  summarise(min(Calories))
+lowest_beverage
+
+#Assuming you are only worried about consuming too many calories,
+#the lowest-calorie coffee-drink would be best, which is:
+# Coffee - Brewed Coffee - Short - calories - 3 cals.
+
+
+```
