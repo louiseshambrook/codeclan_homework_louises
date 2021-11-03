@@ -217,201 +217,181 @@ pre code {
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShDb2RlQ2xhbkRhdGEpXG5gYGAifQ== -->
-<pre class="r"><code>library(CodeClanData)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeSh0aWR5dmVyc2UpXG5tb3ZpZV9kYXRhIDwtIHJlYWRfY3N2KFwiZGF0YS9tb3ZpZXMuY3N2XCIpXG5gYGAifQ== -->
+<pre class="r"><code>library(tidyverse)
+movie_data &lt;- read_csv(&quot;data/movies.csv&quot;)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG5BdHRhY2hpbmcgcGFja2FnZTog4oCYQ29kZUNsYW5EYXRh4oCZXG5cblRoZSBmb2xsb3dpbmcgb2JqZWN0IGlzIG1hc2tlZCBmcm9tIOKAmHBhY2thZ2U6ZGF0YXNldHPigJk6XG5cbiAgICB2b2xjYW5vXG4ifQ== -->
-<pre><code>
-Attaching package: ‘CodeClanData’
+<!-- rnb-output-begin eyJkYXRhIjoiUm93czogNDgwMyBDb2x1bW5zOiAxM1xu4pSA4pSAIENvbHVtbiBzcGVjaWZpY2F0aW9uIOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgFxuRGVsaW1pdGVyOiBcIixcIlxuY2hyICg3KTogb3JpZ2luYWxfdGl0bGUsIHRpdGxlLCBob21lcGFnZSwgb3JpZ2luYWxfbGFuZ3VhZ2UsIG92ZXJ2aWV3LCByZWxlYXNlX2RhdGUsIHRhZ2xpbmVcbmRibCAoNik6IGJ1ZGdldCwgcG9wdWxhcml0eSwgcmV2ZW51ZSwgcnVudGltZSwgdm90ZV9hdmVyYWdlLCB2b3RlX2NvdW50XG5cbuKEuSBVc2UgYHNwZWMoKWAgdG8gcmV0cmlldmUgdGhlIGZ1bGwgY29sdW1uIHNwZWNpZmljYXRpb24gZm9yIHRoaXMgZGF0YS5cbuKEuSBTcGVjaWZ5IHRoZSBjb2x1bW4gdHlwZXMgb3Igc2V0IGBzaG93X2NvbF90eXBlcyA9IEZBTFNFYCB0byBxdWlldCB0aGlzIG1lc3NhZ2UuXG4ifQ== -->
+<pre><code>Rows: 4803 Columns: 13
+── Column specification ───────────────────────────────────────────────────────────────────────────────────────
+Delimiter: &quot;,&quot;
+chr (7): original_title, title, homepage, original_language, overview, release_date, tagline
+dbl (6): budget, popularity, revenue, runtime, vote_average, vote_count
 
-The following object is masked from ‘package:datasets’:
-
-    volcano</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3RhcmJ1Y2tzX2RhdGEgPC0gZHJpbmtzX2NvbnRlbnRcblxubGlicmFyeSh0aWR5dmVyc2UpXG5gYGAifQ== -->
-<pre class="r"><code>starbucks_data &lt;- drinks_content
-
-library(tidyverse)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiUmVnaXN0ZXJlZCBTMyBtZXRob2RzIG92ZXJ3cml0dGVuIGJ5ICdkYnBseXInOlxuICBtZXRob2QgICAgICAgICBmcm9tXG4gIHByaW50LnRibF9sYXp5ICAgICBcbiAgcHJpbnQudGJsX3NxbCAgICAgIFxu4pSA4pSAIEF0dGFjaGluZyBwYWNrYWdlcyDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIAgdGlkeXZlcnNlIDEuMy4xIOKUgOKUgFxu4pyTIGdncGxvdDIgMy4zLjUgICAgIOKckyBwdXJyciAgIDAuMy40XG7inJMgdGliYmxlICAzLjEuNSAgICAg4pyTIGRwbHlyICAgMS4wLjdcbuKckyB0aWR5ciAgIDEuMS40ICAgICDinJMgc3RyaW5nciAxLjQuMFxu4pyTIHJlYWRyICAgMi4wLjIgICAgIOKckyBmb3JjYXRzIDAuNS4xXG7ilIDilIAgQ29uZmxpY3RzIOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgCB0aWR5dmVyc2VfY29uZmxpY3RzKCkg4pSA4pSAXG54IGRwbHlyOjpmaWx0ZXIoKSBtYXNrcyBzdGF0czo6ZmlsdGVyKClcbnggZHBseXI6OmxhZygpICAgIG1hc2tzIHN0YXRzOjpsYWcoKVxuIn0= -->
-<pre><code>Registered S3 methods overwritten by &#39;dbplyr&#39;:
-  method         from
-  print.tbl_lazy     
-  print.tbl_sql      
-── Attaching packages ────────────────────────────────────────────────────────────────────── tidyverse 1.3.1 ──
-✓ ggplot2 3.3.5     ✓ purrr   0.3.4
-✓ tibble  3.1.5     ✓ dplyr   1.0.7
-✓ tidyr   1.1.4     ✓ stringr 1.4.0
-✓ readr   2.0.2     ✓ forcats 0.5.1
-── Conflicts ───────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
-x dplyr::filter() masks stats::filter()
-x dplyr::lag()    masks stats::lag()</code></pre>
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyAxICBMb2FkIGluIHRoZSBkYXRhc2V0IGFuZCBoYXZlIGEgbG9vayBhdCBpdC4gV2hhdCBhcmUgdGhlIGRpbWVuc2lvbnMsIHZhcmlhYmxlIHR5cGVzLCB2YXJpYWJsZSBuYW1lcywgZXRjLj9cblxuZGltKHN0YXJidWNrc19kYXRhKVxuZ2xpbXBzZShzdGFyYnVja3NfZGF0YSlcbmhlYWQoc3RhcmJ1Y2tzX2RhdGEpXG5zdHIoc3RhcmJ1Y2tzX2RhdGEpXG4jcm93cyAtIDI0MlxuI2NvbHVtbnMgLSAxOFxuI3ZhcmlhYmxlIHR5cGVzIC0gY2hyIChjaGFyYWN0ZXJzKSwgZGJsIChudW1lcmljKVxuI3ZhcmlhYmxlIG5hbWVzIC0gYmV2ZXJhZ2UgY2F0ZWdvcnksIGJldmVyYWdlLCBiZXZlcmFnZV9wcmVwLCBDYWxvcmllcywgYW5kIHRoZW5cbiNpdCBicmVha3MgZG93biBpbnRvIG51dHJpdGlvbmFsIGluZm9ybWF0aW9uLlxuXG5gYGAifQ== -->
-<pre class="r"><code># 1  Load in the dataset and have a look at it. What are the dimensions, variable types, variable names, etc.?
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI1ExIEFmdGVyIHlvdeKAmXZlIHJlYWQgaW4gdGhlIGRhdGEgYW5kIGFzc2lnbmVkIGl0IHRvIGEgdmFyaWFibGUgd2l0aCBhIHVzZWZ1bCBuYW1lLCBpbnZlc3RpZ2F0ZSBpdC4gV3JpdGUgZG93biBzb21lIGlkZWFzIGZvciB3aGF0IHlvdSBjb3VsZCBkbyB0byBmdXJ0aGVyIGludmVzdGlnYXRlL2NsZWFuIHRoaXMgZGF0YSB1c2luZyB3aGF0IHlvdeKAmXZlIGxlYXJuZWQgdG9kYXkgKG5vIG5lZWQgdG8gY29kZSBpdCB0aG91Z2gsIGp1c3Qgam90IGRvd24gdGhvdWdodHMgYW5kIGlkZWFzKS4gRmVlbCBmcmVlIHRvIGFsc28gd3JpdGUgZG93biBhbnkgZ2VuZXJhbCB0aG91Z2h0cyB5b3UgZ2V0IGxvb2tpbmcgYXQgdGhlIGRhdGEgLSB0aGlzIHRhc2sgaXMganVzdCB0byBnZXQgeW91IHRoaW5raW5nIGFib3V0IGRhdGEgYW5kIGRhdGEgY2xlYW5pbmcvcHJlcHBpbmcuXG5cbmhlYWQobW92aWVfZGF0YSlcbmBgYCJ9 -->
+<pre class="r"><code>#Q1 After you’ve read in the data and assigned it to a variable with a useful name, investigate it. Write down some ideas for what you could do to further investigate/clean this data using what you’ve learned today (no need to code it though, just jot down thoughts and ideas). Feel free to also write down any general thoughts you get looking at the data - this task is just to get you thinking about data and data cleaning/prepping.
 
-dim(starbucks_data)
-glimpse(starbucks_data)
-head(starbucks_data)
-str(starbucks_data)
-#rows - 242
-#columns - 18
-#variable types - chr (characters), dbl (numeric)
-#variable names - beverage category, beverage, beverage_prep, Calories, and then
-#it breaks down into nutritional information.
-</code></pre>
+head(movie_data)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyAyIExldOKAmXMgZmlyc3QgaW52ZXN0aWdhdGUgdGhlIGNhbG9yaWVzIG9mIGRpZmZlcmVudCBkcmlua3MuIFNlbGVjdCB0aGUgdmFyaWFibGVzIEJldmVyYWdlX2NhdGVnb3J5LCBCZXZlcmFnZSwgQmV2ZXJhZ2VfcHJlcCBhbmQgQ2Fsb3JpZXMgZnJvbSB5b3VyIGRhdGEuIFNpbmNlIHdlIGFyZSBpbnRlcmVzdGVkIGluIHRoZSBjYWxvcmllIGNvbnRlbnQsIGNoZWNrIGlmIHRoZXJlIGFyZSBhbnkgTkEgdmFsdWVzIGluIHRoZSBkYXRhLCBhbmQgZHJvcCB0aGVtIGlmIHRoZXJlIGFyZS5cblxuc2VsZWN0ZWRfYmV2ZXJhZ2VzIDwtIHNlbGVjdChzdGFyYnVja3NfZGF0YSwgQmV2ZXJhZ2VfY2F0ZWdvcnksXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgIEJldmVyYWdlLCBCZXZlcmFnZV9wcmVwLCBDYWxvcmllcykgJT4lXG4gIGZpbHRlcihDYWxvcmllcyAhPSBpcy5uYShDYWxvcmllcykpXG5zZWxlY3RlZF9iZXZlcmFnZXNcblxuYGBgIn0= -->
-<pre class="r"><code># 2 Let’s first investigate the calories of different drinks. Select the variables Beverage_category, Beverage, Beverage_prep and Calories from your data. Since we are interested in the calorie content, check if there are any NA values in the data, and drop them if there are.
-
-selected_beverages &lt;- select(starbucks_data, Beverage_category,
-                             Beverage, Beverage_prep, Calories) %&gt;%
-  filter(Calories != is.na(Calories))
-selected_beverages
-</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyAzIENyZWF0ZSBhIG5ldyB2YXJpYWJsZSAoY29sdW1uKSBjYWxsZWQgY2Fsb3JpZV9kaWZmLCB3aGljaCBzdG9yZXMgdGhlIGRpZmZlcmVuY2UgYmV0d2VlbiAxMzUgY2Fsb3JpZXMgKDEzNSBjYWxvcmllcyA9IDEwIGN1YmVzIG9mIHN1Z2FyISkgYW5kIHRoZSBjYWxvcmllcyBpbiBlYWNoIGRyaW5rLiAoaGludDogeW914oCZbGwgd2FudCB0byBzdWJ0cmFjdCAxMzUgZnJvbSB0aGUgY2Fsb3JpZXMgdG8gc2VlIHdoaWNoIGRyaW5rIGhhdmUgbW9yZSBvciBsZXNzIHRoYW4gMTAgY3VwcyBvZiBzdWdhcikuXG5cbm11dGF0ZShzZWxlY3RlZF9iZXZlcmFnZXMsIGNhbG9yaWVfZGlmZiA9IENhbG9yaWVzIC0gMTM1KVxuXG5gYGAifQ== -->
-<pre class="r"><code># 3 Create a new variable (column) called calorie_diff, which stores the difference between 135 calories (135 calories = 10 cubes of sugar!) and the calories in each drink. (hint: you’ll want to subtract 135 from the calories to see which drink have more or less than 10 cups of sugar).
-
-mutate(selected_beverages, calorie_diff = Calories - 135)
-</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyA0IC0gU3VtbWFyaXNlIHRoZSBtZWFuIG51bWJlciBvZiBjYWxvcmllcyBpbiBlYWNoIGJldmVyYWdlX2NhdGVnb3J5LiBXaGljaCAzIGNhdGVnb3JpZXMgb2YgZHJpbmtzIGhhdmUgdGhlIG1vc3QgY2Fsb3JpZXM/IFdoaWNoIDMgZHJpbmtzIGhhdmUgdGhlIGxlYXN0PyBXcml0ZSBhIHNtYWxsIHN1bW1hcnkgb2YgeW91ciBmaW5kaW5ncy5cblxubWVhbl9iZXZlcmFnZXMgPC0gc2VsZWN0ZWRfYmV2ZXJhZ2VzICU+JVxuICBncm91cF9ieShCZXZlcmFnZV9jYXRlZ29yeSkgJT4lXG4gIHN1bW1hcmlzZShtZWFuKENhbG9yaWVzKSlcbm1lYW5fYmV2ZXJhZ2VzXG5cbiNDb2ZmZWUsIEZyYXBwdWNjaW5vwq4gTGlnaHQgQmxlbmRlZCBDb2ZmZWUsIGFuZCBDbGFzc2ljIEVzcHJlc3NvIERyaW5rcyBoYXZlXG4jdGhlIGZld2VzdCBjYWxvcmllcy5cbiMgRnJhcHB1Y2Npbm/CriBCbGVuZGVkIENvZmZlZSwgU21vb3RoaWVzLCBhbmQgU2lnbmF0dXJlIEVzcHJlc3NvIERyaW5rcyBoYXZlIHRoZSBtb3N0LlxuXG4jIEkgd2FzIHVuYWJsZSB0byBzb3J0IHRoZSBtZWFuIENhbG9yaWVzIGFzIFIgd291bGQgb25seSByZWFkIHRoaXMgYXMgYVxuIyBmdW5jdGlvbiBhbmQgSSBjb3VsZCBub3QgZmluZCBhIHdheSB0byBjb252ZXJ0IGl0IHRvIGEgY2hhcmFjdGVyIChvciBzaW1pbGFyKVxuIyB0aGF0IGNvdWxkIGJlIHRoZW4gYmUgYXJyYW5nZWQuIFRoZSBoZWFkIGFuZCB0YWlsIGJlbG93IGlzIGhvdyBJIHdvdWxkIGhhdmUgZm91bmRcbiN0aGUgdG9wL2JvdHRvbSAzIGhhZCBJIGJlZW4gYWJsZSB0byBhcnJhbmdlIHRoZSBkYXRhLiBJIGhhdmUgbWFudWFsbHkgcmVhZCBteSByZXN1bHRzLlxuXG4jaGVhZChtZWFuX2JldmVyYWdlcywgMylcbiN0YWlsKG1lYW5fYmV2ZXJhZ2VzLCAzKVxuXG5gYGAifQ== -->
-<pre class="r"><code># 4 - Summarise the mean number of calories in each beverage_category. Which 3 categories of drinks have the most calories? Which 3 drinks have the least? Write a small summary of your findings.
-
-mean_beverages &lt;- selected_beverages %&gt;%
-  group_by(Beverage_category) %&gt;%
-  summarise(mean(Calories))
-mean_beverages
-
-#Coffee, Frappuccino® Light Blended Coffee, and Classic Espresso Drinks have
-#the fewest calories.
-# Frappuccino® Blended Coffee, Smoothies, and Signature Espresso Drinks have the most.
-
-# I was unable to sort the mean Calories as R would only read this as a
-# function and I could not find a way to convert it to a character (or similar)
-# that could be then be arranged. The head and tail below is how I would have found
-#the top/bottom 3 had I been able to arrange the data. I have manually read my results.
-
-#head(mean_beverages, 3)
-#tail(mean_beverages, 3)
-</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyA1IExldOKAmXMgbG9vayBhdCB0aGlzIGEgZGlmZmVyZW50IHdheS4gV2hhdCBpcyB0aGUgYXZlcmFnZSBudW1iZXIgb2YgY2Fsb3JpZXMgaW4gZWFjaCBCZXZlcmFnZV9wcmVwIHR5cGU/XG5cbm1lYW5fYmV2ZXJhZ2VzX3ByZXAgPC0gc2VsZWN0ZWRfYmV2ZXJhZ2VzICU+JVxuICBncm91cF9ieShCZXZlcmFnZV9wcmVwKSAlPiVcbiAgc3VtbWFyaXNlKG1lYW5fY2FsID0gbWVhbihDYWxvcmllcykpXG5tZWFuX2JldmVyYWdlc19wcmVwXG5gYGAifQ== -->
-<pre class="r"><code># 5 Let’s look at this a different way. What is the average number of calories in each Beverage_prep type?
-
-mean_beverages_prep &lt;- selected_beverages %&gt;%
-  group_by(Beverage_prep) %&gt;%
-  summarise(mean_cal = mean(Calories))
-mean_beverages_prep</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6MTMsIm5jb2wiOjIsInN1bW1hcnkiOnsiQSB0aWJibGUiOlsiMTMgw5cgMiJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUEyMVNUVS9DTUJqdXhpYXlaSWppRCtDZ1I1WW9GeEl1aXlGcVRQQUFxSGdpWlJTWWxIYU80ZGZKdS8vQ281NjRHdjBEL2hMMTZwM1pybTJDQzAyVzkzbWU5NnR2OXpicm5ZclZzUUFBR1dCb0dzaVlEQUx6ckgxWXJnSmc2SXhvd0FBNWJ1OVlVSkVCTGhiWVowdEhkbiszMVBEeFdOSzFPZzBDbnlwMkZFTFNSNUp0Q1ZZNnBXUUFvK1Vzc3pXaVlTVEpaa0pXUkJrdGlsWGxiSXZlVDVaY2JZaXh4QVdPVnpVNVJ5VHlWWk9FcklpeUxrWVVJNkVBa09lVHVtT1h2d3R3ZDRDd2w5SmVWZWExNHJ6bUhyOGt4KzE4Y3ZQcWJrdS8vL1htUEQzL3VNMUh3WHNQdFBIOVVYWGhpWWdMWk4zcmQ1SHcvOGxOQWlkb0twOWJsNko5Z0c1UUNJZW9HNFFva09MNkJFSFM5U0JPVmNpRjlOWlJWV3hlaFY4a2p1UGZkQ3NQdzZscXBVU3JEeVBvREVLV3o5Z2lsWktsUWVSVHdwSjB2aFptS2xrTFU4TEdqUENiOU12ZWFFYkc1VDNlSUhHTFkwdHNMMkZkdE5SaldjcFVXNFhJMENkcXEwd01lMGo5K3p5Yk9CbllDVUtmcUkyeW1EcDFJaHBCRldkNUZDc2xtUTBzL2dDb2lycWdEUU1BQUE9PSJ9 -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6NiwibmNvbCI6MTMsInN1bW1hcnkiOnsiQSB0aWJibGUiOlsiNiDDlyAxMyJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUE5VlhUNHhrUlJudm1kM1poWEdYVlpHZ1dUUVZKUUcxcDN0MlJoYmhZcy9zTklqTDZtUm5aSW5aWktuMzN0ZmR4YnhYOWFpcTE3Mk5sN21hZUZJUDRBRXhhRFM2S0Z3OHc0RW9CdEJ3SUhoRDR0RUV3b0dEaDExL1g3MVhQYjBURDhhYkwrbXBmMTk5ZjM3ZnY1cUxXNCt2THorKzNHcTFqclNPTGl5MGppeGgybHI2N3U1REsxOXZ0WTR1WXJIUU90cTZsY2VySUxvZGs1UDRmUksvWTgzQnNZMng5TkkycTN1M2xaV2VuREFENFVja3prbXJrb1NrZmxCc2VISEoyRHk3eDRtK3pocjY0enNscGQ1U3M3eGpGM2UycE4wVDU3VWFqcnk0cUJ5NTV2QVQzeklqelJ3OVJYRW5ka3FWa1YyNUlMVlkvMzlSN1BUSSsvTEJibmN5bVhSazBMRXdZMFdkMUJUZGhxVGRrR1RLYVpwMmhpWWMxcXRTcGI2eTVMcGxiVkc4ODlVNXRzN29HVjI0R2lTNHJxdU5pbGUrT0hjRm9HU3dieStZWjltNmVZWHViaWhyUHAxR0x5WjRFcmF2cFBPMmQvOHJSUUk4aGRUclhWeTVMZmpyV3U4Mys1aHN2UHozRnpnT04xNzgybHRoL2VLYkZOYS91LzZqZW56MUI2MzZtNGQxa2ZUL01MdVp4KzhmMFNFNjF0WjBKbExTMEh2YUZsS1Uwc295cDZGS3hRVUVqaWFobkFBSXBmUXBjQlBlaEd1Rk1WcHNTNTBaS3dXbVVsUmFQVlhoUURtbmpHNkxwUElpSVFDQlNQVEdhaXo4aEVpTGdjbHpNMUY2S0l3Rk1rNkFpeWl0OFhBWTd5S09aSzVBbUtxeHl0WFQwb05mcDFIN3BYT3k5Rkpwc1NsdFlweVRiWkViWEVvSVY4YTFmZ21KakdUV0ZpUHBCQ3NnRXBudThVbXVCaFRFd2FZUlNBN3NvV3hJTVdINmNQRklUQlQrWEZKNUxuWXJxOG1HZTMzV0I0YU14TTVFYXQwUm03QlNHejlpeGNIMHFVcDVTSEJDZWVHSUN0ZHB0ZlpaNzQ4MlJHcW5wUWVzQU1SSlNCdFlVNGhObzdQMzk1OTF3TjN4RloxQk0xWFVrSG9yVmM0YVZqbzFZMVpCT0tXVlF3QUN1NkhVRVJ4eGFhUnlFaGRncVBjNUFDOU5yaUJMNWtEYnBzRURZbytvRFBZNVNpMnhNRHRXS1RIWVkyb0hUVVJKbExzR0xsRG1jc29PQWk0WnBRU2J3TVlDWnZEbFkraUIwZ0xCM2xhQUpDSEFrSW1kN2Y2NTNZdjl4bU1MMXg2YStadnZ3RE1nQmNjdDJHR1JMeWhLSEI0MEZkK1Vkb3hoQzhFSWRhUXZPQktjcXppQ2tGU2wwVTRsaUFnL1phc0NIUXBaYWxVZFlqR0dHczNaRHczbmUvaCtXZmtBVnZTL3F4SkhpRmp0ODZrWVZkb2pHSkpwdVB3d0hDb0xjWTRsYlFOSmdMUkZTQXhmZ0xvaitxRXNUa2tDR3Baalo5b1MvTVNjY0JDU1pNcXVVcVp5WWdmeHFhVTRQODNyQU9SalJIZU9VT2JqVGFtSnMwL1RKS0JxVUphOHlEbEVyWmlNakdEM1QwYVVGNjdSRGpZTmtKME8raHd1Mk1DcXNnT1ozb3lLUkQ1NXRrLzZrQmlKaFI2d21hTXRxRTdGTlByc3Nia3l6MWhKTVpGMlpRS0xVU09BZllIdGdqMkJEWkUyR1FrMW9SUjB1bG9DTXBrQVZnU3dodCtzbnlzY0I1Z3dEblRWY0U2VU9RRHdIQmJJYTJlUUdQZWkrcmd2QnhwTGVaVjZHUndWS3dvVmlUV0llYmhTQi9WUmVwSHJlZ0RSZ09RUmpneG96YzJPYzRrbEo2aG1leXdpUlVESzBqSGc0TjVZYVFsRkxtUVpKeUIrRlJ6S2dBRjFqV0lCQWlUSzAxUjdGZ0NQMVJocE1LZHhpQ3VQM0NPREFzcGU4QXhIelEySHNSWXNmR2szSkNFVnlBbVlwUFJZNlRUazBWd3JIUnFJcWtvaGg4QVdzUkNxWXI3Q0FaSmFVN0xnSm43RSsvcy9CcE0wcjdLWVpHNGtTMXB4SXpVSUZYVUgwbUZOTEJNSFVrTGxjVlZKdGpTVFVJb3Qxd1BnVVNmRHJCVFgxY1lWN1dCTm9CQTBORzJ4VFR6ZFJ2UnhHaUM1VVQ1QzVVUTRrUU50UDhzVWlVMXJVRklZSVJBWU1TUkFrOHFLb3hVMnNndFJ4c2RjU0pRRUtOU0puYktYdk5YNitmZFA3ZlZrOG9zL25hVTdlOTk3OS9Qbm41VFA5UzUvNXZnVjg3Ym85VC8rMVd2WEhqN2R1L3pQMTEvNTlkdDNIZXB5eTJkV3UyZld1bXVycXcvTWRoN29ydDdITy9mSG5iV3pYWkN0clo2NWIwWnp0cnQ2UCsrc3hSMHNWOWR2M2prejR4TzcrajllKzludDc2RnJ2L0hDM3dSMzd6OS80OGd6YU9zYmYvM0tIOTU1QmVOTEh6eDNPZXovOEMrL3JMdDZiV1BXQzRzZWlYcE05dXN4ZTc0ZW4yalc4b25XZjNnTm5PNXp4UWwrdjFUSCt5QjI1dGcxT3h0MVZVUjdpVTB1cEVZN1RHVTJEdjBmS1lLK3IxMjhkY2VHMkVaZWltOGI4UjI4QS9vT21UNTdDWjdpSUg2VWhzd1NiOG00ZmZlakJzRUtoNXJLUmhrRDFNUW1UMUc2eUViK24yWVdkY2NLTWFQMGdkdnZlb08vTjN1bm4rWHZwNzNQcllldjk0VkIrSHFmYmNZNzYvUFp2VCtlcUtGNitTZk5hT3Z4MWRmcjhmbG42dkczSHpaSTN2VDBYOUlTVWR2Z2U3TFp2QTNGR0xESS9JcFhVRFdTemk5dUdhRW9sV2pxOFVHZVZIaFArR2IxcVJrRG9EbXNEc2h1NFhLRFIrSWt4bFJweWlySHE4dFA0K01hdFkra295c1ora3g4cjNNSDF0WEJFaDBITFRBdXZSeWkxY1RsaVRHcS94VUpPUWRpbDhOZTZGU0g3TC9WbWtrbllzRC8vaXh5NU4yNGNlTmZoNEZLYzNUbUJxaTR1UXdsWldkZ2NSK3I2NGV1SERjbHQxOWNXdVIvcnBZT1hWNndoelpPVlpvMXlWWlNOT2U5bGJNc0lCelgzOGxtZm14dWZySVd1WGlqWWJVVTNVRjZlQURKVW80WFhCNmRDNHVEd1owUzdTRjZiQm03cnVPTmw1RnVHVTBqN2dUYld0Zi9EYmtld2hkVERnQUEifQ== -->
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["Beverage_prep"],"name":[1],"type":["chr"],"align":["left"]},{"label":["mean_cal"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"2% Milk","2":"218.00000"},{"1":"Doppio","2":"10.00000"},{"1":"Grande","2":"100.00000"},{"1":"Grande Nonfat Milk","2":"209.61538"},{"1":"Short","2":"49.33333"},{"1":"Short Nonfat Milk","2":"99.16667"},{"1":"Solo","2":"5.00000"},{"1":"Soymilk","2":"207.27273"},{"1":"Tall","2":"74.00000"},{"1":"Tall Nonfat Milk","2":"147.82609"},{"1":"Venti","2":"138.33333"},{"1":"Venti Nonfat Milk","2":"260.00000"},{"1":"Whole Milk","2":"283.75000"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[13]},"pages":{}}}
+{"columns":[{"label":["original_title"],"name":[1],"type":["chr"],"align":["left"]},{"label":["title"],"name":[2],"type":["chr"],"align":["left"]},{"label":["homepage"],"name":[3],"type":["chr"],"align":["left"]},{"label":["budget"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["original_language"],"name":[5],"type":["chr"],"align":["left"]},{"label":["overview"],"name":[6],"type":["chr"],"align":["left"]},{"label":["popularity"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["release_date"],"name":[8],"type":["chr"],"align":["left"]},{"label":["revenue"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["runtime"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["tagline"],"name":[11],"type":["chr"],"align":["left"]},{"label":["vote_average"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["vote_count"],"name":[13],"type":["dbl"],"align":["right"]}],"data":[{"1":"Avatar","2":"Avatar","3":"http://www.avatarmovie.com/","4":"2.37e+08","5":"en","6":"In the 22nd century, a paraplegic Marine is dispatched to the moon Pandora on a unique mission, but becomes torn between following orders and protecting an alien civilization.","7":"150.4376","8":"10/12/2009","9":"2787965087","10":"162","11":"Enter the World of Pandora.","12":"7.2","13":"11800"},{"1":"Pirates of the Caribbean: At World's End","2":"Pirates of the Caribbean: At World's End","3":"http://disney.go.com/disneypictures/pirates/","4":"3.00e+08","5":"en","6":"Captain Barbossa, long believed to be dead, has come back to life and is headed to the edge of the Earth with Will Turner and Elizabeth Swann. But nothing is quite as it seems.","7":"139.0826","8":"19/05/2007","9":"961000000","10":"169","11":"At the end of the world, the adventure begins.","12":"6.9","13":"4500"},{"1":"Spectre","2":"Spectre","3":"http://www.sonypictures.com/movies/spectre/","4":"2.45e+08","5":"en","6":"A cryptic message from Bond’s past sends him on a trail to uncover a sinister organization. While M battles political forces to keep the secret service alive, Bond peels back the layers of deceit to reveal the terrible truth behind SPECTRE.","7":"107.3768","8":"26/10/2015","9":"880674609","10":"148","11":"A Plan No One Escapes","12":"6.3","13":"4466"},{"1":"The Dark Knight Rises","2":"The Dark Knight Rises","3":"http://www.thedarkknightrises.com/","4":"2.50e+08","5":"en","6":"Following the death of District Attorney Harvey Dent, Batman assumes responsibility for Dent's crimes to protect the late attorney's reputation and is subsequently hunted by the Gotham City Police Department. Eight years later, Batman encounters the mysterious Selina Kyle and the villainous Bane, a new terrorist leader who overwhelms Gotham's finest. The Dark Knight resurfaces to protect a city that has branded him an enemy.","7":"112.3130","8":"16/07/2012","9":"1084939099","10":"165","11":"The Legend Ends","12":"7.6","13":"9106"},{"1":"John Carter","2":"John Carter","3":"http://movies.disney.com/john-carter","4":"2.60e+08","5":"en","6":"John Carter is a war-weary, former military captain who's inexplicably transported to the mysterious and exotic planet of Barsoom (Mars) and reluctantly becomes embroiled in an epic conflict. It's a world on the brink of collapse, and Carter rediscovers his humanity when he realizes the survival of Barsoom and its people rests in his hands.","7":"43.9270","8":"07/03/2012","9":"284139100","10":"132","11":"Lost in our world, found in another.","12":"6.1","13":"2124"},{"1":"Spider-Man 3","2":"Spider-Man 3","3":"http://www.sonypictures.com/movies/spider-man3/","4":"2.58e+08","5":"en","6":"The seemingly invincible Spider-Man goes up against an all-new crop of villain – including the shape-shifting Sandman. While Spider-Man’s superpowers are altered by an alien organism, his alter ego, Peter Parker, deals with nemesis Eddie Brock and also gets caught up in a love triangle.","7":"115.6998","8":"01/05/2007","9":"890871626","10":"139","11":"The battle within.","12":"5.9","13":"3576"}],"options":{"columns":{"min":{},"max":[10],"total":[13]},"rows":{"min":[10],"max":[10],"total":[6]},"pages":{}}}
   </script>
 </div>
 <!-- rnb-frame-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuTkFcbmBgYCJ9 -->
-<pre class="r"><code>NA</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtbWFyeShtb3ZpZV9kYXRhKVxuYGBgIn0= -->
+<pre class="r"><code>summary(movie_data)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyA2IC0gV2hpY2ggQmV2ZXJhZ2VfcHJlcCB0eXBlIGNvbnRhaW5zIG1vcmUgdGhhbiB0aGUgYXZlcmFnZSBjYWxvcmllcyBvZiBhbGwgZHJpbmtzP1xuI0hpbnRcbiM6IHRvIGFuc3dlciB0aGlzLCB5b3XigJlsbCBoYXZlIHRvIGZpcnN0IGZpZ3VyZSBvdXQgd2hhdCB0aGUgYXZlcmFnZSBjYWxvcmllcyBhY3Jvc3MgYWxsIGRyaW5rcyBhcmUsIGFuZCB0aGVuIHVzZSB0aGF0IGFzIGEgZmlsdGVyIGZvciB0aGUgZ3JvdXBlZCBkYXRhLlxuXG4jTVkgQU5TV0VSXG50b3RhbF9tZWFuIDwtIG1lYW4oc3RhcmJ1Y2tzX2RhdGFbW1wiQ2Fsb3JpZXNcIl1dKVxudG90YWxfbWVhblxuXG4jd2l0aCBhbnN3ZXJzXG5cbmF2Z19jYWwgPC0gc3RhcmJ1Y2tzX2RhdGEgJT4lXG4gIHN1bW1hcmlzZShtZWFuX2NhbCA8LSBtZWFuKENhbG9yaWVzKSkgJT4lXG4gIHB1bGwoKVxuXG5jbGFzcyhhdmdfY2FsKVxuXG4jIDE5My44NzE5XG5cbiMgSSBoYWQgdGhlIHNhbWUgcHJvYmxlbSBhcyBJIHE0LCB3aGVyZSBpdCBlaXRoZXIgZ2l2ZXMgYW4gZXJyb3IsXG4jIHdoZW4gSSB3cml0ZSB0aGUgY29kZSBub3QgYXMgYSBzdHJpbmcgKGFzIGJlbG93KVxuIyBoaWdoZXJfYXZnIDwtIGZpbHRlcihtZWFuX2JldmVyYWdlc19wcmVwLCBtZWFuKENhbG9yaWVzKSA+IHRvdGFsX21lYW4pXG4jIGhpZ2hlcl9hdmdcbiMgYW5kIHdoZW4gd3JpdGluZyBpdCBhcyBhIHN0cmluZywgdGhlIGNvZGUgcnVucyBidXQgZG9lc24ndCBmaWx0ZXIgY29ycmVjdGx5LiBcblxuaGlnaGVyX2F2ZyA8LSBmaWx0ZXIobWVhbl9iZXZlcmFnZXNfcHJlcCwgXCJtZWFuKENhbG9yaWVzKVwiIDwgdG90YWxfbWVhbilcbmhpZ2hlcl9hdmdcblxuI3dpdGggYW5zd2VyXG4jYXZlcmFnZV9iZXZfcHJlcCAlPiVcbiMgIGZpbHRlcihtZWFuX2NhbHMgPj0gYXZnX2NhbClcblxuIyBJIGhhdmUgaGFyZC1jb2RlZCB0byBjb21wYXJlIGFsbCB0aGUgbnVtYmVycyBcblxuaGFyZF9jb2RlX2hpZ2hlciA8LSAxOTMuODcxOSA8IGMoMjE4LjAwMDAwLCAxMC4wMDAwMCwgMTAwLjAwMDAwLCAyMDkuNjE1MzgsIDQ5LjMzMzMzLCA5OS4xNjY2NyxcbiAgICAgICAgICAgIDUuMDAwMDAsIDIwNy4yNzI3MywgNzQuMDAwMDAsIDE0Ny44MjYwOSwgMTM4LjMzMzMzLCAyNjAuMDAwMDAsIDI4My43NTAwMClcbmhhcmRfY29kZV9oaWdoZXJcblxuI3Jvd3MgMSwgNCwgOCwgMTIsIDEzIGFyZSB0cnVlLCBpLmUgMiUgTWlsaywgR3JhbmRlIE5vbmZhdCBNaWxrLCBTb3ltaWxrLCBWZW50aSBOb25mYXQgTWlsaywgV2hvbGUgTWlsay5cblxuYGBgIn0= -->
-<pre class="r"><code># 6 - Which Beverage_prep type contains more than the average calories of all drinks?
-#Hint
-#: to answer this, you’ll have to first figure out what the average calories across all drinks are, and then use that as a filter for the grouped data.
+<!-- rnb-output-begin eyJkYXRhIjoiIG9yaWdpbmFsX3RpdGxlICAgICAgICB0aXRsZSAgICAgICAgICAgICBob21lcGFnZSAgICAgICAgICAgICBidWRnZXQgICAgICAgICAgb3JpZ2luYWxfbGFuZ3VhZ2UgXG4gTGVuZ3RoOjQ4MDMgICAgICAgIExlbmd0aDo0ODAzICAgICAgICBMZW5ndGg6NDgwMyAgICAgICAgTWluLiAgIDogICAgICAgIDAgICBMZW5ndGg6NDgwMyAgICAgICBcbiBDbGFzcyA6Y2hhcmFjdGVyICAgQ2xhc3MgOmNoYXJhY3RlciAgIENsYXNzIDpjaGFyYWN0ZXIgICAxc3QgUXUuOiAgIDc5MDAwMCAgIENsYXNzIDpjaGFyYWN0ZXIgIFxuIE1vZGUgIDpjaGFyYWN0ZXIgICBNb2RlICA6Y2hhcmFjdGVyICAgTW9kZSAgOmNoYXJhY3RlciAgIE1lZGlhbiA6IDE1MDAwMDAwICAgTW9kZSAgOmNoYXJhY3RlciAgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgTWVhbiAgIDogMjkwNDUwNDAgICAgICAgICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAzcmQgUXUuOiA0MDAwMDAwMCAgICAgICAgICAgICAgICAgICAgIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIE1heC4gICA6MzgwMDAwMDAwICAgICAgICAgICAgICAgICAgICAgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiAgIG92ZXJ2aWV3ICAgICAgICAgICBwb3B1bGFyaXR5ICAgICAgcmVsZWFzZV9kYXRlICAgICAgICAgIHJldmVudWUgICAgICAgICAgICAgcnVudGltZSAgICAgXG4gTGVuZ3RoOjQ4MDMgICAgICAgIE1pbi4gICA6ICAwLjAwMCAgIExlbmd0aDo0ODAzICAgICAgICBNaW4uICAgOjAuMDAwZSswMCAgIE1pbi4gICA6ICAwLjAgIFxuIENsYXNzIDpjaGFyYWN0ZXIgICAxc3QgUXUuOiAgNC42NjggICBDbGFzcyA6Y2hhcmFjdGVyICAgMXN0IFF1LjowLjAwMGUrMDAgICAxc3QgUXUuOiA5NC4wICBcbiBNb2RlICA6Y2hhcmFjdGVyICAgTWVkaWFuIDogMTIuOTIyICAgTW9kZSAgOmNoYXJhY3RlciAgIE1lZGlhbiA6MS45MTdlKzA3ICAgTWVkaWFuIDoxMDMuMCAgXG4gICAgICAgICAgICAgICAgICAgIE1lYW4gICA6IDIxLjQ5MiAgICAgICAgICAgICAgICAgICAgICBNZWFuICAgOjguMjI2ZSswNyAgIE1lYW4gICA6MTA2LjkgIFxuICAgICAgICAgICAgICAgICAgICAzcmQgUXUuOiAyOC4zMTQgICAgICAgICAgICAgICAgICAgICAgM3JkIFF1Ljo5LjI5MmUrMDcgICAzcmQgUXUuOjExOC4wICBcbiAgICAgICAgICAgICAgICAgICAgTWF4LiAgIDo4NzUuNTgxICAgICAgICAgICAgICAgICAgICAgIE1heC4gICA6Mi43ODhlKzA5ICAgTWF4LiAgIDozMzguMCAgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIE5BJ3MgICA6MiAgICAgIFxuICAgdGFnbGluZSAgICAgICAgICAgdm90ZV9hdmVyYWdlICAgICAgdm90ZV9jb3VudCAgICAgXG4gTGVuZ3RoOjQ4MDMgICAgICAgIE1pbi4gICA6IDAuMDAwICAgTWluLiAgIDogICAgMC4wICBcbiBDbGFzcyA6Y2hhcmFjdGVyICAgMXN0IFF1LjogNS42MDAgICAxc3QgUXUuOiAgIDU0LjAgIFxuIE1vZGUgIDpjaGFyYWN0ZXIgICBNZWRpYW4gOiA2LjIwMCAgIE1lZGlhbiA6ICAyMzUuMCAgXG4gICAgICAgICAgICAgICAgICAgIE1lYW4gICA6IDYuMDkyICAgTWVhbiAgIDogIDY5MC4yICBcbiAgICAgICAgICAgICAgICAgICAgM3JkIFF1LjogNi44MDAgICAzcmQgUXUuOiAgNzM3LjAgIFxuICAgICAgICAgICAgICAgICAgICBNYXguICAgOjEwLjAwMCAgIE1heC4gICA6MTM3NTIuMCAgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiJ9 -->
+<pre><code> original_title        title             homepage             budget          original_language 
+ Length:4803        Length:4803        Length:4803        Min.   :        0   Length:4803       
+ Class :character   Class :character   Class :character   1st Qu.:   790000   Class :character  
+ Mode  :character   Mode  :character   Mode  :character   Median : 15000000   Mode  :character  
+                                                          Mean   : 29045040                     
+                                                          3rd Qu.: 40000000                     
+                                                          Max.   :380000000                     
+                                                                                                
+   overview           popularity      release_date          revenue             runtime     
+ Length:4803        Min.   :  0.000   Length:4803        Min.   :0.000e+00   Min.   :  0.0  
+ Class :character   1st Qu.:  4.668   Class :character   1st Qu.:0.000e+00   1st Qu.: 94.0  
+ Mode  :character   Median : 12.922   Mode  :character   Median :1.917e+07   Median :103.0  
+                    Mean   : 21.492                      Mean   :8.226e+07   Mean   :106.9  
+                    3rd Qu.: 28.314                      3rd Qu.:9.292e+07   3rd Qu.:118.0  
+                    Max.   :875.581                      Max.   :2.788e+09   Max.   :338.0  
+                                                                             NA&#39;s   :2      
+   tagline           vote_average      vote_count     
+ Length:4803        Min.   : 0.000   Min.   :    0.0  
+ Class :character   1st Qu.: 5.600   1st Qu.:   54.0  
+ Mode  :character   Median : 6.200   Median :  235.0  
+                    Mean   : 6.092   Mean   :  690.2  
+                    3rd Qu.: 6.800   3rd Qu.:  737.0  
+                    Max.   :10.000   Max.   :13752.0  
+                                                      </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2xpbXBzZShtb3ZpZV9kYXRhKVxuYGBgIn0= -->
+<pre class="r"><code>glimpse(movie_data)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiUm93czogNCw4MDNcbkNvbHVtbnM6IDEzXG4kIG9yaWdpbmFsX3RpdGxlICAgIDxjaHI+IFwiQXZhdGFyXCIsIFwiUGlyYXRlcyBvZiB0aGUgQ2FyaWJiZWFuOiBBdCBXb3JsZCdzIEVuZFwiLCBcIlNwZWN0cmVcIiwgXCJUaGUgRGFyayBLbmlnaHQgUuKAplxuJCB0aXRsZSAgICAgICAgICAgICA8Y2hyPiBcIkF2YXRhclwiLCBcIlBpcmF0ZXMgb2YgdGhlIENhcmliYmVhbjogQXQgV29ybGQncyBFbmRcIiwgXCJTcGVjdHJlXCIsIFwiVGhlIERhcmsgS25pZ2h0IFLigKZcbiQgaG9tZXBhZ2UgICAgICAgICAgPGNocj4gXCJodHRwOi8vd3d3LmF2YXRhcm1vdmllLmNvbS9cIiwgXCJodHRwOi8vZGlzbmV5LmdvLmNvbS9kaXNuZXlwaWN0dXJlcy9waXJhdGVzL1wiLCBcImh0dOKAplxuJCBidWRnZXQgICAgICAgICAgICA8ZGJsPiAyLjM3ZSswOCwgMy4wMGUrMDgsIDIuNDVlKzA4LCAyLjUwZSswOCwgMi42MGUrMDgsIDIuNThlKzA4LCAyLjYwZSswOCwgMi44MGUrMDgsIDIuNeKAplxuJCBvcmlnaW5hbF9sYW5ndWFnZSA8Y2hyPiBcImVuXCIsIFwiZW5cIiwgXCJlblwiLCBcImVuXCIsIFwiZW5cIiwgXCJlblwiLCBcImVuXCIsIFwiZW5cIiwgXCJlblwiLCBcImVuXCIsIFwiZW5cIiwgXCJlblwiLCBcImVuXCIsIFwiZW5cIizigKZcbiQgb3ZlcnZpZXcgICAgICAgICAgPGNocj4gXCJJbiB0aGUgMjJuZCBjZW50dXJ5LCBhIHBhcmFwbGVnaWMgTWFyaW5lIGlzIGRpc3BhdGNoZWQgdG8gdGhlIG1vb24gUGFuZG9yYSBvbiBhIHVu4oCmXG4kIHBvcHVsYXJpdHkgICAgICAgIDxkYmw+IDE1MC40Mzc1NzcsIDEzOS4wODI2MTUsIDEwNy4zNzY3ODgsIDExMi4zMTI5NTAsIDQzLjkyNjk5NSwgMTE1LjY5OTgxNCwgNDguNjgxOTY5LCAx4oCmXG4kIHJlbGVhc2VfZGF0ZSAgICAgIDxjaHI+IFwiMTAvMTIvMjAwOVwiLCBcIjE5LzA1LzIwMDdcIiwgXCIyNi8xMC8yMDE1XCIsIFwiMTYvMDcvMjAxMlwiLCBcIjA3LzAzLzIwMTJcIiwgXCIwMS8wNS8yMDA3XCIs4oCmXG4kIHJldmVudWUgICAgICAgICAgIDxkYmw+IDI3ODc5NjUwODcsIDk2MTAwMDAwMCwgODgwNjc0NjA5LCAxMDg0OTM5MDk5LCAyODQxMzkxMDAsIDg5MDg3MTYyNiwgNTkxNzk0OTM2LCAxNDA14oCmXG4kIHJ1bnRpbWUgICAgICAgICAgIDxkYmw+IDE2MiwgMTY5LCAxNDgsIDE2NSwgMTMyLCAxMzksIDEwMCwgMTQxLCAxNTMsIDE1MSwgMTU0LCAxMDYsIDE1MSwgMTQ5LCAxNDMsIDE1MCwgMTQz4oCmXG4kIHRhZ2xpbmUgICAgICAgICAgIDxjaHI+IFwiRW50ZXIgdGhlIFdvcmxkIG9mIFBhbmRvcmEuXCIsIFwiQXQgdGhlIGVuZCBvZiB0aGUgd29ybGQsIHRoZSBhZHZlbnR1cmUgYmVnaW5zLlwiLCBcIkHigKZcbiQgdm90ZV9hdmVyYWdlICAgICAgPGRibD4gNy4yLCA2LjksIDYuMywgNy42LCA2LjEsIDUuOSwgNy40LCA3LjMsIDcuNCwgNS43LCA1LjQsIDYuMSwgNy4wLCA1LjksIDYuNSwgNi4zLCA3LjTigKZcbiQgdm90ZV9jb3VudCAgICAgICAgPGRibD4gMTE4MDAsIDQ1MDAsIDQ0NjYsIDkxMDYsIDIxMjQsIDM1NzYsIDMzMzAsIDY3NjcsIDUyOTMsIDcwMDQsIDE0MDAsIDI5NjUsIDUyNDYsIDIzMTHigKZcbiJ9 -->
+<pre><code>Rows: 4,803
+Columns: 13
+$ original_title    &lt;chr&gt; &quot;Avatar&quot;, &quot;Pirates of the Caribbean: At World&#39;s End&quot;, &quot;Spectre&quot;, &quot;The Dark Knight R…
+$ title             &lt;chr&gt; &quot;Avatar&quot;, &quot;Pirates of the Caribbean: At World&#39;s End&quot;, &quot;Spectre&quot;, &quot;The Dark Knight R…
+$ homepage          &lt;chr&gt; &quot;http://www.avatarmovie.com/&quot;, &quot;http://disney.go.com/disneypictures/pirates/&quot;, &quot;htt…
+$ budget            &lt;dbl&gt; 2.37e+08, 3.00e+08, 2.45e+08, 2.50e+08, 2.60e+08, 2.58e+08, 2.60e+08, 2.80e+08, 2.5…
+$ original_language &lt;chr&gt; &quot;en&quot;, &quot;en&quot;, &quot;en&quot;, &quot;en&quot;, &quot;en&quot;, &quot;en&quot;, &quot;en&quot;, &quot;en&quot;, &quot;en&quot;, &quot;en&quot;, &quot;en&quot;, &quot;en&quot;, &quot;en&quot;, &quot;en&quot;,…
+$ overview          &lt;chr&gt; &quot;In the 22nd century, a paraplegic Marine is dispatched to the moon Pandora on a un…
+$ popularity        &lt;dbl&gt; 150.437577, 139.082615, 107.376788, 112.312950, 43.926995, 115.699814, 48.681969, 1…
+$ release_date      &lt;chr&gt; &quot;10/12/2009&quot;, &quot;19/05/2007&quot;, &quot;26/10/2015&quot;, &quot;16/07/2012&quot;, &quot;07/03/2012&quot;, &quot;01/05/2007&quot;,…
+$ revenue           &lt;dbl&gt; 2787965087, 961000000, 880674609, 1084939099, 284139100, 890871626, 591794936, 1405…
+$ runtime           &lt;dbl&gt; 162, 169, 148, 165, 132, 139, 100, 141, 153, 151, 154, 106, 151, 149, 143, 150, 143…
+$ tagline           &lt;chr&gt; &quot;Enter the World of Pandora.&quot;, &quot;At the end of the world, the adventure begins.&quot;, &quot;A…
+$ vote_average      &lt;dbl&gt; 7.2, 6.9, 6.3, 7.6, 6.1, 5.9, 7.4, 7.3, 7.4, 5.7, 5.4, 6.1, 7.0, 5.9, 6.5, 6.3, 7.4…
+$ vote_count        &lt;dbl&gt; 11800, 4500, 4466, 9106, 2124, 3576, 3330, 6767, 5293, 7004, 1400, 2965, 5246, 2311…</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubmFtZXMobW92aWVfZGF0YSlcbmBgYCJ9 -->
+<pre class="r"><code>names(movie_data)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiIFsxXSBcIm9yaWdpbmFsX3RpdGxlXCIgICAgXCJ0aXRsZVwiICAgICAgICAgICAgIFwiaG9tZXBhZ2VcIiAgICAgICAgICBcImJ1ZGdldFwiICAgICAgICAgICAgXCJvcmlnaW5hbF9sYW5ndWFnZVwiXG4gWzZdIFwib3ZlcnZpZXdcIiAgICAgICAgICBcInBvcHVsYXJpdHlcIiAgICAgICAgXCJyZWxlYXNlX2RhdGVcIiAgICAgIFwicmV2ZW51ZVwiICAgICAgICAgICBcInJ1bnRpbWVcIiAgICAgICAgICBcblsxMV0gXCJ0YWdsaW5lXCIgICAgICAgICAgIFwidm90ZV9hdmVyYWdlXCIgICAgICBcInZvdGVfY291bnRcIiAgICAgICBcbiJ9 -->
+<pre><code> [1] &quot;original_title&quot;    &quot;title&quot;             &quot;homepage&quot;          &quot;budget&quot;            &quot;original_language&quot;
+ [6] &quot;overview&quot;          &quot;popularity&quot;        &quot;release_date&quot;      &quot;revenue&quot;           &quot;runtime&quot;          
+[11] &quot;tagline&quot;           &quot;vote_average&quot;      &quot;vote_count&quot;       </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBPcmlnaW5hbCB0aXRsZSBhbmQgdGl0bGUgYXJlIHNpbWlsYXJcbiMgUmV2ZW51ZSBjb3VsZCBiZSBiZXR0ZXIgZm9ybWF0dGVkXG4jIE1pc3NpbmcgZGF0YSBpbiB0YWdsaW5lXG4jIE9yaWdpbmFsIGxhbmd1YWdlIGlzIGluIGEgcG9vciBmb3JtYXRcbiMgUnVudGltZSBpcyBpbiBhIHBvb3IgZm9ybWF0XG4jIFJldmVudWUgaGFzIG1pc3NpbmcgZGF0YVxuIyBIb21lcGFnZSBoYXMgbWlzc2luZyBkYXRhLCBhbmQgc2VlbXMgc3VwZXJmbHVvdXNcblxuIyBXb3VsZCBsaWtlIHRvIGNvbXBhcmUgYnVkZ2V0IHRvIHJldmVudWVcbiMgV291bGQgbGlrZSB0byBjb21wYXJlIHBvcHVsYXJpdHkgdG8gdm90ZSBhdmVyYWdlXG4jIFdvdWxkIGxpa2UgdG8gZ3JvdXAgYnkgYnVkZ2V0L3JldmVudWUgKGkuZSBsb3NzL3Byb2ZpdCksIGFuZCB2b3RlL3BvcHVsYXJpdHlcblxuYGBgIn0= -->
+<pre class="r"><code># Original title and title are similar
+# Revenue could be better formatted
+# Missing data in tagline
+# Original language is in a poor format
+# Runtime is in a poor format
+# Revenue has missing data
+# Homepage has missing data, and seems superfluous
 
-#MY ANSWER
-total_mean &lt;- mean(starbucks_data[[&quot;Calories&quot;]])
-total_mean
-
-#with answers
-
-avg_cal &lt;- starbucks_data %&gt;%
-  summarise(mean_cal &lt;- mean(Calories)) %&gt;%
-  pull()
-
-class(avg_cal)
-
-# 193.8719
-
-# I had the same problem as I q4, where it either gives an error,
-# when I write the code not as a string (as below)
-# higher_avg &lt;- filter(mean_beverages_prep, mean(Calories) &gt; total_mean)
-# higher_avg
-# and when writing it as a string, the code runs but doesn&#39;t filter correctly. 
-
-higher_avg &lt;- filter(mean_beverages_prep, &quot;mean(Calories)&quot; &lt; total_mean)
-higher_avg
-
-#with answer
-#average_bev_prep %&gt;%
-#  filter(mean_cals &gt;= avg_cal)
-
-# I have hard-coded to compare all the numbers 
-
-hard_code_higher &lt;- 193.8719 &lt; c(218.00000, 10.00000, 100.00000, 209.61538, 49.33333, 99.16667,
-            5.00000, 207.27273, 74.00000, 147.82609, 138.33333, 260.00000, 283.75000)
-hard_code_higher
-
-#rows 1, 4, 8, 12, 13 are true, i.e 2% Milk, Grande Nonfat Milk, Soymilk, Venti Nonfat Milk, Whole Milk.
+# Would like to compare budget to revenue
+# Would like to compare popularity to vote average
+# Would like to group by budget/revenue (i.e loss/profit), and vote/popularity
 </code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyA3IFdoaWNoIGlzIHRoZSBiZXN0IHR5cGUgb2YgY29mZmVlIGRyaW5rIHRvIGdldCBpZiB5b3XigJlyZSB3b3JyaWVkIGFib3V0IGNvbnN1bWluZyB0b28gbWFueSBjYWxvcmllcz9cbmxvd2VzdF9iZXZlcmFnZSA8LSBzZWxlY3RlZF9iZXZlcmFnZXMgJT4lXG4gIGdyb3VwX2J5KENhbG9yaWVzLCBCZXZlcmFnZV9jYXRlZ29yeSkgJT4lXG4gIHN1bW1hcmlzZShtaW5fY2FsID0gbWluKENhbG9yaWVzKSkgJT4lXG4gIGhlYWQoMSlcbmBgYCJ9 -->
-<pre class="r"><code># 7 Which is the best type of coffee drink to get if you’re worried about consuming too many calories?
-lowest_beverage &lt;- selected_beverages %&gt;%
-  group_by(Calories, Beverage_category) %&gt;%
-  summarise(min_cal = min(Calories)) %&gt;%
-  head(1)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI1EyIC0gQSBsb3Qgb2YgaW50ZXJlc3Rpbmcgc3R1ZmYgaW4gdGhlcmUhIEJ1dCBmb3Igbm93LCB3ZSBhcmUgb25seSBpbnRlcmVzdGVkIGluIHRoZSBtb3ZpZXPigJkgdGl0bGVzLCB0aGVpciBydW50aW1lIGFzIHdlbGwgYXMgdGhlaXIgYnVkZ2V0LiBTZWxlY3QgdGhlIHRocmVlIGNvbHVtbnMgdGhhdCBjb250YWluIHRoaXMgaW5mb3JtYXRpb24gYW5kIHNhdmUgdGhlbSBpbnRvIGEgbmV3IHZhcmlhYmxlIGNhbGxlZCBtb3ZpZXNfc2VsZWN0ZWQuIEhpbnQ6IHlvdSB3aWxsIGhhdmUgdG8gbWFrZSBhIGNob2ljZSBiZXR3ZWVuIG9yaWdpbmFsX3RpdGxlIGFuZCB0aXRsZS5cblxubW92aWVzX3NlbGVjdGVkIDwtIG1vdmllX2RhdGEgJT4lXG4gIHNlbGVjdChvcmlnaW5hbF90aXRsZSwgcnVudGltZSwgYnVkZ2V0KVxubW92aWVzX3NlbGVjdGVkXG5cbmBgYCJ9 -->
+<pre class="r"><code>#Q2 - A lot of interesting stuff in there! But for now, we are only interested in the movies’ titles, their runtime as well as their budget. Select the three columns that contain this information and save them into a new variable called movies_selected. Hint: you will have to make a choice between original_title and title.
+
+movies_selected &lt;- movie_data %&gt;%
+  select(original_title, runtime, budget)
+movies_selected
+</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiYHN1bW1hcmlzZSgpYCBoYXMgZ3JvdXBlZCBvdXRwdXQgYnkgJ0NhbG9yaWVzJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgIGFyZ3VtZW50LlxuIn0= -->
-<pre><code>`summarise()` has grouped output by &#39;Calories&#39;. You can override using the `.groups` argument.</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubG93ZXN0X2JldmVyYWdlXG5gYGAifQ== -->
-<pre class="r"><code>lowest_beverage</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImdyb3VwZWRfZGYiLCJ0YmxfZGYiLCJ0YmwiLCJkYXRhLmZyYW1lIl0sIm5yb3ciOjEsIm5jb2wiOjMsInN1bW1hcnkiOnsiQSB0aWJibGUiOlsiMSDDlyAzIl0sIkdyb3VwcyI6WyJDYWxvcmllcyBbMV0iXX19LCJyZGYiOiJINHNJQUFBQUFBQUFBMlZReTA3RE1CQmNKekZ0STdVSzRqc1NxZXFGSTZLSUQwQWc5WVpNdWdsV1hidHlYQjQzdnJ4bG5jUlNNU3ZaM3AwZGp6Mzc5TEJaNVpzY0FGTElHSU9VVXdyODVmbXh2QVhJRWlvWVpERHo1eGVSYm5vbXdNSURkMU1JVVZ3UXI5YW1hUkQvcy83SThWcUpyb3V1NWx2aFJOVllzY2VJUHJQbXM5S0UreXR6V3NrUGJXZUtXRGVRaXNGVUQwN1hRaGtyQ1IvcTYzdjhRQ3RhZksyRnc5Ylk3N0V4MlV0Tm1LTDBGQWxQek1GSm8wazY4VlBnMGRlWmpZRGlxUDFYdG1YOWZ0Uzdjcm4wL3ZyK0VQTXhaeGQ1T3J5Wm5VY3RIa2FLdXBVYWcwVWwzbENOeFlJRzAxdXVEbFpxRndaSmFGYzU0MFRnNWJWUkFlbk53ZWtYbXFvZmpmMEJBQUE9In0= -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6MSwibmNvbCI6MSwic3VtbWFyeSI6eyJBIHRpYmJsZSI6WyIxIMOXIDEiXX19LCJyZGYiOiJINHNJQUFBQUFBQUFBMTFReXc2Q01CRGNBdFhRUkVQaWQwQkN2UGdCeGc4d21uQ3RnRXJFbGtDSkh2MXljRXRhSCsyaDNaM016TzUwdjgzV0xHTUE0RU5BQ1BnVVM2REh3eTdlQUFRZU5nUUNDUFg3Uk5KcUFnQVc1Z1dIUkFXL2x4MFcwUytZeTE0b2h4bTI4cEZZdHJielhuaU5lRnpMdk9hZGE4a0tybmh5YmxHUDNlQkk1ckpSbFJRbzh2VEMxQkdUMWdHaVh1aE5pamkvOXVJV3A2bWU4RTM0U1V2K2F6M1RHNDBYTlY2elVsd3FVZHJsYTM0cWE5TXNNZktVT0duYUNqL0VSRUcwUzVSVTNQSllMbXVMVE9GZ2VBT3RwV1BycUFFQUFBPT0ifQ== -->
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["Calories"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Beverage_category"],"name":[2],"type":["chr"],"align":["left"]},{"label":["min_cal"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"3","2":"Coffee","3":"3"}],"options":{"columns":{"min":{},"max":[10],"total":[3]},"rows":{"min":[10],"max":[10],"total":[1]},"pages":{}}}
+{"columns":[{"label":["count"],"name":[1],"type":["int"],"align":["right"]}],"data":[{"1":"0"}],"options":{"columns":{"min":{},"max":[10],"total":[1]},"rows":{"min":[10],"max":[10],"total":[1]},"pages":{}}}
   </script>
 </div>
 <!-- rnb-frame-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG4jQXNzdW1pbmcgeW91IGFyZSBvbmx5IHdvcnJpZWQgYWJvdXQgY29uc3VtaW5nIHRvbyBtYW55IGNhbG9yaWVzLFxuI3RoZSBsb3dlc3QtY2Fsb3JpZSBjb2ZmZWUtZHJpbmsgd291bGQgYmUgYmVzdCwgd2hpY2ggaXM6XG4jIENvZmZlZSAtIEJyZXdlZCBDb2ZmZWUgLSBTaG9ydCAtIGNhbG9yaWVzIC0gMyBjYWxzLlxuXG5gYGAifQ== -->
-<pre class="r"><code>
-#Assuming you are only worried about consuming too many calories,
-#the lowest-calorie coffee-drink would be best, which is:
-# Coffee - Brewed Coffee - Short - calories - 3 cals.
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubW92aWVzX3J1bnRpbWUgPC0gbW92aWVzX3NlbGVjdGVkICU+JVxuICBtdXRhdGUoXG4gICAgcnVudGltZSA9IG5hX2lmKHJ1bnRpbWUsIFwiMFwiKVxuICApXG5cbmBgYCJ9 -->
+<pre class="r"><code>movies_runtime &lt;- movies_selected %&gt;%
+  mutate(
+    runtime = na_if(runtime, &quot;0&quot;)
+  )
 </code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gbW92aWVzX3NlbGVjdGVkICU+JSBmaWx0ZXIocnVudGltZSA9PSAwKSAlPiUgY291bnQoKSAlPiUgbW92aWVzX3J1bnRpbWUgPC0gbW92aWVzX3NlbGVjdGVkICU+JSAgOiBcbiAgY291bGQgbm90IGZpbmQgZnVuY3Rpb24gXCIlPiU8LVwiXG4ifQ== -->
+<pre><code>Error in movies_selected %&gt;% filter(runtime == 0) %&gt;% count() %&gt;% movies_runtime &lt;- movies_selected %&gt;%  : 
+  could not find function &quot;%&gt;%&lt;-&quot;</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubW92aWVzX2ltcHV0ZWQgPC0gbW92aWVzX3J1bnRpbWUgJT4lXG4gIG11dGF0ZShydW50aW1lID0gY29hbGVzY2UoXG4gICAgcnVudGltZSxcbiAgICBtZWRpYW4ocnVudGltZSxcbiAgICAgICAgICAgbmEucm0gPSBUUlVFKVxuICApXG4pXG5cbmBgYCJ9 -->
+<pre class="r"><code>movies_imputed &lt;- movies_runtime %&gt;%
+  mutate(runtime = coalesce(
+    runtime,
+    median(runtime,
+           na.rm = TRUE)
+  )
+)
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gbXV0YXRlKC4sIHJ1bnRpbWUgPSBjb2FsZXNjZShydW50aW1lLCBtZWRpYW4ocnVudGltZSwgbmEucm0gPSBUUlVFKSkpIDogXG4gIG9iamVjdCAnbW92aWVzX3J1bnRpbWUnIG5vdCBmb3VuZFxuIn0= -->
+<pre><code>Error in mutate(., runtime = coalesce(runtime, median(runtime, na.rm = TRUE))) : 
+  object &#39;movies_runtime&#39; not found</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6MTAsIm5jb2wiOjMsInN1bW1hcnkiOnsiQSB0aWJibGUiOlsiMTAgw5cgMyJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUEyMlN6V29iTVJDQXh6K2I0QTAySWJrVWNoRzlGQUkyaE9UZ280MmJPcWNFZ29OOWErVmR4UmJXampaYWJkTkFBajNrMElmb29RL1FoOGhUNVJLSXE5MGRRV01pRUtQNTVrOHowdVhuMlhFNEN3R2dBYzFhRFJxQk8wSndOZm5TN1FNMDYwNnBRUk5haGZ6aG5QWkxUNEJkdDBNeWJJMjRVVG9qYldleUZHeWtrNVRqSGFGd0xLeTl5K2E1V1JCcGpaVFFLYmVHK3h4blBGSENrdFk4VFJKdjJSdHJGT3hXMmlXekx2TlVZa3lXZ3d1TUJMdEtOVExPSmpJUlRDSWJKc0xJeUFlM3BsckhtZFhSaWtEN1RQRHZBajlsYk15dGNLQlQzRytRczZKdEdOd01LcW1mU0VJbGtUaVNucEJkL1NGSjhhdHZRS3ZNTzd3NS9BWHZyT0hEWC8zelBYNytXT0xoL2U5K0tUOWVWUHJqeTRmSzQ4MkxCTWdUa2RGck5BaDJ0SkVMaVZ4OXRkSXFRWFRiNUdqZGlQeTQ1M204Y09OK202OWw5RzNQNTJ5N1hTK3FyOWZyNTgzQ2tlS1pMK3hoR0hQTGU5Zkd4VHZ0ZFNOa1c2ZFdhblJCOWVJUEJSdkJOYk1CZG5Nc2JoSjNvMldPcSs3UlNWR2h0RmVyVGVmd3YzT2pxbGxmVTY3QWR5dlFUY1QzSGlnK0Y4cFB5N1ZjZHR4TGpVVC8vMEpIczU3VmxudS9NTkxLazdJNWVQMEhjdzB3aFRzREFBQT0ifQ== -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["original_title"],"name":[1],"type":["chr"],"align":["left"]},{"label":["runtime"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["budget"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"Carlos","2":"338","3":"18000000"},{"1":"The Company","2":"276","3":"0"},{"1":"Gettysburg","2":"254","3":"0"},{"1":"Cleopatra","2":"248","3":"31115000"},{"1":"Hamlet","2":"242","3":"0"},{"1":"Emma","2":"240","3":"0"},{"1":"Gone with the Wind","2":"238","3":"4000000"},{"1":"Once Upon a Time in America","2":"229","3":"30000000"},{"1":"Woodstock","2":"225","3":"600000"},{"1":"Heaven's Gate","2":"219","3":"44000000"}],"options":{"columns":{"min":{},"max":[10],"total":[3]},"rows":{"min":[10],"max":[10],"total":[10]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKYGBge3J9CmxpYnJhcnkoQ29kZUNsYW5EYXRhKQoKc3RhcmJ1Y2tzX2RhdGEgPC0gZHJpbmtzX2NvbnRlbnQKCmxpYnJhcnkodGlkeXZlcnNlKQpgYGAKYGBge3J9CiMgMSAgTG9hZCBpbiB0aGUgZGF0YXNldCBhbmQgaGF2ZSBhIGxvb2sgYXQgaXQuIFdoYXQgYXJlIHRoZSBkaW1lbnNpb25zLCB2YXJpYWJsZSB0eXBlcywgdmFyaWFibGUgbmFtZXMsIGV0Yy4/CgpkaW0oc3RhcmJ1Y2tzX2RhdGEpCmdsaW1wc2Uoc3RhcmJ1Y2tzX2RhdGEpCmhlYWQoc3RhcmJ1Y2tzX2RhdGEpCnN0cihzdGFyYnVja3NfZGF0YSkKI3Jvd3MgLSAyNDIKI2NvbHVtbnMgLSAxOAojdmFyaWFibGUgdHlwZXMgLSBjaHIgKGNoYXJhY3RlcnMpLCBkYmwgKG51bWVyaWMpCiN2YXJpYWJsZSBuYW1lcyAtIGJldmVyYWdlIGNhdGVnb3J5LCBiZXZlcmFnZSwgYmV2ZXJhZ2VfcHJlcCwgQ2Fsb3JpZXMsIGFuZCB0aGVuCiNpdCBicmVha3MgZG93biBpbnRvIG51dHJpdGlvbmFsIGluZm9ybWF0aW9uLgoKYGBgCgpgYGB7cn0KIyAyIExldOKAmXMgZmlyc3QgaW52ZXN0aWdhdGUgdGhlIGNhbG9yaWVzIG9mIGRpZmZlcmVudCBkcmlua3MuIFNlbGVjdCB0aGUgdmFyaWFibGVzIEJldmVyYWdlX2NhdGVnb3J5LCBCZXZlcmFnZSwgQmV2ZXJhZ2VfcHJlcCBhbmQgQ2Fsb3JpZXMgZnJvbSB5b3VyIGRhdGEuIFNpbmNlIHdlIGFyZSBpbnRlcmVzdGVkIGluIHRoZSBjYWxvcmllIGNvbnRlbnQsIGNoZWNrIGlmIHRoZXJlIGFyZSBhbnkgTkEgdmFsdWVzIGluIHRoZSBkYXRhLCBhbmQgZHJvcCB0aGVtIGlmIHRoZXJlIGFyZS4KCnNlbGVjdGVkX2JldmVyYWdlcyA8LSBzZWxlY3Qoc3RhcmJ1Y2tzX2RhdGEsIEJldmVyYWdlX2NhdGVnb3J5LAogICAgICAgICAgICAgICAgICAgICAgICAgICAgIEJldmVyYWdlLCBCZXZlcmFnZV9wcmVwLCBDYWxvcmllcykgJT4lCiAgZmlsdGVyKENhbG9yaWVzICE9IGlzLm5hKENhbG9yaWVzKSkKc2VsZWN0ZWRfYmV2ZXJhZ2VzCgpgYGAKCmBgYHtyfQojIDMgQ3JlYXRlIGEgbmV3IHZhcmlhYmxlIChjb2x1bW4pIGNhbGxlZCBjYWxvcmllX2RpZmYsIHdoaWNoIHN0b3JlcyB0aGUgZGlmZmVyZW5jZSBiZXR3ZWVuIDEzNSBjYWxvcmllcyAoMTM1IGNhbG9yaWVzID0gMTAgY3ViZXMgb2Ygc3VnYXIhKSBhbmQgdGhlIGNhbG9yaWVzIGluIGVhY2ggZHJpbmsuIChoaW50OiB5b3XigJlsbCB3YW50IHRvIHN1YnRyYWN0IDEzNSBmcm9tIHRoZSBjYWxvcmllcyB0byBzZWUgd2hpY2ggZHJpbmsgaGF2ZSBtb3JlIG9yIGxlc3MgdGhhbiAxMCBjdXBzIG9mIHN1Z2FyKS4KCm11dGF0ZShzZWxlY3RlZF9iZXZlcmFnZXMsIGNhbG9yaWVfZGlmZiA9IENhbG9yaWVzIC0gMTM1KQoKYGBgCgpgYGB7cn0KIyA0IC0gU3VtbWFyaXNlIHRoZSBtZWFuIG51bWJlciBvZiBjYWxvcmllcyBpbiBlYWNoIGJldmVyYWdlX2NhdGVnb3J5LiBXaGljaCAzIGNhdGVnb3JpZXMgb2YgZHJpbmtzIGhhdmUgdGhlIG1vc3QgY2Fsb3JpZXM/IFdoaWNoIDMgZHJpbmtzIGhhdmUgdGhlIGxlYXN0PyBXcml0ZSBhIHNtYWxsIHN1bW1hcnkgb2YgeW91ciBmaW5kaW5ncy4KCm1lYW5fYmV2ZXJhZ2VzIDwtIHNlbGVjdGVkX2JldmVyYWdlcyAlPiUKICBncm91cF9ieShCZXZlcmFnZV9jYXRlZ29yeSkgJT4lCiAgc3VtbWFyaXNlKG1lYW4oQ2Fsb3JpZXMpKQptZWFuX2JldmVyYWdlcwoKI0NvZmZlZSwgRnJhcHB1Y2Npbm/CriBMaWdodCBCbGVuZGVkIENvZmZlZSwgYW5kIENsYXNzaWMgRXNwcmVzc28gRHJpbmtzIGhhdmUKI3RoZSBmZXdlc3QgY2Fsb3JpZXMuCiMgRnJhcHB1Y2Npbm/CriBCbGVuZGVkIENvZmZlZSwgU21vb3RoaWVzLCBhbmQgU2lnbmF0dXJlIEVzcHJlc3NvIERyaW5rcyBoYXZlIHRoZSBtb3N0LgoKIyBJIHdhcyB1bmFibGUgdG8gc29ydCB0aGUgbWVhbiBDYWxvcmllcyBhcyBSIHdvdWxkIG9ubHkgcmVhZCB0aGlzIGFzIGEKIyBmdW5jdGlvbiBhbmQgSSBjb3VsZCBub3QgZmluZCBhIHdheSB0byBjb252ZXJ0IGl0IHRvIGEgY2hhcmFjdGVyIChvciBzaW1pbGFyKQojIHRoYXQgY291bGQgYmUgdGhlbiBiZSBhcnJhbmdlZC4gVGhlIGhlYWQgYW5kIHRhaWwgYmVsb3cgaXMgaG93IEkgd291bGQgaGF2ZSBmb3VuZAojdGhlIHRvcC9ib3R0b20gMyBoYWQgSSBiZWVuIGFibGUgdG8gYXJyYW5nZSB0aGUgZGF0YS4gSSBoYXZlIG1hbnVhbGx5IHJlYWQgbXkgcmVzdWx0cy4KCiNoZWFkKG1lYW5fYmV2ZXJhZ2VzLCAzKQojdGFpbChtZWFuX2JldmVyYWdlcywgMykKCmBgYAoKYGBge3J9CiMgNSBMZXTigJlzIGxvb2sgYXQgdGhpcyBhIGRpZmZlcmVudCB3YXkuIFdoYXQgaXMgdGhlIGF2ZXJhZ2UgbnVtYmVyIG9mIGNhbG9yaWVzIGluIGVhY2ggQmV2ZXJhZ2VfcHJlcCB0eXBlPwoKbWVhbl9iZXZlcmFnZXNfcHJlcCA8LSBzZWxlY3RlZF9iZXZlcmFnZXMgJT4lCiAgZ3JvdXBfYnkoQmV2ZXJhZ2VfcHJlcCkgJT4lCiAgc3VtbWFyaXNlKG1lYW5fY2FsID0gbWVhbihDYWxvcmllcykpCm1lYW5fYmV2ZXJhZ2VzX3ByZXAKCmBgYAoKYGBge3J9CiMgNiAtIFdoaWNoIEJldmVyYWdlX3ByZXAgdHlwZSBjb250YWlucyBtb3JlIHRoYW4gdGhlIGF2ZXJhZ2UgY2Fsb3JpZXMgb2YgYWxsIGRyaW5rcz8KI0hpbnQKIzogdG8gYW5zd2VyIHRoaXMsIHlvdeKAmWxsIGhhdmUgdG8gZmlyc3QgZmlndXJlIG91dCB3aGF0IHRoZSBhdmVyYWdlIGNhbG9yaWVzIGFjcm9zcyBhbGwgZHJpbmtzIGFyZSwgYW5kIHRoZW4gdXNlIHRoYXQgYXMgYSBmaWx0ZXIgZm9yIHRoZSBncm91cGVkIGRhdGEuCgojTVkgQU5TV0VSCnRvdGFsX21lYW4gPC0gbWVhbihzdGFyYnVja3NfZGF0YVtbIkNhbG9yaWVzIl1dKQp0b3RhbF9tZWFuCgojd2l0aCBhbnN3ZXJzCgphdmdfY2FsIDwtIHN0YXJidWNrc19kYXRhICU+JQogIHN1bW1hcmlzZShtZWFuX2NhbCA8LSBtZWFuKENhbG9yaWVzKSkgJT4lCiAgcHVsbCgpCgpjbGFzcyhhdmdfY2FsKQoKIyAxOTMuODcxOQoKIyBJIGhhZCB0aGUgc2FtZSBwcm9ibGVtIGFzIEkgcTQsIHdoZXJlIGl0IGVpdGhlciBnaXZlcyBhbiBlcnJvciwKIyB3aGVuIEkgd3JpdGUgdGhlIGNvZGUgbm90IGFzIGEgc3RyaW5nIChhcyBiZWxvdykKIyBoaWdoZXJfYXZnIDwtIGZpbHRlcihtZWFuX2JldmVyYWdlc19wcmVwLCBtZWFuKENhbG9yaWVzKSA+IHRvdGFsX21lYW4pCiMgaGlnaGVyX2F2ZwojIGFuZCB3aGVuIHdyaXRpbmcgaXQgYXMgYSBzdHJpbmcsIHRoZSBjb2RlIHJ1bnMgYnV0IGRvZXNuJ3QgZmlsdGVyIGNvcnJlY3RseS4gCgpoaWdoZXJfYXZnIDwtIGZpbHRlcihtZWFuX2JldmVyYWdlc19wcmVwLCAibWVhbihDYWxvcmllcykiIDwgdG90YWxfbWVhbikKaGlnaGVyX2F2ZwoKI3dpdGggYW5zd2VyCiNhdmVyYWdlX2Jldl9wcmVwICU+JQojICBmaWx0ZXIobWVhbl9jYWxzID49IGF2Z19jYWwpCgojIEkgaGF2ZSBoYXJkLWNvZGVkIHRvIGNvbXBhcmUgYWxsIHRoZSBudW1iZXJzIAoKaGFyZF9jb2RlX2hpZ2hlciA8LSAxOTMuODcxOSA8IGMoMjE4LjAwMDAwLCAxMC4wMDAwMCwgMTAwLjAwMDAwLCAyMDkuNjE1MzgsIDQ5LjMzMzMzLCA5OS4xNjY2NywKICAgICAgICAgICAgNS4wMDAwMCwgMjA3LjI3MjczLCA3NC4wMDAwMCwgMTQ3LjgyNjA5LCAxMzguMzMzMzMsIDI2MC4wMDAwMCwgMjgzLjc1MDAwKQpoYXJkX2NvZGVfaGlnaGVyCgojcm93cyAxLCA0LCA4LCAxMiwgMTMgYXJlIHRydWUsIGkuZSAyJSBNaWxrLCBHcmFuZGUgTm9uZmF0IE1pbGssIFNveW1pbGssIFZlbnRpIE5vbmZhdCBNaWxrLCBXaG9sZSBNaWxrLgoKYGBgCgpgYGB7cn0KIyA3IFdoaWNoIGlzIHRoZSBiZXN0IHR5cGUgb2YgY29mZmVlIGRyaW5rIHRvIGdldCBpZiB5b3XigJlyZSB3b3JyaWVkIGFib3V0IGNvbnN1bWluZyB0b28gbWFueSBjYWxvcmllcz8KbG93ZXN0X2JldmVyYWdlIDwtIHNlbGVjdGVkX2JldmVyYWdlcyAlPiUKICBncm91cF9ieShDYWxvcmllcywgQmV2ZXJhZ2VfY2F0ZWdvcnkpICU+JQogIHN1bW1hcmlzZShtaW5fY2FsID0gbWluKENhbG9yaWVzKSkgJT4lCiAgaGVhZCgxKQpsb3dlc3RfYmV2ZXJhZ2UKCiNBc3N1bWluZyB5b3UgYXJlIG9ubHkgd29ycmllZCBhYm91dCBjb25zdW1pbmcgdG9vIG1hbnkgY2Fsb3JpZXMsCiN0aGUgbG93ZXN0LWNhbG9yaWUgY29mZmVlLWRyaW5rIHdvdWxkIGJlIGJlc3QsIHdoaWNoIGlzOgojIENvZmZlZSAtIEJyZXdlZCBDb2ZmZWUgLSBTaG9ydCAtIGNhbG9yaWVzIC0gMyBjYWxzLgoKYGBg</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQpgYGB7cn0KbGlicmFyeSh0aWR5dmVyc2UpCm1vdmllX2RhdGEgPC0gcmVhZF9jc3YoImRhdGEvbW92aWVzLmNzdiIpCgpgYGAKYGBge3J9CiNRMSBBZnRlciB5b3XigJl2ZSByZWFkIGluIHRoZSBkYXRhIGFuZCBhc3NpZ25lZCBpdCB0byBhIHZhcmlhYmxlIHdpdGggYSB1c2VmdWwgbmFtZSwgaW52ZXN0aWdhdGUgaXQuIFdyaXRlIGRvd24gc29tZSBpZGVhcyBmb3Igd2hhdCB5b3UgY291bGQgZG8gdG8gZnVydGhlciBpbnZlc3RpZ2F0ZS9jbGVhbiB0aGlzIGRhdGEgdXNpbmcgd2hhdCB5b3XigJl2ZSBsZWFybmVkIHRvZGF5IChubyBuZWVkIHRvIGNvZGUgaXQgdGhvdWdoLCBqdXN0IGpvdCBkb3duIHRob3VnaHRzIGFuZCBpZGVhcykuIEZlZWwgZnJlZSB0byBhbHNvIHdyaXRlIGRvd24gYW55IGdlbmVyYWwgdGhvdWdodHMgeW91IGdldCBsb29raW5nIGF0IHRoZSBkYXRhIC0gdGhpcyB0YXNrIGlzIGp1c3QgdG8gZ2V0IHlvdSB0aGlua2luZyBhYm91dCBkYXRhIGFuZCBkYXRhIGNsZWFuaW5nL3ByZXBwaW5nLgoKaGVhZChtb3ZpZV9kYXRhKQpzdW1tYXJ5KG1vdmllX2RhdGEpCmdsaW1wc2UobW92aWVfZGF0YSkKbmFtZXMobW92aWVfZGF0YSkKCiMgT3JpZ2luYWwgdGl0bGUgYW5kIHRpdGxlIGFyZSBzaW1pbGFyCiMgUmV2ZW51ZSBjb3VsZCBiZSBiZXR0ZXIgZm9ybWF0dGVkCiMgTWlzc2luZyBkYXRhIGluIHRhZ2xpbmUKIyBPcmlnaW5hbCBsYW5ndWFnZSBpcyBpbiBhIHBvb3IgZm9ybWF0CiMgUnVudGltZSBpcyBpbiBhIHBvb3IgZm9ybWF0CiMgUmV2ZW51ZSBoYXMgbWlzc2luZyBkYXRhCiMgSG9tZXBhZ2UgaGFzIG1pc3NpbmcgZGF0YSwgYW5kIHNlZW1zIHN1cGVyZmx1b3VzCgojIFdvdWxkIGxpa2UgdG8gY29tcGFyZSBidWRnZXQgdG8gcmV2ZW51ZQojIFdvdWxkIGxpa2UgdG8gY29tcGFyZSBwb3B1bGFyaXR5IHRvIHZvdGUgYXZlcmFnZQojIFdvdWxkIGxpa2UgdG8gZ3JvdXAgYnkgYnVkZ2V0L3JldmVudWUgKGkuZSBsb3NzL3Byb2ZpdCksIGFuZCB2b3RlL3BvcHVsYXJpdHkKCmBgYAoKYGBge3J9CiNRMiAtIEEgbG90IG9mIGludGVyZXN0aW5nIHN0dWZmIGluIHRoZXJlISBCdXQgZm9yIG5vdywgd2UgYXJlIG9ubHkgaW50ZXJlc3RlZCBpbiB0aGUgbW92aWVz4oCZIHRpdGxlcywgdGhlaXIgcnVudGltZSBhcyB3ZWxsIGFzIHRoZWlyIGJ1ZGdldC4gU2VsZWN0IHRoZSB0aHJlZSBjb2x1bW5zIHRoYXQgY29udGFpbiB0aGlzIGluZm9ybWF0aW9uIGFuZCBzYXZlIHRoZW0gaW50byBhIG5ldyB2YXJpYWJsZSBjYWxsZWQgbW92aWVzX3NlbGVjdGVkLiBIaW50OiB5b3Ugd2lsbCBoYXZlIHRvIG1ha2UgYSBjaG9pY2UgYmV0d2VlbiBvcmlnaW5hbF90aXRsZSBhbmQgdGl0bGUuCgptb3ZpZXNfc2VsZWN0ZWQgPC0gbW92aWVfZGF0YSAlPiUKICBzZWxlY3Qob3JpZ2luYWxfdGl0bGUsIHJ1bnRpbWUsIGJ1ZGdldCkKbW92aWVzX3NlbGVjdGVkCgpgYGAKCmBgYHtyfQojIFEzIC0gT2ssIG5vdyB0YWtlIHlvdXIgc3Vic2V0dGVkIGRhdGEgbW92aWVzX3NlbGVjdGVkLCBhbmQgY291bnQgdGhlIG51bWJlciBvZiBtaXNzaW5nIHZhbHVlcyBpbiBlYWNoIGNvbHVtbi4KCiNmb3Igb3JpZ2luYWxfdGl0bGUKbW92aWVzX3NlbGVjdGVkICU+JQogIHN1bW1hcmlzZShjb3VudCA9IHN1bShpcy5uYShvcmlnaW5hbF90aXRsZSkpKQojIGFuc3dlciBpcyAwCgojZm9yIHJ1bnRpbWUKbW92aWVzX3NlbGVjdGVkICU+JQogIHN1bW1hcmlzZShjb3VudCA9IHN1bShpcy5uYShydW50aW1lKSkpCiMyIE5BCgptb3ZpZXNfc2VsZWN0ZWQgJT4lCiAgZmlsdGVyKHJ1bnRpbWUgPT0gMCkgJT4lCiAgY291bnQoKSAlPiUKIyAzNSB3aGVyZSBUUlVFCgoKI2ZvciBidWRnZXQKbW92aWVzX3NlbGVjdGVkICU+JQogIHN1bW1hcmlzZShjb3VudCA9IHN1bShpcy5uYShidWRnZXQpKSkKIyAtIDAKCm1vdmllc19zZWxlY3RlZCAlPiUKICBmaWx0ZXIocnVudGltZSA9PSAwKSAlPiUKICBjb3VudCgpICU+JQojIGFuc3dlciBpcyAxMDM3CgpgYGAKCgpgYGB7cn0KIyBRNCAtIGhlcmXigJlzIG5vdCB0b28gbWFueSBOQXMsIGJ1dCB0aGVyZSBhcmUgYWN0dWFsbHkgcXVpdGUgYSBmZXcgbW92aWVzIHdpdGggYSBydW50aW1lIG9mIDAgaW4gdGhpcyBkYXRhc2V0LiBTaW5jZSBpdOKAmXMgaW1wb3NzaWJsZSBmb3IgYSBtb3ZpZSB0byBoYXZlIGEgcnVudGltZSBvZiAwLCB1c2UgdGhlIGZ1bmN0aW9uIG5hX2lmIHRvIGNvbnZlcnQgcnVudGltZXMgb2YgbGVuZ3RoIDAgaW50byBOQXMuIFNhdmUgdGhpcyBpbnRvIGEgbmV3IHZhcmlhYmxlIGNhbGxlZCBtb3ZpZXNfcnVudGltZS4gVGhlbiBjb3VudCBob3cgbWFueSBtaXNzaW5nIHZhbHVlcyB0aGVyZSBhcmUgbm93IGluIHRoZSBjb2x1bW4gcnVudGltZS4KCiNyZW1vdmluZyBOQSdzCm1vdmllc19ydW50aW1lIDwtIG1vdmllc19zZWxlY3RlZCAlPiUKICBtdXRhdGUoCiAgICBydW50aW1lID0gbmFfaWYocnVudGltZSwgIjAiKQogICkKCiMgc2Vjb25kIGNvdW50CnJ1bnRpbWVfY291bnRfYWdhaW4gPC0gbW92aWVzX3NlbGVjdGVkICU+JQogIGZpbHRlcihydW50aW1lID09IDApICU+JQogIGNvdW50KCkgJT4lCiMzNyBOQQoKYGBgCgpgYGB7cn0KI1E1IC0gSW1wdXRlIHRoZSBtaXNzaW5nIHZhbHVlcyBpbiBydW50aW1lIHdpdGggdGhlIG1lZGlhbiBydW50aW1lIHVzaW5nIGNvYWxlc2NlIGFuZCBzYXZlIHRoaXMgaW50byBhIG5ldyB2YXJpYWJsZSBjYWxsZWQgbW92aWVzX2ltcHV0ZWQuIFRoZXJlIHNob3VsZCBub3cgYmUgbm8gbWlzc2luZyB2YWx1ZXMgaW4gdGhlIGNvbHVtbiBydW50aW1lIC0gY2hlY2sgdGhpcyB0byBtYWtlIHN1cmUuCgptb3ZpZXNfaW1wdXRlZCA8LSBtb3ZpZXNfcnVudGltZSAlPiUKICBtdXRhdGUocnVudGltZSA9IGNvYWxlc2NlKAogICAgcnVudGltZSwKICAgIG1lZGlhbihydW50aW1lLAogICAgICAgICAgIG5hLnJtID0gVFJVRSkKICApCikKCm1vdmllc19pbXB1dGVkICU+JQogIGZpbHRlcihydW50aW1lID09IDApICU+JQogIGNvdW50KCkgJT4lCiMgMCBUUlVFIC8gTkEKCmBgYAoKYGBge3J9CiNRNiAtIEZpbmFsbHksIHVzZSB0aGUgc2xpY2VfbWluIGFuZCBzbGljZV9tYXggZnVuY3Rpb25zIG9uIG1vdmllc19pbXB1dGVkIHRvIGdldCB0aGUgbW92aWVzIHdpdGggdGhlIDEwIHNob3J0ZXN0IGFuZCAxMCBsb25nZXN0IHJ1bnRpbWVzLgoKbW92aWVzX2ltcHV0ZWQgJT4lCiAgc2xpY2VfbWluKHJ1bnRpbWUsIG4gPSAxMCkKCm1vdmllc19pbXB1dGVkICU+JQogIHNsaWNlX21heChydW50aW1lLCBuID0gMTApCgpgYGAKCmBgYHtyfQojUTcgLSBVc2luZyB0aGUgaWZfZWxzZSBmdW5jdGlvbiwgaW1wdXRlIGFueXRoaW5nIHdpdGggYSBidWRnZXQgYmVsb3cgJDEwMCB3aXRoIHRoZSBtZWRpYW4gYnVkZ2V0LiBPdmVyd3JpdGUgeW91ciBtb3ZpZXNfaW1wdXRlZCBzbyBpdCBjb250YWlucyB0aGUgbmV3IGJ1ZGdldCB2YWx1ZXMuCgptb3ZpZXNfaW1wdXRlZCA8LSBtb3ZpZXNfaW1wdXRlZCAlPiUKICBzZWxlY3QoYnVkZ2V0KSAlPiUKICBtdXRhdGUoYnVkZ2V0ID0gaWZfZWxzZSgKICAgIGJ1ZGdldCA9PSAwLCBtZWRpYW4oYnVkZ2V0LCBuYS5ybSA9IFRSVUUpLCBidWRnZXQpCiAgKQoKYGBgCgo=</div>
 
 
 
@@ -458,7 +438,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
-  window.initializeSourceEmbed("day_two_homework.Rmd");
+  window.initializeSourceEmbed("day_3_homework.Rmd");
   window.initializeCodeFolding("show" === "show");
 });
 </script>

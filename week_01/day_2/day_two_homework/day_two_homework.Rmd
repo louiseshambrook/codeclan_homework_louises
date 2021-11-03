@@ -39,10 +39,11 @@ selected_beverages
 # 3 Create a new variable (column) called calorie_diff, which stores the difference between 135 calories (135 calories = 10 cubes of sugar!) and the calories in each drink. (hint: you’ll want to subtract 135 from the calories to see which drink have more or less than 10 cups of sugar).
 
 mutate(selected_beverages, calorie_diff = Calories - 135)
+
 ```
 
 ```{r}
-# 4 - Summarise the mean number of calories in each beverage_category. Which 3 category of drinks have the most calories? Which 3 drinks have the least? Write a small summary of your findings.
+# 4 - Summarise the mean number of calories in each beverage_category. Which 3 categories of drinks have the most calories? Which 3 drinks have the least? Write a small summary of your findings.
 
 mean_beverages <- selected_beverages %>%
   group_by(Beverage_category) %>%
@@ -68,10 +69,8 @@ mean_beverages
 
 mean_beverages_prep <- selected_beverages %>%
   group_by(Beverage_prep) %>%
-  summarise(mean(Calories))
+  summarise(mean_cal = mean(Calories))
 mean_beverages_prep
-
-
 
 ```
 
@@ -80,21 +79,32 @@ mean_beverages_prep
 #Hint
 #: to answer this, you’ll have to first figure out what the average calories across all drinks are, and then use that as a filter for the grouped data.
 
+#MY ANSWER
 total_mean <- mean(starbucks_data[["Calories"]])
 total_mean
+
+#with answers
+
+avg_cal <- starbucks_data %>%
+  summarise(mean_cal <- mean(Calories)) %>%
+  pull()
+
+class(avg_cal)
 
 # 193.8719
 
 # I had the same problem as I q4, where it either gives an error,
 # when I write the code not as a string (as below)
-
 # higher_avg <- filter(mean_beverages_prep, mean(Calories) > total_mean)
 # higher_avg
-
 # and when writing it as a string, the code runs but doesn't filter correctly. 
 
 higher_avg <- filter(mean_beverages_prep, "mean(Calories)" < total_mean)
 higher_avg
+
+#with answer
+#average_bev_prep %>%
+#  filter(mean_cals >= avg_cal)
 
 # I have hard-coded to compare all the numbers 
 
@@ -109,13 +119,13 @@ hard_code_higher
 ```{r}
 # 7 Which is the best type of coffee drink to get if you’re worried about consuming too many calories?
 lowest_beverage <- selected_beverages %>%
-  group_by(Calories, Beverage_category,) %>%
-  summarise(min(Calories))
+  group_by(Calories, Beverage_category) %>%
+  summarise(min_cal = min(Calories)) %>%
+  head(1)
 lowest_beverage
 
 #Assuming you are only worried about consuming too many calories,
 #the lowest-calorie coffee-drink would be best, which is:
 # Coffee - Brewed Coffee - Short - calories - 3 cals.
-
 
 ```
