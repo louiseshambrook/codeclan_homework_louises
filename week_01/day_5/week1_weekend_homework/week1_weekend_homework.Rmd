@@ -1,0 +1,154 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+# Homework for 8/11/21
+# load books.csv data. Explore it and find 5 things to describe/summarise
+
+```
+
+```{r}
+# My questions to explore
+
+#Q1 - What is the highest rated book from the original series in English by JK?
+#Q2 - Is the average of the original HP higher than the average of LotR?
+#Q3 - What are the ratings and titles of the top 5 french books
+# ranked by ratings count?
+#Q4 - What is the mean rating for books published by Puffin?
+#Q5 - Are short books (200 to 400 pages) rated lower or higher on average
+# than long books (600 to 800 pages)?
+```
+
+
+```{r}
+# loading packages and data
+
+library(tidyverse)
+library(janitor)
+
+books <- read_csv("data/books.csv")
+```
+
+```{r}
+# Creating my main dataframe - removing row_ID, ISBN, ISBN13,
+# publication_date and text_reviews_count
+
+main_books_data <- books %>%
+  select(-rowid, -isbn, -isbn13, -text_reviews_count, -bookID)
+
+```
+
+```{r}
+#Q1 - What is the highest rated book from the original series in English by JK?
+
+highest_hp_rating <- main_books_data %>%
+  select(title, authors, average_rating) %>%
+  filter(str_detect(authors, "Rowling"),
+         str_detect(title, "Harry Potter and the"),
+         !str_detect(title, "Sorcerer's")) %>%
+  group_by(average_rating, title) %>%
+  distinct(title) %>%
+  arrange(average_rating)
+  
+tail(highest_hp_rating, 1)
+
+# Answer is HBP with 4.57
+
+```
+
+```{r}
+#Q2 - Is the average of HP1-7 higher than the average of LotR?
+
+# Calculating the Harry Potter average
+hp_avg_rating <- main_books_data %>%
+  select(title, authors, average_rating) %>%
+  filter(str_detect(authors, "Rowling"),
+         str_detect(title, "Harry Potter and the"),
+         !str_detect(title, "Sorcerer's")) %>%
+  distinct(title, average_rating) %>%
+  summarise(avg_rating = mean(average_rating))
+hp_avg_rating
+# 4.511667
+
+# Calculating the LotR average
+lotr_avg_rating <- main_books_data %>%
+  select(title, authors, average_rating, publisher) %>%
+  filter(str_detect(title, "The Return of the King|The Fellowship of the Ring|The Two Towers"),
+         str_detect(publisher, "Houghton Mifflin|Mariner Books"), 
+         authors != "Jude Fisher/Viggo Mortensen",
+         publisher != "Houghton Mifflin Harcourt"
+  ) %>%
+  summarise(avg_rating = mean(average_rating))
+lotr_avg_rating
+
+#4.44333
+
+higher_hp_lotr_rating <- hp_avg_rating > lotr_avg_rating
+higher_hp_lotr_rating
+#TRUE - HP is higher than LOTR
+
+```
+
+```{r}
+#Q3 What are the ratings and titles of the top 5 rated french books
+#ranked by number of ratings (not rating)
+
+top_french_books <- main_books_data %>%
+  select(title, average_rating, ratings_count, language_code) %>%
+  filter(language_code == "fre") %>%
+  group_by(ratings_count, average_rating) %>%
+  arrange(desc(ratings_count))
+
+head(top_french_books, 5)
+
+#top_french_books gives the output
+
+```
+
+```{r}
+#Q4 - What is the mean rating for books published by Puffin?
+
+mean_puffin_rating <- main_books_data %>%
+  select(title, average_rating, publisher) %>%
+  summarise(puffin_avg_rating = (mean(average_rating)))
+
+# answer is 3.934075
+
+```
+
+```{r}
+#Q5 - Are books between 200 and 400 pages, rated lower than books 
+# between 600 to 800 pages?
+
+# low book rating 
+short_book <- main_books_data %>%
+  select(title, average_rating, num_pages) %>%
+  mutate(length_of_book = case_when(
+    num_pages < 200 ~ "under 200",
+    num_pages > 200 & num_pages < 400 ~ "200 to 400",
+    TRUE ~ "above 2000")) %>%
+  filter(length_of_book == "200 to 400") %>%
+  summarise(low_book_avg_rating = mean(average_rating))
+# 3.890945
+  
+long_book <- main_books_data %>%
+  select(title, average_rating, num_pages) %>%
+  mutate(length_of_book = case_when(
+    num_pages < 600 ~ "under 200",
+    num_pages > 400 & num_pages < 600 ~ "400 to 600",
+    num_pages > 600 & num_pages < 800 ~ "600 to 800",
+    TRUE ~ "above 2000")) %>%
+  filter(length_of_book == "600 to 800") %>%
+  summarise(high_book_avg_rating = mean(average_rating))
+# 4.051187
+
+highest_book_split_rating <- short_book < long_book
+highest_book_split_rating
+#TRUE
+
+```
+
+
+

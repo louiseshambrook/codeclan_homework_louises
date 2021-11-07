@@ -27,6 +27,9 @@ names(movie_data)
 # Would like to compare popularity to vote average
 # Would like to group by budget/revenue (i.e loss/profit), and vote/popularity
 
+# check for missing values
+sum(is.na(movie_data))
+
 ```
 
 ```{r}
@@ -42,41 +45,47 @@ movies_selected
 # Q3 - Ok, now take your subsetted data movies_selected, and count the number of missing values in each column.
 
 #for original_title
-movies_selected %>%
-  summarise(count = sum(is.na(original_title)))
+#movies_selected %>%
+#  summarise(count = sum(is.na(original_title)))
 # answer is 0
 
 #for runtime
-movies_selected %>%
-  summarise(count = sum(is.na(runtime)))
+#movies_selected %>%
+#  summarise(count = sum(is.na(runtime)))
 #2 NA
 
-movies_selected %>%
-  filter(runtime == 0) %>%
-  count() %>%
+#movies_selected %>%
+#  filter(runtime == 0) %>%
+#  count() %>%
 # 35 where TRUE
 
-
 #for budget
-movies_selected %>%
-  summarise(count = sum(is.na(budget)))
+#movies_selected %>%
+#  summarise(count = sum(is.na(budget)))
 # - 0
 
-movies_selected %>%
-  filter(runtime == 0) %>%
-  count() %>%
+#movies_selected %>%
+#  filter(runtime == 0) %>%
+#  count() %>%
 # answer is 1037
 
-```
+#CORRECT ANSWER
+movies_selected %>%
+  summarise(na_budget = sum(is.na(budget)),
+            na_original_title = sum(is.na(original_title)),
+            na_runtime =sum(is.na(runtime))
+            )
 
+#ignore runtime = 0
+  
+```
 
 ```{r}
 # Q4 - here’s not too many NAs, but there are actually quite a few movies with a runtime of 0 in this dataset. Since it’s impossible for a movie to have a runtime of 0, use the function na_if to convert runtimes of length 0 into NAs. Save this into a new variable called movies_runtime. Then count how many missing values there are now in the column runtime.
 
 #removing NA's
 movies_runtime <- movies_selected %>%
-  mutate(
-    runtime = na_if(runtime, "0")
+  mutate(runtime = na_if(runtime, "0")
   )
 
 # second count
@@ -91,10 +100,8 @@ runtime_count_again <- movies_selected %>%
 #Q5 - Impute the missing values in runtime with the median runtime using coalesce and save this into a new variable called movies_imputed. There should now be no missing values in the column runtime - check this to make sure.
 
 movies_imputed <- movies_runtime %>%
-  mutate(runtime = coalesce(
-    runtime,
-    median(runtime,
-           na.rm = TRUE)
+  mutate(runtime = coalesce(runtime,
+    median(runtime, na.rm = TRUE)
   )
 )
 
@@ -126,4 +133,43 @@ movies_imputed <- movies_imputed %>%
   )
 
 ```
+
+```{r}
+#Q1E - Using case_when, create a new column called budget_type and label budgets as follows:
+# 
+#     Budgets below 12 million as ‘Small budget’
+#     Budgets between 12 and 40 million as ‘Medium budget’
+#     Budgets 40 millions and above as ‘Big budget’
+# 
+# Save this into a new variable called movie_budgets.
+
+movies_selected %>%
+  select(budget) %>%
+  mutate(
+    budget_type = case_when(
+      budget == 12000000 ~ "Small budget",
+      budget <= 40000000 ~ "Medium budget", 
+      TRUE ~ as.character("Big budget")
+    )
+  )
+
+```
+
+```{r}
+#Q2E - Take the original dataset with all the variables. Using across and where, summarise the number of missing values, first across all columns of type character, and then across all columns of type numeric.
+
+movie_data %>%
+  summarise(across(where
+            (is.character), count(sum(is.na
+            ))))
+
+```
+```{r}
+#to compare the title / original title
+
+movie_data %>% 
+  mutate(same_title = if_else(original_title == title, "same", "not same")) %>% 
+  filter(same_title == "not same")
+```
+
 
