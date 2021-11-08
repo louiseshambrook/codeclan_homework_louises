@@ -1,0 +1,101 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+# My questions to explore AGAIN
+
+# Start again with the full books data frame
+
+# Q1 - What are the top 10 rated books in English?
+# Q2 - Which publisher has published the most books?
+# Q3 - What are the text review counts of the top 5 french books?
+# Q4 - Which publisher has the highest average rating?
+# Q5 - How many pages are the longest books for the top 5 text reviews?
+# Q6 - What is langauge gla (who writes / publishes these books)?
+
+```
+
+```{r}
+books <- read_csv("data/books.csv")
+
+library(tidyverse)
+library(janitor)
+```
+
+```{r}
+# Q1 - What are the top 10 rated books in English?
+
+books %>%
+
+```
+
+```{r}
+# Q2 - Which publisher has published the most books?
+
+books %>%
+
+```
+
+```{r}
+# Q3 - What are the text review counts of the top 5 french books?
+
+books %>%
+
+```
+
+```{r}
+# Q4 - Which publisher has the highest average rating?
+
+books %>%
+
+
+```
+
+```{r}
+# Q5 - How many pages are the longest books for the top 5 text reviews?
+
+books %>%
+
+```
+
+```{r}
+# Q6 - What is langauge gla (who writes / publishes these books)?
+
+books %>% 
+
+```
+
+```{r}
+
+# REDO THIS WITH ISBN/BOOK ID INCLUDED to find the distinct ID's
+
+# Calculating the Harry Potter average
+hp_avg_rating <- main_books_data %>%
+  select(title, authors, average_rating) %>%
+  filter(str_detect(authors, "Rowling"),
+         str_detect(title, "Harry Potter and the"),
+         !str_detect(title, "Sorcerer's")) %>%
+  distinct(title, average_rating) %>%
+  summarise(avg_rating = mean(average_rating))
+hp_avg_rating
+# 4.511667
+
+# Calculating the LotR average
+lotr_avg_rating <- main_books_data %>%
+  select(title, authors, average_rating, publisher) %>%
+  filter(str_detect(title, "The Return of the King|The Fellowship of the Ring|The Two Towers"),
+         str_detect(publisher, "Houghton Mifflin|Mariner Books"), 
+         authors != "Jude Fisher/Viggo Mortensen",
+         publisher != "Houghton Mifflin Harcourt"
+  ) %>%
+  summarise(avg_rating = mean(average_rating))
+lotr_avg_rating
+
+#4.44333
+
+higher_hp_lotr_rating <- hp_avg_rating > lotr_avg_rating
+higher_hp_lotr_rating
+#TRUE - HP is higher than LOTR
+```

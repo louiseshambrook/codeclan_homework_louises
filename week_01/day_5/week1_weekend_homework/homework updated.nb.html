@@ -217,97 +217,103 @@ pre code {
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBIb21ld29yayBmb3IgOC8xMS8yMVxuIyBsb2FkIGJvb2tzLmNzdiBkYXRhLiBFeHBsb3JlIGl0IGFuZCBmaW5kIDUgdGhpbmdzIHRvIGRlc2NyaWJlL3N1bW1hcmlzZVxuXG5gYGAifQ== -->
-<pre class="r"><code># Homework for 8/11/21
-# load books.csv data. Explore it and find 5 things to describe/summarise
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBNeSBxdWVzdGlvbnMgdG8gZXhwbG9yZSBBR0FJTlxuXG4jIFN0YXJ0IGFnYWluIHdpdGggdGhlIGZ1bGwgYm9va3MgZGF0YSBmcmFtZVxuXG4jIFExIC0gV2hhdCBhcmUgdGhlIHRvcCAxMCByYXRlZCBib29rcyBpbiBFbmdsaXNoP1xuIyBRMiAtIFdoaWNoIHB1Ymxpc2hlciBoYXMgcHVibGlzaGVkIHRoZSBtb3N0IGJvb2tzP1xuIyBRMyAtIFdoYXQgYXJlIHRoZSB0ZXh0IHJldmlldyBjb3VudHMgb2YgdGhlIHRvcCA1IGZyZW5jaCBib29rcz9cbiMgUTQgLSBXaGljaCBwdWJsaXNoZXIgaGFzIHRoZSBoaWdoZXN0IGF2ZXJhZ2UgcmF0aW5nP1xuIyBRNSAtIEhvdyBtYW55IHBhZ2VzIGFyZSB0aGUgbG9uZ2VzdCBib29rcyBmb3IgdGhlIHRvcCA1IHRleHQgcmV2aWV3cz9cbiMgUTYgLSBXaGF0IGlzIGxhbmdhdWdlIGdsYSAod2hvIHdyaXRlcyAvIHB1Ymxpc2hlcyB0aGVzZSBib29rcyk/XG5cbmBgYCJ9 -->
+<pre class="r"><code># My questions to explore AGAIN
+
+# Start again with the full books data frame
+
+# Q1 - What are the top 10 rated books in English?
+# Q2 - Which publisher has published the most books?
+# Q3 - What are the text review counts of the top 5 french books?
+# Q4 - Which publisher has the highest average rating?
+# Q5 - How many pages are the longest books for the top 5 text reviews?
+# Q6 - What is langauge gla (who writes / publishes these books)?
 </code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBNeSBxdWVzdGlvbnMgdG8gZXhwbG9yZVxuXG4jUTEgLSBXaGF0IGlzIHRoZSBoaWdoZXN0IHJhdGVkIGJvb2sgZnJvbSB0aGUgb3JpZ2luYWwgc2VyaWVzIGluIEVuZ2xpc2ggYnkgSks/XG4jUTIgLSBJcyB0aGUgYXZlcmFnZSBvZiB0aGUgb3JpZ2luYWwgSFAgaGlnaGVyIHRoYW4gdGhlIGF2ZXJhZ2Ugb2YgTG90Uj9cbiNRMyAtIFdoYXQgYXJlIHRoZSByYXRpbmdzIGFuZCB0aXRsZXMgb2YgdGhlIHRvcCA1IGZyZW5jaCBib29rc1xuIyByYW5rZWQgYnkgcmF0aW5ncyBjb3VudD9cbiNRNCAtIFdoYXQgaXMgdGhlIG1lYW4gcmF0aW5nIGZvciBib29rcyBwdWJsaXNoZWQgYnkgUHVmZmluP1xuI1E1IC0gQXJlIHNob3J0IGJvb2tzICgyMDAgdG8gNDAwIHBhZ2VzKSByYXRlZCBsb3dlciBvciBoaWdoZXIgb24gYXZlcmFnZVxuIyB0aGFuIGxvbmcgYm9va3MgKDYwMCB0byA4MDAgcGFnZXMpP1xuYGBgIn0= -->
-<pre class="r"><code># My questions to explore
-
-#Q1 - What is the highest rated book from the original series in English by JK?
-#Q2 - Is the average of the original HP higher than the average of LotR?
-#Q3 - What are the ratings and titles of the top 5 french books
-# ranked by ratings count?
-#Q4 - What is the mean rating for books published by Puffin?
-#Q5 - Are short books (200 to 400 pages) rated lower or higher on average
-# than long books (600 to 800 pages)?</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBsb2FkaW5nIHBhY2thZ2VzIGFuZCBkYXRhXG5cbmxpYnJhcnkodGlkeXZlcnNlKVxubGlicmFyeShqYW5pdG9yKVxuXG5ib29rcyA8LSByZWFkX2NzdihcImRhdGEvYm9va3MuY3N2XCIpXG5gYGAifQ== -->
-<pre class="r"><code># loading packages and data
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYm9va3MgPC0gcmVhZF9jc3YoXCJkYXRhL2Jvb2tzLmNzdlwiKVxuXG5saWJyYXJ5KHRpZHl2ZXJzZSlcbmxpYnJhcnkoamFuaXRvcilcbmBgYCJ9 -->
+<pre class="r"><code>books &lt;- read_csv(&quot;data/books.csv&quot;)
 
 library(tidyverse)
-library(janitor)
-
-books &lt;- read_csv(&quot;data/books.csv&quot;)</code></pre>
+library(janitor)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiUm93czogMTExMjMgQ29sdW1uczogMTNcbuKUgOKUgCBDb2x1bW4gc3BlY2lmaWNhdGlvbiDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIBcbkRlbGltaXRlcjogXCIsXCJcbmNociAoNyk6IHRpdGxlLCBhdXRob3JzLCBpc2JuLCBpc2JuMTMsIGxhbmd1YWdlX2NvZGUsIHB1YmxpY2F0aW9uX2RhdGUsIHB1Ymxpc2hlclxuZGJsICg2KTogcm93aWQsIGJvb2tJRCwgYXZlcmFnZV9yYXRpbmcsIG51bV9wYWdlcywgcmF0aW5nc19jb3VudCwgdGV4dF9yZXZpZXdzX2NvdW50XG5cbuKEuSBVc2UgYHNwZWMoKWAgdG8gcmV0cmlldmUgdGhlIGZ1bGwgY29sdW1uIHNwZWNpZmljYXRpb24gZm9yIHRoaXMgZGF0YS5cbuKEuSBTcGVjaWZ5IHRoZSBjb2x1bW4gdHlwZXMgb3Igc2V0IGBzaG93X2NvbF90eXBlcyA9IEZBTFNFYCB0byBxdWlldCB0aGlzIG1lc3NhZ2UuXG4ifQ== -->
-<pre><code>Rows: 11123 Columns: 13
-── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────────
-Delimiter: &quot;,&quot;
-chr (7): title, authors, isbn, isbn13, language_code, publication_date, publisher
-dbl (6): rowid, bookID, average_rating, num_pages, ratings_count, text_reviews_count
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBDcmVhdGluZyBteSBtYWluIGRhdGFmcmFtZSAtIHJlbW92aW5nIHJvd19JRCwgSVNCTiwgSVNCTjEzLFxuIyBwdWJsaWNhdGlvbl9kYXRlIGFuZCB0ZXh0X3Jldmlld3NfY291bnRcblxubWFpbl9ib29rc19kYXRhIDwtIGJvb2tzICU+JVxuICBzZWxlY3QoLXJvd2lkLCAtaXNibiwgLWlzYm4xMywgLXRleHRfcmV2aWV3c19jb3VudCwgLWJvb2tJRClcblxuYGBgIn0= -->
-<pre class="r"><code># Creating my main dataframe - removing row_ID, ISBN, ISBN13,
-# publication_date and text_reviews_count
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBRMSAtIFdoYXQgYXJlIHRoZSB0b3AgMTAgcmF0ZWQgYm9va3MgaW4gRW5nbGlzaD9cblxuYm9va3MgJT4lXG5cbmBgYCJ9 -->
+<pre class="r"><code># Q1 - What are the top 10 rated books in English?
 
-main_books_data &lt;- books %&gt;%
-  select(-rowid, -isbn, -isbn13, -text_reviews_count, -bookID)
+books %&gt;%
 </code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI1ExIC0gV2hhdCBpcyB0aGUgaGlnaGVzdCByYXRlZCBib29rIGZyb20gdGhlIG9yaWdpbmFsIHNlcmllcyBpbiBFbmdsaXNoIGJ5IEpLP1xuXG5oaWdoZXN0X2hwX3JhdGluZyA8LSBtYWluX2Jvb2tzX2RhdGEgJT4lXG4gIHNlbGVjdCh0aXRsZSwgYXV0aG9ycywgYXZlcmFnZV9yYXRpbmcpICU+JVxuICBmaWx0ZXIoc3RyX2RldGVjdChhdXRob3JzLCBcIlJvd2xpbmdcIiksXG4gICAgICAgICBzdHJfZGV0ZWN0KHRpdGxlLCBcIkhhcnJ5IFBvdHRlciBhbmQgdGhlXCIpLFxuICAgICAgICAgIXN0cl9kZXRlY3QodGl0bGUsIFwiU29yY2VyZXInc1wiKSkgJT4lXG4gIGdyb3VwX2J5KGF2ZXJhZ2VfcmF0aW5nLCB0aXRsZSkgJT4lXG4gIGRpc3RpbmN0KHRpdGxlKSAlPiVcbiAgYXJyYW5nZShhdmVyYWdlX3JhdGluZykgJT4lXG4gIHVuZ3JvdXAoKSAlPiVcbiAgc2xpY2VfbWluKDEpXG4gIFxuIyB0YWlsKGhpZ2hlc3RfaHBfcmF0aW5nLCAxKVxuXG4jIEFuc3dlciBpcyBIQlAgd2l0aCA0LjU3XG5cbmBgYCJ9 -->
-<pre class="r"><code>#Q1 - What is the highest rated book from the original series in English by JK?
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBRMiAtIFdoaWNoIHB1Ymxpc2hlciBoYXMgcHVibGlzaGVkIHRoZSBtb3N0IGJvb2tzP1xuXG5ib29rcyAlPiVcblxuYGBgIn0= -->
+<pre class="r"><code># Q2 - Which publisher has published the most books?
 
-highest_hp_rating &lt;- main_books_data %&gt;%
-  select(title, authors, average_rating) %&gt;%
-  filter(str_detect(authors, &quot;Rowling&quot;),
-         str_detect(title, &quot;Harry Potter and the&quot;),
-         !str_detect(title, &quot;Sorcerer&#39;s&quot;)) %&gt;%
-  group_by(average_rating, title) %&gt;%
-  distinct(title) %&gt;%
-  arrange(average_rating) %&gt;%
-  ungroup() %&gt;%
-  slice_min(1)
-  
-# tail(highest_hp_rating, 1)
-
-# Answer is HBP with 4.57
+books %&gt;%
 </code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuI1EyIC0gSXMgdGhlIGF2ZXJhZ2Ugb2YgSFAxLTcgaGlnaGVyIHRoYW4gdGhlIGF2ZXJhZ2Ugb2YgTG90Uj9cblxuIyBDYWxjdWxhdGluZyB0aGUgSGFycnkgUG90dGVyIGF2ZXJhZ2VcbmhwX2F2Z19yYXRpbmcgPC0gbWFpbl9ib29rc19kYXRhICU+JVxuICBzZWxlY3QodGl0bGUsIGF1dGhvcnMsIGF2ZXJhZ2VfcmF0aW5nKSAlPiVcbiAgZmlsdGVyKHN0cl9kZXRlY3QoYXV0aG9ycywgXFxSb3dsaW5nXFwpLFxuICAgICAgICAgc3RyX2RldGVjdCh0aXRsZSwgXFxIYXJyeSBQb3R0ZXIgYW5kIHRoZVxcKSxcbiAgICAgICAgICFzdHJfZGV0ZWN0KHRpdGxlLCBcXFNvcmNlcmVyJ3NcXCkpICU+JVxuICBkaXN0aW5jdCh0aXRsZSwgYXZlcmFnZV9yYXRpbmcpICU+JVxuICBzdW1tYXJpc2UoYXZnX3JhdGluZyA9IG1lYW4oYXZlcmFnZV9yYXRpbmcpKVxuaHBfYXZnX3JhdGluZ1xuIyA0LjUxMTY2N1xuXG4jIENhbGN1bGF0aW5nIHRoZSBMb3RSIGF2ZXJhZ2VcbmxvdHJfYXZnX3JhdGluZyA8LSBtYWluX2Jvb2tzX2RhdGEgJT4lXG4gIHNlbGVjdCh0aXRsZSwgYXV0aG9ycywgYXZlcmFnZV9yYXRpbmcsIHB1Ymxpc2hlcikgJT4lXG4gIGZpbHRlcihzdHJfZGV0ZWN0KHRpdGxlLCBcXFRoZSBSZXR1cm4gb2YgdGhlIEtpbmd8VGhlIEZlbGxvd3NoaXAgb2YgdGhlIFJpbmd8VGhlIFR3byBUb3dlcnNcXCksXG4gICAgICAgICBzdHJfZGV0ZWN0KHB1Ymxpc2hlciwgXFxIb3VnaHRvbiBNaWZmbGlufE1hcmluZXIgQm9va3NcXCksIFxuICAgICAgICAgYXV0aG9ycyAhPSBcXEp1ZGUgRmlzaGVyL1ZpZ2dvIE1vcnRlbnNlblxcLFxuICAgICAgICAgcHVibGlzaGVyICE9IFxcSG91Z2h0b24gTWlmZmxpbiBIYXJjb3VydFxcXG4gICkgJT4lXG4gIHN1bW1hcmlzZShhdmdfcmF0aW5nID0gbWVhbihhdmVyYWdlX3JhdGluZykpXG5sb3RyX2F2Z19yYXRpbmdcblxuIzQuNDQzMzNcblxuaGlnaGVyX2hwX2xvdHJfcmF0aW5nIDwtIGhwX2F2Z19yYXRpbmcgPiBsb3RyX2F2Z19yYXRpbmdcbmhpZ2hlcl9ocF9sb3RyX3JhdGluZ1xuI1RSVUUgLSBIUCBpcyBoaWdoZXIgdGhhbiBMT1RSXG5cbmBgYFxuYGBgIn0= -->
-<pre class="r"><code>```r
-#Q2 - Is the average of HP1-7 higher than the average of LotR?
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBRMyAtIFdoYXQgYXJlIHRoZSB0ZXh0IHJldmlldyBjb3VudHMgb2YgdGhlIHRvcCA1IGZyZW5jaCBib29rcz9cblxuYm9va3MgJT4lXG5cbmBgYCJ9 -->
+<pre class="r"><code># Q3 - What are the text review counts of the top 5 french books?
+
+books %&gt;%
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBRNCAtIFdoaWNoIHB1Ymxpc2hlciBoYXMgdGhlIGhpZ2hlc3QgYXZlcmFnZSByYXRpbmc/XG5cbmJvb2tzICU+JVxuXG5cbmBgYCJ9 -->
+<pre class="r"><code># Q4 - Which publisher has the highest average rating?
+
+books %&gt;%
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBRNSAtIEhvdyBtYW55IHBhZ2VzIGFyZSB0aGUgbG9uZ2VzdCBib29rcyBmb3IgdGhlIHRvcCA1IHRleHQgcmV2aWV3cz9cblxuYm9va3MgJT4lXG5cbmBgYCJ9 -->
+<pre class="r"><code># Q5 - How many pages are the longest books for the top 5 text reviews?
+
+books %&gt;%
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBRNiAtIFdoYXQgaXMgbGFuZ2F1Z2UgZ2xhICh3aG8gd3JpdGVzIC8gcHVibGlzaGVzIHRoZXNlIGJvb2tzKT9cblxuYm9va3MgJT4lIFxuXG5gYGAifQ== -->
+<pre class="r"><code># Q6 - What is langauge gla (who writes / publishes these books)?
+
+books %&gt;% 
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG4jIFJFRE8gVEhJUyBXSVRIIElTQk4vQk9PSyBJRCBJTkNMVURFRCB0byBmaW5kIHRoZSBkaXN0aW5jdCBJRCdzXG5cbiMgQ2FsY3VsYXRpbmcgdGhlIEhhcnJ5IFBvdHRlciBhdmVyYWdlXG5ocF9hdmdfcmF0aW5nIDwtIG1haW5fYm9va3NfZGF0YSAlPiVcbiAgc2VsZWN0KHRpdGxlLCBhdXRob3JzLCBhdmVyYWdlX3JhdGluZykgJT4lXG4gIGZpbHRlcihzdHJfZGV0ZWN0KGF1dGhvcnMsIFwiUm93bGluZ1wiKSxcbiAgICAgICAgIHN0cl9kZXRlY3QodGl0bGUsIFwiSGFycnkgUG90dGVyIGFuZCB0aGVcIiksXG4gICAgICAgICAhc3RyX2RldGVjdCh0aXRsZSwgXCJTb3JjZXJlcidzXCIpKSAlPiVcbiAgZGlzdGluY3QodGl0bGUsIGF2ZXJhZ2VfcmF0aW5nKSAlPiVcbiAgc3VtbWFyaXNlKGF2Z19yYXRpbmcgPSBtZWFuKGF2ZXJhZ2VfcmF0aW5nKSlcbmhwX2F2Z19yYXRpbmdcbiMgNC41MTE2NjdcblxuIyBDYWxjdWxhdGluZyB0aGUgTG90UiBhdmVyYWdlXG5sb3RyX2F2Z19yYXRpbmcgPC0gbWFpbl9ib29rc19kYXRhICU+JVxuICBzZWxlY3QodGl0bGUsIGF1dGhvcnMsIGF2ZXJhZ2VfcmF0aW5nLCBwdWJsaXNoZXIpICU+JVxuICBmaWx0ZXIoc3RyX2RldGVjdCh0aXRsZSwgXCJUaGUgUmV0dXJuIG9mIHRoZSBLaW5nfFRoZSBGZWxsb3dzaGlwIG9mIHRoZSBSaW5nfFRoZSBUd28gVG93ZXJzXCIpLFxuICAgICAgICAgc3RyX2RldGVjdChwdWJsaXNoZXIsIFwiSG91Z2h0b24gTWlmZmxpbnxNYXJpbmVyIEJvb2tzXCIpLCBcbiAgICAgICAgIGF1dGhvcnMgIT0gXCJKdWRlIEZpc2hlci9WaWdnbyBNb3J0ZW5zZW5cIixcbiAgICAgICAgIHB1Ymxpc2hlciAhPSBcIkhvdWdodG9uIE1pZmZsaW4gSGFyY291cnRcIlxuICApICU+JVxuICBzdW1tYXJpc2UoYXZnX3JhdGluZyA9IG1lYW4oYXZlcmFnZV9yYXRpbmcpKVxubG90cl9hdmdfcmF0aW5nXG5cbiM0LjQ0MzMzXG5cbmhpZ2hlcl9ocF9sb3RyX3JhdGluZyA8LSBocF9hdmdfcmF0aW5nID4gbG90cl9hdmdfcmF0aW5nXG5oaWdoZXJfaHBfbG90cl9yYXRpbmdcbiNUUlVFIC0gSFAgaXMgaGlnaGVyIHRoYW4gTE9UUlxuYGBgIn0= -->
+<pre class="r"><code>
+# REDO THIS WITH ISBN/BOOK ID INCLUDED to find the distinct ID&#39;s
 
 # Calculating the Harry Potter average
 hp_avg_rating &lt;- main_books_data %&gt;%
   select(title, authors, average_rating) %&gt;%
-  filter(str_detect(authors, \Rowling\),
-         str_detect(title, \Harry Potter and the\),
-         !str_detect(title, \Sorcerer&#39;s\)) %&gt;%
+  filter(str_detect(authors, &quot;Rowling&quot;),
+         str_detect(title, &quot;Harry Potter and the&quot;),
+         !str_detect(title, &quot;Sorcerer&#39;s&quot;)) %&gt;%
   distinct(title, average_rating) %&gt;%
   summarise(avg_rating = mean(average_rating))
 hp_avg_rating
@@ -316,10 +322,10 @@ hp_avg_rating
 # Calculating the LotR average
 lotr_avg_rating &lt;- main_books_data %&gt;%
   select(title, authors, average_rating, publisher) %&gt;%
-  filter(str_detect(title, \The Return of the King|The Fellowship of the Ring|The Two Towers\),
-         str_detect(publisher, \Houghton Mifflin|Mariner Books\), 
-         authors != \Jude Fisher/Viggo Mortensen\,
-         publisher != \Houghton Mifflin Harcourt\
+  filter(str_detect(title, &quot;The Return of the King|The Fellowship of the Ring|The Two Towers&quot;),
+         str_detect(publisher, &quot;Houghton Mifflin|Mariner Books&quot;), 
+         authors != &quot;Jude Fisher/Viggo Mortensen&quot;,
+         publisher != &quot;Houghton Mifflin Harcourt&quot;
   ) %&gt;%
   summarise(avg_rating = mean(average_rating))
 lotr_avg_rating
@@ -328,133 +334,11 @@ lotr_avg_rating
 
 higher_hp_lotr_rating &lt;- hp_avg_rating &gt; lotr_avg_rating
 higher_hp_lotr_rating
-#TRUE - HP is higher than LOTR
-</code></pre>
-<pre><code>
-&lt;!-- rnb-source-end --&gt;
-
-&lt;!-- rnb-chunk-end --&gt;
-
-
-&lt;!-- rnb-text-begin --&gt;
-
-
-
-&lt;!-- rnb-text-end --&gt;
-
-
-&lt;!-- rnb-chunk-begin --&gt;
-
-
-&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuI1EzIFdoYXQgYXJlIHRoZSByYXRpbmdzIGFuZCB0aXRsZXMgb2YgdGhlIHRvcCA1IHJhdGVkIGZyZW5jaCBib29rc1xuI3JhbmtlZCBieSBudW1iZXIgb2YgcmF0aW5ncyAobm90IHJhdGluZylcblxudG9wX2ZyZW5jaF9ib29rcyA8LSBtYWluX2Jvb2tzX2RhdGEgJT4lXG4gIHNlbGVjdCh0aXRsZSwgYXZlcmFnZV9yYXRpbmcsIHJhdGluZ3NfY291bnQsIGxhbmd1YWdlX2NvZGUpICU+JVxuICBmaWx0ZXIobGFuZ3VhZ2VfY29kZSA9PSBcXGZyZVxcKSAlPiVcbiAgZ3JvdXBfYnkocmF0aW5nc19jb3VudCwgYXZlcmFnZV9yYXRpbmcpICU+JVxuICBhcnJhbmdlKGRlc2MocmF0aW5nc19jb3VudCkpXG5cbmhlYWQodG9wX2ZyZW5jaF9ib29rcywgNSlcblxuI3RvcF9mcmVuY2hfYm9va3MgZ2l2ZXMgdGhlIG91dHB1dFxuXG5gYGBcbmBgYCJ9 --&gt;
-
-```r
-```r
-#Q3 What are the ratings and titles of the top 5 rated french books
-#ranked by number of ratings (not rating)
-
-top_french_books &lt;- main_books_data %&gt;%
-  select(title, average_rating, ratings_count, language_code) %&gt;%
-  filter(language_code == \fre\) %&gt;%
-  group_by(ratings_count, average_rating) %&gt;%
-  arrange(desc(ratings_count))
-
-head(top_french_books, 5)
-
-#top_french_books gives the output
-</code></pre>
-<pre><code>
-&lt;!-- rnb-source-end --&gt;
-
-&lt;!-- rnb-chunk-end --&gt;
-
-
-&lt;!-- rnb-text-begin --&gt;
-
-
-
-&lt;!-- rnb-text-end --&gt;
-
-
-&lt;!-- rnb-chunk-begin --&gt;
-
-
-&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuI1E0IC0gV2hhdCBpcyB0aGUgbWVhbiByYXRpbmcgZm9yIGJvb2tzIHB1Ymxpc2hlZCBieSBQdWZmaW4/XG5cbm1lYW5fcHVmZmluX3JhdGluZyA8LSBtYWluX2Jvb2tzX2RhdGEgJT4lXG4gIHNlbGVjdCh0aXRsZSwgYXZlcmFnZV9yYXRpbmcsIHB1Ymxpc2hlcikgJT4lXG4gIHN1bW1hcmlzZShwdWZmaW5fYXZnX3JhdGluZyA9IChtZWFuKGF2ZXJhZ2VfcmF0aW5nKSkpXG5cbiMgYW5zd2VyIGlzIDMuOTM0MDc1XG5cbmBgYFxuYGBgIn0= --&gt;
-
-```r
-```r
-#Q4 - What is the mean rating for books published by Puffin?
-
-mean_puffin_rating &lt;- main_books_data %&gt;%
-  select(title, average_rating, publisher) %&gt;%
-  summarise(puffin_avg_rating = (mean(average_rating)))
-
-# answer is 3.934075
-</code></pre>
-<pre><code>
-&lt;!-- rnb-source-end --&gt;
-
-&lt;!-- rnb-chunk-end --&gt;
-
-
-&lt;!-- rnb-text-begin --&gt;
-
-
-
-&lt;!-- rnb-text-end --&gt;
-
-
-&lt;!-- rnb-chunk-begin --&gt;
-
-
-&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuI1E1IC0gQXJlIHNob3J0ZXIgYm9va3MsIHJhdGVkIGxvd2VyIHRoYW4gbG9uZ2VyIGJvb2tzP1xuXG4jIGxvdyBib29rIHJhdGluZyBcbnNob3J0X2Jvb2sgPC0gbWFpbl9ib29rc19kYXRhICU+JVxuICBzZWxlY3QodGl0bGUsIGF2ZXJhZ2VfcmF0aW5nLCBudW1fcGFnZXMpICU+JVxuICBtdXRhdGUobGVuZ3RoX29mX2Jvb2sgPSBjYXNlX3doZW4oXG4gICAgbnVtX3BhZ2VzIDwgMjAwIH4gXFx1bmRlciAyMDBcXCxcbiAgICBudW1fcGFnZXMgPiAyMDAgJiBudW1fcGFnZXMgPCA0MDAgfiBcXDIwMCB0byA0MDBcXCxcbiAgICBUUlVFIH4gXFxhYm92ZSAyMDAwXFwpKSAlPiVcbiAgZmlsdGVyKGxlbmd0aF9vZl9ib29rID09IFxcMjAwIHRvIDQwMFxcKSAlPiVcbiAgc3VtbWFyaXNlKGxvd19ib29rX2F2Z19yYXRpbmcgPSBtZWFuKGF2ZXJhZ2VfcmF0aW5nKSlcbiAgXG5sb25nX2Jvb2sgPC0gbWFpbl9ib29rc19kYXRhICU+JVxuICBzZWxlY3QodGl0bGUsIGF2ZXJhZ2VfcmF0aW5nLCBudW1fcGFnZXMpICU+JVxuICBtdXRhdGUobGVuZ3RoX29mX2Jvb2sgPSBjYXNlX3doZW4oXG4gICAgbnVtX3BhZ2VzIDwgNjAwIH4gXFx1bmRlciAyMDBcXCxcbiAgICBudW1fcGFnZXMgPiA2MDAgJiBudW1fcGFnZXMgPCA4MDAgfiBcXDYwMCB0byA4MDBcXCxcbiAgICBUUlVFIH4gXFxhYm92ZSAyMDAwXFwpKSAlPiVcbiAgZmlsdGVyKGxlbmd0aF9vZl9ib29rID09IFxcNjAwIHRvIDgwMFxcKSAlPiVcbiAgc3VtbWFyaXNlKGhpZ2hfYm9va19hdmdfcmF0aW5nID0gbWVhbihhdmVyYWdlX3JhdGluZykpXG5cbmhpZ2hlc3RfYm9va19zcGxpdF9yYXRpbmcgPC0gc2hvcnRfYm9vayA8IGxvbmdfYm9va1xuaGlnaGVzdF9ib29rX3NwbGl0X3JhdGluZ1xuI1RSVUVcblxuYm9va19zdW1tIDwtIGJvb2tzICU+JVxuICBzZWxlY3QodGl0bGUsIGF2ZXJhZ2VfcmF0aW5nLCBudW1fcGFnZXMpICU+JVxuICBtdXRhdGUobGVuZ3RoX29mX2Jvb2sgPSBjYXNlX3doZW4oXG4gICAgbnVtX3BhZ2VzIDwgMjAwIH4gXFwwLiB1bmRlciAyMDBcXCxcbiAgICBudW1fcGFnZXMgPj0gMjAwICYgbnVtX3BhZ2VzIDwgNDAwIH4gXFwxLiAyMDAgdG8gNDAwXFwsXG4gICAgbnVtX3BhZ2VzID49IDQwMCAmIG51bV9wYWdlcyA8IDYwMCB+IFxcMi4gNDAwIHRvIDYwMFxcLFxuICAgIG51bV9wYWdlcyA+PSA2MDAgJiBudW1fcGFnZXMgPCA4MDAgfiBcXDMuIDYwMCB0byA4MDBcXCxcbiAgICBUUlVFIH4gXFw0LiBhYm92ZSA4MDBcXCkpICU+JVxuICAjIGZpbHRlcihsZW5ndGhfb2ZfYm9vayA9PSBcXDIwMCB0byA0MDBcXCkgJT4lXG4gIGdyb3VwX2J5KGxlbmd0aF9vZl9ib29rKSAlPiVcbiAgc3VtbWFyaXNlKGF2Z19yYXRpbmcgPSBtZWFuKGF2ZXJhZ2VfcmF0aW5nKSlcblxuYGBgXG5gYGAifQ== --&gt;
-
-```r
-```r
-#Q5 - Are shorter books, rated lower than longer books?
-
-# low book rating 
-short_book &lt;- main_books_data %&gt;%
-  select(title, average_rating, num_pages) %&gt;%
-  mutate(length_of_book = case_when(
-    num_pages &lt; 200 ~ \under 200\,
-    num_pages &gt; 200 &amp; num_pages &lt; 400 ~ \200 to 400\,
-    TRUE ~ \above 2000\)) %&gt;%
-  filter(length_of_book == \200 to 400\) %&gt;%
-  summarise(low_book_avg_rating = mean(average_rating))
-  
-long_book &lt;- main_books_data %&gt;%
-  select(title, average_rating, num_pages) %&gt;%
-  mutate(length_of_book = case_when(
-    num_pages &lt; 600 ~ \under 200\,
-    num_pages &gt; 600 &amp; num_pages &lt; 800 ~ \600 to 800\,
-    TRUE ~ \above 2000\)) %&gt;%
-  filter(length_of_book == \600 to 800\) %&gt;%
-  summarise(high_book_avg_rating = mean(average_rating))
-
-highest_book_split_rating &lt;- short_book &lt; long_book
-highest_book_split_rating
-#TRUE
-
-book_summ &lt;- books %&gt;%
-  select(title, average_rating, num_pages) %&gt;%
-  mutate(length_of_book = case_when(
-    num_pages &lt; 200 ~ \0. under 200\,
-    num_pages &gt;= 200 &amp; num_pages &lt; 400 ~ \1. 200 to 400\,
-    num_pages &gt;= 400 &amp; num_pages &lt; 600 ~ \2. 400 to 600\,
-    num_pages &gt;= 600 &amp; num_pages &lt; 800 ~ \3. 600 to 800\,
-    TRUE ~ \4. above 800\)) %&gt;%
-  # filter(length_of_book == \200 to 400\) %&gt;%
-  group_by(length_of_book) %&gt;%
-  summarise(avg_rating = mean(average_rating))
-</code></pre>
-<p>```</p>
+#TRUE - HP is higher than LOTR</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKYGBge3J9CiMgSG9tZXdvcmsgZm9yIDgvMTEvMjEKIyBsb2FkIGJvb2tzLmNzdiBkYXRhLiBFeHBsb3JlIGl0IGFuZCBmaW5kIDUgdGhpbmdzIHRvIGRlc2NyaWJlL3N1bW1hcmlzZQoKYGBgCgpgYGB7cn0KIyBNeSBxdWVzdGlvbnMgdG8gZXhwbG9yZQoKI1ExIC0gV2hhdCBpcyB0aGUgaGlnaGVzdCByYXRlZCBib29rIGZyb20gdGhlIG9yaWdpbmFsIHNlcmllcyBpbiBFbmdsaXNoIGJ5IEpLPwojUTIgLSBJcyB0aGUgYXZlcmFnZSBvZiB0aGUgb3JpZ2luYWwgSFAgaGlnaGVyIHRoYW4gdGhlIGF2ZXJhZ2Ugb2YgTG90Uj8KI1EzIC0gV2hhdCBhcmUgdGhlIHJhdGluZ3MgYW5kIHRpdGxlcyBvZiB0aGUgdG9wIDUgZnJlbmNoIGJvb2tzCiMgcmFua2VkIGJ5IHJhdGluZ3MgY291bnQ/CiNRNCAtIFdoYXQgaXMgdGhlIG1lYW4gcmF0aW5nIGZvciBib29rcyBwdWJsaXNoZWQgYnkgUHVmZmluPwojUTUgLSBBcmUgc2hvcnQgYm9va3MgKDIwMCB0byA0MDAgcGFnZXMpIHJhdGVkIGxvd2VyIG9yIGhpZ2hlciBvbiBhdmVyYWdlCiMgdGhhbiBsb25nIGJvb2tzICg2MDAgdG8gODAwIHBhZ2VzKT8KYGBgCgoKYGBge3J9CiMgbG9hZGluZyBwYWNrYWdlcyBhbmQgZGF0YQoKbGlicmFyeSh0aWR5dmVyc2UpCmxpYnJhcnkoamFuaXRvcikKCmJvb2tzIDwtIHJlYWRfY3N2KCJkYXRhL2Jvb2tzLmNzdiIpCmBgYAoKYGBge3J9CiMgQ3JlYXRpbmcgbXkgbWFpbiBkYXRhZnJhbWUgLSByZW1vdmluZyByb3dfSUQsIElTQk4sIElTQk4xMywKIyBwdWJsaWNhdGlvbl9kYXRlIGFuZCB0ZXh0X3Jldmlld3NfY291bnQKCm1haW5fYm9va3NfZGF0YSA8LSBib29rcyAlPiUKICBzZWxlY3QoLXJvd2lkLCAtaXNibiwgLWlzYm4xMywgLXRleHRfcmV2aWV3c19jb3VudCwgLWJvb2tJRCkKCmBgYAoKYGBge3J9CiNRMSAtIFdoYXQgaXMgdGhlIGhpZ2hlc3QgcmF0ZWQgYm9vayBmcm9tIHRoZSBvcmlnaW5hbCBzZXJpZXMgaW4gRW5nbGlzaCBieSBKSz8KCmhpZ2hlc3RfaHBfcmF0aW5nIDwtIG1haW5fYm9va3NfZGF0YSAlPiUKICBzZWxlY3QodGl0bGUsIGF1dGhvcnMsIGF2ZXJhZ2VfcmF0aW5nKSAlPiUKICBmaWx0ZXIoc3RyX2RldGVjdChhdXRob3JzLCAiUm93bGluZyIpLAogICAgICAgICBzdHJfZGV0ZWN0KHRpdGxlLCAiSGFycnkgUG90dGVyIGFuZCB0aGUiKSwKICAgICAgICAgIXN0cl9kZXRlY3QodGl0bGUsICJTb3JjZXJlcidzIikpICU+JQogIGdyb3VwX2J5KGF2ZXJhZ2VfcmF0aW5nLCB0aXRsZSkgJT4lCiAgZGlzdGluY3QodGl0bGUpICU+JQogIHVuZ3JvdXAoKSAlPiUKICBzbGljZV9tYXgoMSkKCiMgQW5zd2VyIGlzIEhCUCB3aXRoIDQuNTcKCmBgYAoKYGBge3J9CiNRMiAtIElzIHRoZSBhdmVyYWdlIG9mIEhQMS03IGhpZ2hlciB0aGFuIHRoZSBhdmVyYWdlIG9mIExvdFI/CgojIENhbGN1bGF0aW5nIHRoZSBIYXJyeSBQb3R0ZXIgYXZlcmFnZQpocF9hdmdfcmF0aW5nIDwtIG1haW5fYm9va3NfZGF0YSAlPiUKICBzZWxlY3QodGl0bGUsIGF1dGhvcnMsIGF2ZXJhZ2VfcmF0aW5nKSAlPiUKICBmaWx0ZXIoc3RyX2RldGVjdChhdXRob3JzLCAiUm93bGluZyIpLAogICAgICAgICBzdHJfZGV0ZWN0KHRpdGxlLCAiSGFycnkgUG90dGVyIGFuZCB0aGUiKSwKICAgICAgICAgIXN0cl9kZXRlY3QodGl0bGUsICJTb3JjZXJlcidzIikpICU+JQogIGRpc3RpbmN0KHRpdGxlLCBhdmVyYWdlX3JhdGluZykgJT4lCiAgc3VtbWFyaXNlKGF2Z19yYXRpbmcgPSBtZWFuKGF2ZXJhZ2VfcmF0aW5nKSkKaHBfYXZnX3JhdGluZwojIDQuNTExNjY3CgojIENhbGN1bGF0aW5nIHRoZSBMb3RSIGF2ZXJhZ2UKbG90cl9hdmdfcmF0aW5nIDwtIG1haW5fYm9va3NfZGF0YSAlPiUKICBzZWxlY3QodGl0bGUsIGF1dGhvcnMsIGF2ZXJhZ2VfcmF0aW5nLCBwdWJsaXNoZXIpICU+JQogIGZpbHRlcihzdHJfZGV0ZWN0KHRpdGxlLCAiVGhlIFJldHVybiBvZiB0aGUgS2luZ3xUaGUgRmVsbG93c2hpcCBvZiB0aGUgUmluZ3xUaGUgVHdvIFRvd2VycyIpLAogICAgICAgICBzdHJfZGV0ZWN0KHB1Ymxpc2hlciwgIkhvdWdodG9uIE1pZmZsaW58TWFyaW5lciBCb29rcyIpLCAKICAgICAgICAgYXV0aG9ycyAhPSAiSnVkZSBGaXNoZXIvVmlnZ28gTW9ydGVuc2VuIiwKICAgICAgICAgcHVibGlzaGVyICE9ICJIb3VnaHRvbiBNaWZmbGluIEhhcmNvdXJ0IgogICkgJT4lCiAgc3VtbWFyaXNlKGF2Z19yYXRpbmcgPSBtZWFuKGF2ZXJhZ2VfcmF0aW5nKSkKbG90cl9hdmdfcmF0aW5nCgojNC40NDMzMwoKaGlnaGVyX2hwX2xvdHJfcmF0aW5nIDwtIGhwX2F2Z19yYXRpbmcgPiBsb3RyX2F2Z19yYXRpbmcKaGlnaGVyX2hwX2xvdHJfcmF0aW5nCiNUUlVFIC0gSFAgaXMgaGlnaGVyIHRoYW4gTE9UUgoKYGBgCgpgYGB7cn0KI1EzIFdoYXQgYXJlIHRoZSByYXRpbmdzIGFuZCB0aXRsZXMgb2YgdGhlIHRvcCA1IHJhdGVkIGZyZW5jaCBib29rcwojcmFua2VkIGJ5IG51bWJlciBvZiByYXRpbmdzIChub3QgcmF0aW5nKQoKdG9wX2ZyZW5jaF9ib29rcyA8LSBtYWluX2Jvb2tzX2RhdGEgJT4lCiAgc2VsZWN0KHRpdGxlLCBhdmVyYWdlX3JhdGluZywgcmF0aW5nc19jb3VudCwgbGFuZ3VhZ2VfY29kZSkgJT4lCiAgZmlsdGVyKGxhbmd1YWdlX2NvZGUgPT0gImZyZSIpICU+JQogIGdyb3VwX2J5KHJhdGluZ3NfY291bnQsIGF2ZXJhZ2VfcmF0aW5nKSAlPiUKICBhcnJhbmdlKGRlc2MocmF0aW5nc19jb3VudCkpCgpoZWFkKHRvcF9mcmVuY2hfYm9va3MsIDUpCgojdG9wX2ZyZW5jaF9ib29rcyBnaXZlcyB0aGUgb3V0cHV0CgpgYGAKCmBgYHtyfQojUTQgLSBXaGF0IGlzIHRoZSBtZWFuIHJhdGluZyBmb3IgYm9va3MgcHVibGlzaGVkIGJ5IFB1ZmZpbj8KCm1lYW5fcHVmZmluX3JhdGluZyA8LSBtYWluX2Jvb2tzX2RhdGEgJT4lCiAgc2VsZWN0KHRpdGxlLCBhdmVyYWdlX3JhdGluZywgcHVibGlzaGVyKSAlPiUKICBzdW1tYXJpc2UocHVmZmluX2F2Z19yYXRpbmcgPSAobWVhbihhdmVyYWdlX3JhdGluZykpKQoKIyBhbnN3ZXIgaXMgMy45MzQwNzUKCmBgYAoKYGBge3J9CiNRNSAtIEFyZSBzaG9ydGVyIGJvb2tzLCByYXRlZCBsb3dlciB0aGFuIGxvbmdlciBib29rcz8KCiMgbG93IGJvb2sgcmF0aW5nIApzaG9ydF9ib29rIDwtIG1haW5fYm9va3NfZGF0YSAlPiUKICBzZWxlY3QodGl0bGUsIGF2ZXJhZ2VfcmF0aW5nLCBudW1fcGFnZXMpICU+JQogIG11dGF0ZShsZW5ndGhfb2ZfYm9vayA9IGNhc2Vfd2hlbigKICAgIG51bV9wYWdlcyA8IDIwMCB+ICJ1bmRlciAyMDAiLAogICAgbnVtX3BhZ2VzID4gMjAwICYgbnVtX3BhZ2VzIDwgNDAwIH4gIjIwMCB0byA0MDAiLAogICAgVFJVRSB+ICJhYm92ZSAyMDAwIikpICU+JQogIGZpbHRlcihsZW5ndGhfb2ZfYm9vayA9PSAiMjAwIHRvIDQwMCIpICU+JQogIHN1bW1hcmlzZShsb3dfYm9va19hdmdfcmF0aW5nID0gbWVhbihhdmVyYWdlX3JhdGluZykpCiAgCmxvbmdfYm9vayA8LSBtYWluX2Jvb2tzX2RhdGEgJT4lCiAgc2VsZWN0KHRpdGxlLCBhdmVyYWdlX3JhdGluZywgbnVtX3BhZ2VzKSAlPiUKICBtdXRhdGUobGVuZ3RoX29mX2Jvb2sgPSBjYXNlX3doZW4oCiAgICBudW1fcGFnZXMgPCA2MDAgfiAidW5kZXIgMjAwIiwKICAgIG51bV9wYWdlcyA+IDYwMCAmIG51bV9wYWdlcyA8IDgwMCB+ICI2MDAgdG8gODAwIiwKICAgIFRSVUUgfiAiYWJvdmUgMjAwMCIpKSAlPiUKICBmaWx0ZXIobGVuZ3RoX29mX2Jvb2sgPT0gIjYwMCB0byA4MDAiKSAlPiUKICBzdW1tYXJpc2UoaGlnaF9ib29rX2F2Z19yYXRpbmcgPSBtZWFuKGF2ZXJhZ2VfcmF0aW5nKSkKCmhpZ2hlc3RfYm9va19zcGxpdF9yYXRpbmcgPC0gc2hvcnRfYm9vayA8IGxvbmdfYm9vawpoaWdoZXN0X2Jvb2tfc3BsaXRfcmF0aW5nCiNUUlVFCgpib29rX3N1bW0gPC0gYm9va3MgJT4lCiAgc2VsZWN0KHRpdGxlLCBhdmVyYWdlX3JhdGluZywgbnVtX3BhZ2VzKSAlPiUKICBtdXRhdGUobGVuZ3RoX29mX2Jvb2sgPSBjYXNlX3doZW4oCiAgICBudW1fcGFnZXMgPCAyMDAgfiAiMC4gdW5kZXIgMjAwIiwKICAgIG51bV9wYWdlcyA+PSAyMDAgJiBudW1fcGFnZXMgPCA0MDAgfiAiMS4gMjAwIHRvIDQwMCIsCiAgICBudW1fcGFnZXMgPj0gNDAwICYgbnVtX3BhZ2VzIDwgNjAwIH4gIjIuIDQwMCB0byA2MDAiLAogICAgbnVtX3BhZ2VzID49IDYwMCAmIG51bV9wYWdlcyA8IDgwMCB+ICIzLiA2MDAgdG8gODAwIiwKICAgIFRSVUUgfiAiNC4gYWJvdmUgODAwIikpICU+JQogICMgZmlsdGVyKGxlbmd0aF9vZl9ib29rID09ICIyMDAgdG8gNDAwIikgJT4lCiAgZ3JvdXBfYnkobGVuZ3RoX29mX2Jvb2spICU+JQogIHN1bW1hcmlzZShhdmdfcmF0aW5nID0gbWVhbihhdmVyYWdlX3JhdGluZykpCgpgYGAKCgoK</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKYGBge3J9CiMgTXkgcXVlc3Rpb25zIHRvIGV4cGxvcmUgQUdBSU4KCiMgU3RhcnQgYWdhaW4gd2l0aCB0aGUgZnVsbCBib29rcyBkYXRhIGZyYW1lCgojIFExIC0gV2hhdCBhcmUgdGhlIHRvcCAxMCByYXRlZCBib29rcyBpbiBFbmdsaXNoPwojIFEyIC0gV2hpY2ggcHVibGlzaGVyIGhhcyBwdWJsaXNoZWQgdGhlIG1vc3QgYm9va3M/CiMgUTMgLSBXaGF0IGFyZSB0aGUgdGV4dCByZXZpZXcgY291bnRzIG9mIHRoZSB0b3AgNSBmcmVuY2ggYm9va3M/CiMgUTQgLSBXaGljaCBwdWJsaXNoZXIgaGFzIHRoZSBoaWdoZXN0IGF2ZXJhZ2UgcmF0aW5nPwojIFE1IC0gSG93IG1hbnkgcGFnZXMgYXJlIHRoZSBsb25nZXN0IGJvb2tzIGZvciB0aGUgdG9wIDUgdGV4dCByZXZpZXdzPwojIFE2IC0gV2hhdCBpcyBsYW5nYXVnZSBnbGEgKHdobyB3cml0ZXMgLyBwdWJsaXNoZXMgdGhlc2UgYm9va3MpPwoKYGBgCgpgYGB7cn0KYm9va3MgPC0gcmVhZF9jc3YoImRhdGEvYm9va3MuY3N2IikKCmxpYnJhcnkodGlkeXZlcnNlKQpsaWJyYXJ5KGphbml0b3IpCmBgYAoKYGBge3J9CiMgUTEgLSBXaGF0IGFyZSB0aGUgdG9wIDEwIHJhdGVkIGJvb2tzIGluIEVuZ2xpc2g/Cgpib29rcyAlPiUKCmBgYAoKYGBge3J9CiMgUTIgLSBXaGljaCBwdWJsaXNoZXIgaGFzIHB1Ymxpc2hlZCB0aGUgbW9zdCBib29rcz8KCmJvb2tzICU+JQoKYGBgCgpgYGB7cn0KIyBRMyAtIFdoYXQgYXJlIHRoZSB0ZXh0IHJldmlldyBjb3VudHMgb2YgdGhlIHRvcCA1IGZyZW5jaCBib29rcz8KCmJvb2tzICU+JQoKYGBgCgpgYGB7cn0KIyBRNCAtIFdoaWNoIHB1Ymxpc2hlciBoYXMgdGhlIGhpZ2hlc3QgYXZlcmFnZSByYXRpbmc/Cgpib29rcyAlPiUKCgpgYGAKCmBgYHtyfQojIFE1IC0gSG93IG1hbnkgcGFnZXMgYXJlIHRoZSBsb25nZXN0IGJvb2tzIGZvciB0aGUgdG9wIDUgdGV4dCByZXZpZXdzPwoKYm9va3MgJT4lCgpgYGAKCmBgYHtyfQojIFE2IC0gV2hhdCBpcyBsYW5nYXVnZSBnbGEgKHdobyB3cml0ZXMgLyBwdWJsaXNoZXMgdGhlc2UgYm9va3MpPwoKYm9va3MgJT4lIAoKYGBgCgpgYGB7cn0KCiMgUkVETyBUSElTIFdJVEggSVNCTi9CT09LIElEIElOQ0xVREVEIHRvIGZpbmQgdGhlIGRpc3RpbmN0IElEJ3MKCiMgQ2FsY3VsYXRpbmcgdGhlIEhhcnJ5IFBvdHRlciBhdmVyYWdlCmhwX2F2Z19yYXRpbmcgPC0gbWFpbl9ib29rc19kYXRhICU+JQogIHNlbGVjdCh0aXRsZSwgYXV0aG9ycywgYXZlcmFnZV9yYXRpbmcpICU+JQogIGZpbHRlcihzdHJfZGV0ZWN0KGF1dGhvcnMsICJSb3dsaW5nIiksCiAgICAgICAgIHN0cl9kZXRlY3QodGl0bGUsICJIYXJyeSBQb3R0ZXIgYW5kIHRoZSIpLAogICAgICAgICAhc3RyX2RldGVjdCh0aXRsZSwgIlNvcmNlcmVyJ3MiKSkgJT4lCiAgZGlzdGluY3QodGl0bGUsIGF2ZXJhZ2VfcmF0aW5nKSAlPiUKICBzdW1tYXJpc2UoYXZnX3JhdGluZyA9IG1lYW4oYXZlcmFnZV9yYXRpbmcpKQpocF9hdmdfcmF0aW5nCiMgNC41MTE2NjcKCiMgQ2FsY3VsYXRpbmcgdGhlIExvdFIgYXZlcmFnZQpsb3RyX2F2Z19yYXRpbmcgPC0gbWFpbl9ib29rc19kYXRhICU+JQogIHNlbGVjdCh0aXRsZSwgYXV0aG9ycywgYXZlcmFnZV9yYXRpbmcsIHB1Ymxpc2hlcikgJT4lCiAgZmlsdGVyKHN0cl9kZXRlY3QodGl0bGUsICJUaGUgUmV0dXJuIG9mIHRoZSBLaW5nfFRoZSBGZWxsb3dzaGlwIG9mIHRoZSBSaW5nfFRoZSBUd28gVG93ZXJzIiksCiAgICAgICAgIHN0cl9kZXRlY3QocHVibGlzaGVyLCAiSG91Z2h0b24gTWlmZmxpbnxNYXJpbmVyIEJvb2tzIiksIAogICAgICAgICBhdXRob3JzICE9ICJKdWRlIEZpc2hlci9WaWdnbyBNb3J0ZW5zZW4iLAogICAgICAgICBwdWJsaXNoZXIgIT0gIkhvdWdodG9uIE1pZmZsaW4gSGFyY291cnQiCiAgKSAlPiUKICBzdW1tYXJpc2UoYXZnX3JhdGluZyA9IG1lYW4oYXZlcmFnZV9yYXRpbmcpKQpsb3RyX2F2Z19yYXRpbmcKCiM0LjQ0MzMzCgpoaWdoZXJfaHBfbG90cl9yYXRpbmcgPC0gaHBfYXZnX3JhdGluZyA+IGxvdHJfYXZnX3JhdGluZwpoaWdoZXJfaHBfbG90cl9yYXRpbmcKI1RSVUUgLSBIUCBpcyBoaWdoZXIgdGhhbiBMT1RSCmBgYAo=</div>
 
 
 
@@ -501,7 +385,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
-  window.initializeSourceEmbed("week1_weekend_homework.Rmd");
+  window.initializeSourceEmbed("homework updated.Rmd");
   window.initializeCodeFolding("show" === "show");
 });
 </script>

@@ -50,9 +50,8 @@ highest_hp_rating <- main_books_data %>%
          !str_detect(title, "Sorcerer's")) %>%
   group_by(average_rating, title) %>%
   distinct(title) %>%
-  arrange(average_rating)
-  
-tail(highest_hp_rating, 1)
+  ungroup() %>%
+  slice_max(1)
 
 # Answer is HBP with 4.57
 
@@ -119,8 +118,7 @@ mean_puffin_rating <- main_books_data %>%
 ```
 
 ```{r}
-#Q5 - Are books between 200 and 400 pages, rated lower than books 
-# between 600 to 800 pages?
+#Q5 - Are shorter books, rated lower than longer books?
 
 # low book rating 
 short_book <- main_books_data %>%
@@ -131,22 +129,31 @@ short_book <- main_books_data %>%
     TRUE ~ "above 2000")) %>%
   filter(length_of_book == "200 to 400") %>%
   summarise(low_book_avg_rating = mean(average_rating))
-# 3.890945
   
 long_book <- main_books_data %>%
   select(title, average_rating, num_pages) %>%
   mutate(length_of_book = case_when(
     num_pages < 600 ~ "under 200",
-    num_pages > 400 & num_pages < 600 ~ "400 to 600",
     num_pages > 600 & num_pages < 800 ~ "600 to 800",
     TRUE ~ "above 2000")) %>%
   filter(length_of_book == "600 to 800") %>%
   summarise(high_book_avg_rating = mean(average_rating))
-# 4.051187
 
 highest_book_split_rating <- short_book < long_book
 highest_book_split_rating
 #TRUE
+
+book_summ <- books %>%
+  select(title, average_rating, num_pages) %>%
+  mutate(length_of_book = case_when(
+    num_pages < 200 ~ "0. under 200",
+    num_pages >= 200 & num_pages < 400 ~ "1. 200 to 400",
+    num_pages >= 400 & num_pages < 600 ~ "2. 400 to 600",
+    num_pages >= 600 & num_pages < 800 ~ "3. 600 to 800",
+    TRUE ~ "4. above 800")) %>%
+  # filter(length_of_book == "200 to 400") %>%
+  group_by(length_of_book) %>%
+  summarise(avg_rating = mean(average_rating))
 
 ```
 
