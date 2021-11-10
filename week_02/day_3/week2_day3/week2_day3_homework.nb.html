@@ -217,176 +217,128 @@ pre code {
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeSh0aWR5dmVyc2UpXG5saWJyYXJ5KGphbml0b3IpXG50d2VldHMgPC0gcmVhZF9jc3YoXCJkYXRhL2NvZGVfY2xhbl90d2VldHMuY3N2XCIpXG5gYGAifQ== -->
-<pre class="r"><code>library(tidyverse)
-library(janitor)
-tweets &lt;- read_csv(&quot;data/code_clan_tweets.csv&quot;)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiUm93czogMjM0IENvbHVtbnM6IDI3XG7ilIDilIAgQ29sdW1uIHNwZWNpZmljYXRpb24g4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAXG5EZWxpbWl0ZXI6IFwiLFwiXG5jaHIgKDEyKTogY3JlYXRlZF9hdCwgc2NyZWVuX25hbWUsIHRleHQsIHNvdXJjZSwgcmVwbHlfdG9fc2NyZWVuX25hbWUsIGhhc2h0YWdzLCB1cmxzX3VybCwgdXJsc190LmNvLCB1cmxzX2V4Li4uXG5kYmwgKDEwKTogdHdlZXRfaWQsIHVzZXJfaWQsIGRpc3BsYXlfdGV4dF93aWR0aCwgcmVwbHlfdG9fc3RhdHVzX2lkLCByZXBseV90b191c2VyX2lkLCBmYXZvcml0ZV9jb3VudCwgcmV0d2VlLi4uXG5sZ2wgICg1KTogaXNfcXVvdGUsIGlzX3JldHdlZXQsIHF1b3RlX2NvdW50LCByZXBseV9jb3VudCwgc3ltYm9sc1xuXG7ihLkgVXNlIGBzcGVjKClgIHRvIHJldHJpZXZlIHRoZSBmdWxsIGNvbHVtbiBzcGVjaWZpY2F0aW9uIGZvciB0aGlzIGRhdGEuXG7ihLkgU3BlY2lmeSB0aGUgY29sdW1uIHR5cGVzIG9yIHNldCBgc2hvd19jb2xfdHlwZXMgPSBGQUxTRWAgdG8gcXVpZXQgdGhpcyBtZXNzYWdlLlxuIn0= -->
-<pre><code>Rows: 234 Columns: 27
-── Column specification ─────────────────────────────────────────────────────────────────────────────────────────
-Delimiter: &quot;,&quot;
-chr (12): created_at, screen_name, text, source, reply_to_screen_name, hashtags, urls_url, urls_t.co, urls_ex...
-dbl (10): tweet_id, user_id, display_text_width, reply_to_status_id, reply_to_user_id, favorite_count, retwee...
-lgl  (5): is_quote, is_retweet, quote_count, reply_count, symbols
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBRdWVzdGlvbiAxLlxuIyBMb2FkIHRoZSBjb2RlX2NsYW5fdHdlZXRzLmNzdiBkYXRhLiBGaW5kIHRoZSBudW1iZXIgb2Ygcm93cywgY29sdW1ucywgYW5kIGxpc3QgYWxsIHRoZSB2YXJpYWJsZSBuYW1lcy5cblxubnJvdyh0d2VldHMpXG4jMjM0XG5cbm5jb2wodHdlZXRzKVxuIzI3XG5cbm5hbWVzKHR3ZWV0cylcbmBgYCJ9 -->
-<pre class="r"><code># Question 1.
-# Load the code_clan_tweets.csv data. Find the number of rows, columns, and list all the variable names.
-
-nrow(tweets)
-#234
-
-ncol(tweets)
-#27
-
-names(tweets)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBteSBkYXRhOlxuIyB0ZW1wOiAxMSwgMTIsIDExXG4jIHJhaW46IDEyLCA5MCwgNFxuIyB3aW5kc3BlZWQ6IDEyLCAxMywgN1xuYGBgIn0= -->
+<pre class="r"><code># my data:
+# temp: 11, 12, 11
+# rain: 12, 90, 4
+# windspeed: 12, 13, 7</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBRdWVzdGlvbiAyLlxuIyBGaW5kIHRoZSB0b3RhbCBudW1iZXIgb2YgZmF2b3VyaXRlcyAoc3RvcmVkIGluIGZhdm9yaXRlX2NvdW50KSB0aGF0IENvZGVDbGFuIHR3ZWV0cyBoYXZlIGdvdC4gRG9u4oCZdCBhZGQgYSB0d2VldOKAmXMgZmF2b3JpdGVfY291bnQgdG8gdGhlIHRvdGFsIHdoZW4gdGhlIHR3ZWV0IHdhcyBxdW90ZWQgKHNlZSB0aGUgaXNfcXVvdGUgdmFyaWFibGUpLlxuXG50d2VldHMgJT4lXG4gIHNlbGVjdChmYXZvcml0ZV9jb3VudCwgaXNfcXVvdGUpICU+JVxuICBmaWx0ZXIoaXNfcXVvdGUgPT0gRkFMU0UpICU+JVxuICBzdW1tYXJpc2Uoc3VtKGZhdm9yaXRlX2NvdW50KSlcbiAgXG4jIGlzIGNvcnJlY3RcbmBgYCJ9 -->
-<pre class="r"><code># Question 2.
-# Find the total number of favourites (stored in favorite_count) that CodeClan tweets have got. Don’t add a tweet’s favorite_count to the total when the tweet was quoted (see the is_quote variable).
-
-tweets %&gt;%
-  select(favorite_count, is_quote) %&gt;%
-  filter(is_quote == FALSE) %&gt;%
-  summarise(sum(favorite_count))
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxud2VhdGhlcl9saXN0IDwtIGxpc3QoXCJUaHVyc2RheVwiID0gbGlzdCh0ZW1wZXJhdHVyZSA9IDExLCBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNoYW5jZV9vZl9yYWluID0gMTIsIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgd2luZHNwZWVkID0gMTIpLFxuICAgICAgICAgICAgICAgICAgICAgXCJGcmlkYXlcIiA9IGxpc3QodGVtcGVyYXR1cmUgPSAxMiwgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBjaGFuY2Vfb2ZfcmFpbiA9IDkwLCBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHdpbmRzcGVlZCA9IDEzKSxcbiAgICAgICAgICAgICAgICAgICAgIFwiU2F0dXJkYXlcIiA9IGxpc3QodGVtcGVyYXR1cmUgPSAxMSwgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBjaGFuY2Vfb2ZfcmFpbiA9IDQsIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgd2luZHNwZWVkID0gNylcbilcbiAgXG53ZWF0aGVyX2xpc3RcblxuYGBgIn0= -->
+<pre class="r"><code>weather_list &lt;- list(&quot;Thursday&quot; = list(temperature = 11, 
+                                       chance_of_rain = 12, 
+                                       windspeed = 12),
+                     &quot;Friday&quot; = list(temperature = 12, 
+                                       chance_of_rain = 90, 
+                                       windspeed = 13),
+                     &quot;Saturday&quot; = list(temperature = 11, 
+                                       chance_of_rain = 4, 
+                                       windspeed = 7)
+)
   
-# is correct</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBRdWVzdGlvbiAzLlxuIyBTdW1tYXJpc2UgdGhlIG1lYW4gbnVtYmVyIG9mIHJldHdlZXRzIChyZXR3ZWV0X2NvdW50KSwgc3BsaXQgYnkgdGhlIHR5cGUgb2YgcGxhdGZvcm0gdGhhdCB3YXMgdXNlZCB0byB0d2VldCAoc291cmNlKS4gQWdhaW4sIG9taXQgcXVvdGVkIHR3ZWV0cyBmcm9tIHRoZSBtZWFuLlxuXG50d2VldHMgJT4lXG4gIHBpdm90X3dpZGVyKG5hbWVzX2Zyb20gPSBcInNvdXJjZVwiLFxuICAgICAgICAgICAgICB2YWx1ZXNfZnJvbSA9IFwicmV0d2VldF9jb3VudFwiXG4gICkgJT4lXG4gIGNsZWFuX25hbWVzKCkgJT4lXG4gIHNlbGVjdCh0d2l0dGVyX3dlYl9hcHAsIHR3ZWV0Ym90X2Zvcl9tYWMsIGhvb3RzdWl0ZV9pbmMsIHR3aXR0ZXJfd2ViX2NsaWVudCwgdHdpdHRlcl9mb3JfaV9waG9uZSwgdHdlZXRfZGVjaywgaXNfcXVvdGUpICU+JVxuICBmaWx0ZXIoaXNfcXVvdGUgPT0gRkFMU0UpICU+JVxuICBjb2xNZWFucyhuYS5ybSA9IFRSVUUpXG5cbmBgYCJ9 -->
-<pre class="r"><code># Question 3.
-# Summarise the mean number of retweets (retweet_count), split by the type of platform that was used to tweet (source). Again, omit quoted tweets from the mean.
-
-tweets %&gt;%
-  pivot_wider(names_from = &quot;source&quot;,
-              values_from = &quot;retweet_count&quot;
-  ) %&gt;%
-  clean_names() %&gt;%
-  select(twitter_web_app, tweetbot_for_mac, hootsuite_inc, twitter_web_client, twitter_for_i_phone, tweet_deck, is_quote) %&gt;%
-  filter(is_quote == FALSE) %&gt;%
-  colMeans(na.rm = TRUE)
+weather_list
 </code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBRdWVzdGlvbiA0LlxuIyBDb3VudCB0aGUgdG90YWwgbnVtYmVyIG9mIGxpa2VzIChpLmUuIHRvdGFsIG9mIGZhdm9yaXRlX2NvdW50KSwgc3BsaXQgYnkgbWVkaWEgdHlwZSwgYW5kIGFycmFuZ2UgdGhlbSBmcm9tIG1vc3QgbGlrZXMgdG8gbGVhc3QuIEFzc3VtZSB0aGF0IGFueSB0d2VldHMgd2l0aG91dCBhIGxpc3RlZCBtZWRpYSB0eXBlIGFyZSBvZiB0eXBlIOKAnHRleHTigJ0uXG4jXG5cbnR3ZWV0cyAlPiVcbiAgcmVwbGFjZV9uYShsaXN0KG1lZGlhX3R5cGUgPSBcInRleHRfbGlrZXNcIikpICU+JVxuICBwaXZvdF93aWRlcihuYW1lc19mcm9tID0gXCJtZWRpYV90eXBlXCIsXG4gICAgICAgICAgICAgIHZhbHVlc19mcm9tID0gXCJmYXZvcml0ZV9jb3VudFwiXG4gICAgICAgICAgICAgICkgJT4lXG4gIGNsZWFuX25hbWVzKCkgJT4lXG4gIHNlbGVjdChwaG90bywgdGV4dF9saWtlcykgJT4lXG4gIGFycmFuZ2UoZGVzYyhwaG90bykpXG5cbiMgdGhlc2UgYXJlbid0IHByb3Blcmx5IGFycmFuZ2VkIGFuZCBJIGhhdmVuJ3QgZGVhbHQgd2l0aCB0aGUgTkEncyBwcm9wZXJseVxuXG4jYW5zd2VyXG5cbnR3ZWV0cyAlPiVcbiAgbXV0YXRlKG1lZGlhX3R5cGUgPSBjb2FsZXNjZShtZWRpYV90eXBlLCBcInRleHRcIikpICU+JVxuICBncm91cF9ieShtZWRpYV90eXBlKSAlPiVcbiAgc3VtbWFyaXNlKGZhdm91cml0ZV9jb3VudF90b3RhbCA9IHN1bShmYXZvcml0ZV9jb3VudCkpICU+JVxuICBhcnJhbmdlKGRlc2MoZmF2b3VyaXRlX2NvdW50X3RvdGFsKSlcblxuYGBgIn0= -->
-<pre class="r"><code># Question 4.
-# Count the total number of likes (i.e. total of favorite_count), split by media type, and arrange them from most likes to least. Assume that any tweets without a listed media type are of type “text”.
-#
+<!-- rnb-output-begin eyJkYXRhIjoiJFRodXJzZGF5XG4kVGh1cnNkYXkkdGVtcGVyYXR1cmVcblsxXSAxMVxuXG4kVGh1cnNkYXkkY2hhbmNlX29mX3JhaW5cblsxXSAxMlxuXG4kVGh1cnNkYXkkd2luZHNwZWVkXG5bMV0gMTJcblxuXG4kRnJpZGF5XG4kRnJpZGF5JHRlbXBlcmF0dXJlXG5bMV0gMTJcblxuJEZyaWRheSRjaGFuY2Vfb2ZfcmFpblxuWzFdIDkwXG5cbiRGcmlkYXkkd2luZHNwZWVkXG5bMV0gMTNcblxuXG4kU2F0dXJkYXlcbiRTYXR1cmRheSR0ZW1wZXJhdHVyZVxuWzFdIDExXG5cbiRTYXR1cmRheSRjaGFuY2Vfb2ZfcmFpblxuWzFdIDRcblxuJFNhdHVyZGF5JHdpbmRzcGVlZFxuWzFdIDdcbiJ9 -->
+<pre><code>$Thursday
+$Thursday$temperature
+[1] 11
 
-tweets %&gt;%
-  replace_na(list(media_type = &quot;text_likes&quot;)) %&gt;%
-  pivot_wider(names_from = &quot;media_type&quot;,
-              values_from = &quot;favorite_count&quot;
-              ) %&gt;%
-  clean_names() %&gt;%
-  select(photo, text_likes) %&gt;%
-  arrange(desc(photo))
+$Thursday$chance_of_rain
+[1] 12
 
-# these aren&#39;t properly arranged and I haven&#39;t dealt with the NA&#39;s properly
+$Thursday$windspeed
+[1] 12
 
-#answer
 
-tweets %&gt;%
-  mutate(media_type = coalesce(media_type, &quot;text&quot;)) %&gt;%
-  group_by(media_type) %&gt;%
-  summarise(favourite_count_total = sum(favorite_count)) %&gt;%
-  arrange(desc(favourite_count_total))
-</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29kZV9jbGFuX3R3ZWV0c190ZXh0IDwtIGNvZGVjbGFuX3R3ZWV0cyAlPiVcbiAgbXV0YXRlKGNvdW50X3N0cl9sZW5ndGggPSBzdHJfbGVuZ3RoKHRleHQpKSAlPiVcbiAgc2VsZWN0KGNvdW50X3N0cl9sZW5ndGgsIGRpc3BsYXlfdGV4dF93aWR0aCkgJT4lXG4gIHN1bW1hcmlzZShtZWFuX2NvdW50cyA9IG1lYW4oY291bnRfc3RyX2xlbmd0aCwgbmEucm0gPSBUUlVFKSlcblxuYGBgIn0= -->
-<pre class="r"><code>code_clan_tweets_text &lt;- codeclan_tweets %&gt;%
-  mutate(count_str_length = str_length(text)) %&gt;%
-  select(count_str_length, display_text_width) %&gt;%
-  summarise(mean_counts = mean(count_str_length, na.rm = TRUE))
-</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gbXV0YXRlKC4sIGNvdW50X3N0cl9sZW5ndGggPSBzdHJfbGVuZ3RoKHRleHQpKSA6IFxuICBvYmplY3QgJ2NvZGVjbGFuX3R3ZWV0cycgbm90IGZvdW5kXG4ifQ== -->
-<pre><code>Error in mutate(., count_str_length = str_length(text)) : 
-  object &#39;codeclan_tweets&#39; not found</code></pre>
+$Friday
+$Friday$temperature
+[1] 12
+
+$Friday$chance_of_rain
+[1] 90
+
+$Friday$windspeed
+[1] 13
+
+
+$Saturday
+$Saturday$temperature
+[1] 11
+
+$Saturday$chance_of_rain
+[1] 4
+
+$Saturday$windspeed
+[1] 7</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY2NfaW5mbyA8LSByZWFkX2NzdihcImRhdGEvY29kZV9jbGFuX2luZm8uY3N2XCIpXG5cbmBgYCJ9 -->
-<pre class="r"><code>cc_info &lt;- read_csv(&quot;data/code_clan_info.csv&quot;)
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxud2VhdGhlcl9saXN0W1tcIlRodXJzZGF5XCJdXVtbXCJ0ZW1wZXJhdHVyZVwiXV1cblxuYGBgIn0= -->
+<pre class="r"><code>weather_list[[&quot;Thursday&quot;]][[&quot;temperature&quot;]]
 </code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiUm93czogMjM0IENvbHVtbnM6IDE1XG7ilIDilIAgQ29sdW1uIHNwZWNpZmljYXRpb24g4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAXG5EZWxpbWl0ZXI6IFwiLFwiXG5jaHIgKDcpOiBzdGF0dXNfdXJsLCBuYW1lLCBsb2NhdGlvbiwgZGVzY3JpcHRpb24sIHVybCwgYWNjb3VudF9jcmVhdGVkX2F0LCBwcm9maWxlX3VybFxuZGJsICg2KTogdHdlZXRfaWQsIGZvbGxvd2Vyc19jb3VudCwgZnJpZW5kc19jb3VudCwgbGlzdGVkX2NvdW50LCBzdGF0dXNlc19jb3VudCwgZmF2b3VyaXRlc19jb3VudFxubGdsICgyKTogcHJvdGVjdGVkLCB2ZXJpZmllZFxuXG7ihLkgVXNlIGBzcGVjKClgIHRvIHJldHJpZXZlIHRoZSBmdWxsIGNvbHVtbiBzcGVjaWZpY2F0aW9uIGZvciB0aGlzIGRhdGEuXG7ihLkgU3BlY2lmeSB0aGUgY29sdW1uIHR5cGVzIG9yIHNldCBgc2hvd19jb2xfdHlwZXMgPSBGQUxTRWAgdG8gcXVpZXQgdGhpcyBtZXNzYWdlLlxuIn0= -->
-<pre><code>Rows: 234 Columns: 15
-── Column specification ─────────────────────────────────────────────────────────────────────────────────────────
-Delimiter: &quot;,&quot;
-chr (7): status_url, name, location, description, url, account_created_at, profile_url
-dbl (6): tweet_id, followers_count, friends_count, listed_count, statuses_count, favourites_count
-lgl (2): protected, verified
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDExXG4ifQ== -->
+<pre><code>[1] 11</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBRdWVzdGlvbiA3LlxuIyBGcm9tIHlvdXIgbmV3IGpvaW5lZCBkYXRhLCBjcmVhdGUgYSBuZXcgdGliYmxlIGNvZGVjbGFuX2hhc2h0YWdzIGNvbnRhaW5pbmcgb25seSB0aGUgdHdlZXRfaWQgYW5kIGNvbnZlcnQgdGhlIGhhc2h0YWdzIGludG8gbG93ZXJjYXNlIGZvciBhbmFseXNpcy4gS2VlcCBvbmx5IHRob3NlIHR3ZWV0cyB3aXRoIGhhc2h0YWdzLlxuXG5jb2RlY2xhbl9oYXNodGFncyA8LSB0d2VldHNfY2Nfam9pbmVkICU+JVxuICBzZWxlY3QodGV4dClcblxuY29kZWNsYW5faGFzaHRhZ3MgJT4lXG4gIHN0cl9leHRyYWN0X2FsbChcIlsjXVtBLVphLXpdK1wiKSAlPiVcbiAgZmxhdHRlbl9jaHIoKSAlPiVcbiAgc3RyX3RvX2xvd2VyKClcblxuY29kZWNsYW5faGFzaHRhZ3MgJT4lXG4gIGZpbHRlcihzdHJfZGV0ZWN0KHRleHQsIChcIlsjXVwiKSlcbiAgKVxuXG4jQU5TV0VSXG5cbmhhc2h0YWdzIDwtIHR3ZWV0c19jY19qb2luZWQgJT4lIFxuICBzZWxlY3QodHdlZXRfaWQsIGhhc2h0YWdzKSAlPiVcbiAgbXV0YXRlKGxvd2Nhc2VfaGFzaHRhZyA9IHN0cl90b19sb3dlcihoYXNodGFncykpICU+JVxuICBzZWxlY3QoLWhhc2h0YWdzKSAlPiVcbiAgZHJvcF9uYShsb3djYXNlX2hhc2h0YWcpXG5cbiNBbnN3ZXIgZm91bmQgaW4gcmV2aWV3XG5cbmNvZGVjbGFuX2FsbF9kYXRhICU+JVxuICBmaWx0ZXIoc3RyX2RldGVjdCh0ZXh0LCAoXCJbI11cIikpKSAlPiUgXG4gIG11dGF0ZShoYXNodGFncyA9IHN0cl9leHRyYWN0X2FsbCh0ZXh0LCBcIiNbQS1aYS16MC05XSpcIikpICU+JSBcbiAgdW5uZXN0KCkgJT4lIFxuICBtdXRhdGUoaGFzaHRhZ3MgPSBzdHJfdG9fbG93ZXIoaGFzaHRhZ3MpKVxuXG5gYGAifQ== -->
-<pre class="r"><code># Question 7.
-# From your new joined data, create a new tibble codeclan_hashtags containing only the tweet_id and convert the hashtags into lowercase for analysis. Keep only those tweets with hashtags.
-
-codeclan_hashtags &lt;- tweets_cc_joined %&gt;%
-  select(text)
-
-codeclan_hashtags %&gt;%
-  str_extract_all(&quot;[#][A-Za-z]+&quot;) %&gt;%
-  flatten_chr() %&gt;%
-  str_to_lower()
-
-codeclan_hashtags %&gt;%
-  filter(str_detect(text, (&quot;[#]&quot;))
-  )
-
-#ANSWER
-
-hashtags &lt;- tweets_cc_joined %&gt;% 
-  select(tweet_id, hashtags) %&gt;%
-  mutate(lowcase_hashtag = str_to_lower(hashtags)) %&gt;%
-  select(-hashtags) %&gt;%
-  drop_na(lowcase_hashtag)
-
-#Answer found in review
-
-codeclan_all_data %&gt;%
-  filter(str_detect(text, (&quot;[#]&quot;))) %&gt;% 
-  mutate(hashtags = str_extract_all(text, &quot;#[A-Za-z0-9]*&quot;)) %&gt;% 
-  unnest() %&gt;% 
-  mutate(hashtags = str_to_lower(hashtags))
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGVtcGVyYXR1cmVfbWF0cml4XG5cbmBgYCJ9 -->
+<pre class="r"><code>temperature_matrix
 </code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICBbLDFdIFssMl0gWywzXSBbLDRdIFssNV0gWyw2XSBbLDddXG5bMSxdICAgIDggICAxMCAgIDEyICAgMTQgICAgOCAgIDEwICAgMTJcblsyLF0gICAgOSAgIDExICAgMTMgICAxNSAgICA5ICAgMTEgICAxM1xuIn0= -->
+<pre><code>     [,1] [,2] [,3] [,4] [,5] [,6] [,7]
+[1,]    8   10   12   14    8   10   12
+[2,]    9   11   13   15    9   11   13</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGVtcGVyYXR1cmVfbWF0cml4WyxjKDEsMyw1KV1cblxuYGBgIn0= -->
+<pre class="r"><code>temperature_matrix[,c(1,3,5)]
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICBbLDFdIFssMl0gWywzXVxuWzEsXSAgICA4ICAgMTIgICAgOFxuWzIsXSAgICA5ICAgMTMgICAgOVxuIn0= -->
+<pre><code>     [,1] [,2] [,3]
+[1,]    8   12    8
+[2,]    9   13    9</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYXBwZW5kX2Fuc3dlcigxMilcblxuYGBgIn0= -->
+<pre class="r"><code>append_answer(12)
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDEuMlxuIn0= -->
+<pre><code>[1] 1.2</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudmVjdG9yMSA9PSB2ZWN0b3IyXG5cbmBgYCJ9 -->
+<pre class="r"><code>vector1 == vector2
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIEZBTFNFIEZBTFNFIEZBTFNFXG4ifQ== -->
+<pre><code>[1] FALSE FALSE FALSE</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKYGBge3J9CmxpYnJhcnkodGlkeXZlcnNlKQpsaWJyYXJ5KGphbml0b3IpCnR3ZWV0cyA8LSByZWFkX2NzdigiZGF0YS9jb2RlX2NsYW5fdHdlZXRzLmNzdiIpCmBgYAoKYGBge3J9CiMgUXVlc3Rpb24gMS4KIyBMb2FkIHRoZSBjb2RlX2NsYW5fdHdlZXRzLmNzdiBkYXRhLiBGaW5kIHRoZSBudW1iZXIgb2Ygcm93cywgY29sdW1ucywgYW5kIGxpc3QgYWxsIHRoZSB2YXJpYWJsZSBuYW1lcy4KCm5yb3codHdlZXRzKQojMjM0CgpuY29sKHR3ZWV0cykKIzI3CgpuYW1lcyh0d2VldHMpCmBgYAoKYGBge3J9CiMgUXVlc3Rpb24gMi4KIyBGaW5kIHRoZSB0b3RhbCBudW1iZXIgb2YgZmF2b3VyaXRlcyAoc3RvcmVkIGluIGZhdm9yaXRlX2NvdW50KSB0aGF0IENvZGVDbGFuIHR3ZWV0cyBoYXZlIGdvdC4gRG9u4oCZdCBhZGQgYSB0d2VldOKAmXMgZmF2b3JpdGVfY291bnQgdG8gdGhlIHRvdGFsIHdoZW4gdGhlIHR3ZWV0IHdhcyBxdW90ZWQgKHNlZSB0aGUgaXNfcXVvdGUgdmFyaWFibGUpLgoKdHdlZXRzICU+JQogIHNlbGVjdChmYXZvcml0ZV9jb3VudCwgaXNfcXVvdGUpICU+JQogIGZpbHRlcihpc19xdW90ZSA9PSBGQUxTRSkgJT4lCiAgc3VtbWFyaXNlKHN1bShmYXZvcml0ZV9jb3VudCkpCiAgCiMgaXMgY29ycmVjdApgYGAKCmBgYHtyfQojIFF1ZXN0aW9uIDMuCiMgU3VtbWFyaXNlIHRoZSBtZWFuIG51bWJlciBvZiByZXR3ZWV0cyAocmV0d2VldF9jb3VudCksIHNwbGl0IGJ5IHRoZSB0eXBlIG9mIHBsYXRmb3JtIHRoYXQgd2FzIHVzZWQgdG8gdHdlZXQgKHNvdXJjZSkuIEFnYWluLCBvbWl0IHF1b3RlZCB0d2VldHMgZnJvbSB0aGUgbWVhbi4KCnR3ZWV0cyAlPiUKICBwaXZvdF93aWRlcihuYW1lc19mcm9tID0gInNvdXJjZSIsCiAgICAgICAgICAgICAgdmFsdWVzX2Zyb20gPSAicmV0d2VldF9jb3VudCIKICApICU+JQogIGNsZWFuX25hbWVzKCkgJT4lCiAgc2VsZWN0KHR3aXR0ZXJfd2ViX2FwcCwgdHdlZXRib3RfZm9yX21hYywgaG9vdHN1aXRlX2luYywgdHdpdHRlcl93ZWJfY2xpZW50LCB0d2l0dGVyX2Zvcl9pX3Bob25lLCB0d2VldF9kZWNrLCBpc19xdW90ZSkgJT4lCiAgZmlsdGVyKGlzX3F1b3RlID09IEZBTFNFKSAlPiUKICBjb2xNZWFucyhuYS5ybSA9IFRSVUUpCgpgYGAKCmBgYHtyfQojIFF1ZXN0aW9uIDQuCiMgQ291bnQgdGhlIHRvdGFsIG51bWJlciBvZiBsaWtlcyAoaS5lLiB0b3RhbCBvZiBmYXZvcml0ZV9jb3VudCksIHNwbGl0IGJ5IG1lZGlhIHR5cGUsIGFuZCBhcnJhbmdlIHRoZW0gZnJvbSBtb3N0IGxpa2VzIHRvIGxlYXN0LiBBc3N1bWUgdGhhdCBhbnkgdHdlZXRzIHdpdGhvdXQgYSBsaXN0ZWQgbWVkaWEgdHlwZSBhcmUgb2YgdHlwZSDigJx0ZXh04oCdLgojCgp0d2VldHMgJT4lCiAgcmVwbGFjZV9uYShsaXN0KG1lZGlhX3R5cGUgPSAidGV4dF9saWtlcyIpKSAlPiUKICBwaXZvdF93aWRlcihuYW1lc19mcm9tID0gIm1lZGlhX3R5cGUiLAogICAgICAgICAgICAgIHZhbHVlc19mcm9tID0gImZhdm9yaXRlX2NvdW50IgogICAgICAgICAgICAgICkgJT4lCiAgY2xlYW5fbmFtZXMoKSAlPiUKICBzZWxlY3QocGhvdG8sIHRleHRfbGlrZXMpICU+JQogIGFycmFuZ2UoZGVzYyhwaG90bykpCgojIHRoZXNlIGFyZW4ndCBwcm9wZXJseSBhcnJhbmdlZCBhbmQgSSBoYXZlbid0IGRlYWx0IHdpdGggdGhlIE5BJ3MgcHJvcGVybHkKCiNhbnN3ZXIKCnR3ZWV0cyAlPiUKICBtdXRhdGUobWVkaWFfdHlwZSA9IGNvYWxlc2NlKG1lZGlhX3R5cGUsICJ0ZXh0IikpICU+JQogIGdyb3VwX2J5KG1lZGlhX3R5cGUpICU+JQogIHN1bW1hcmlzZShmYXZvdXJpdGVfY291bnRfdG90YWwgPSBzdW0oZmF2b3JpdGVfY291bnQpKSAlPiUKICBhcnJhbmdlKGRlc2MoZmF2b3VyaXRlX2NvdW50X3RvdGFsKSkKCmBgYAoKCmBgYHtyfQojIFF1ZXN0aW9uIDUuCiMgRmluZCB0aGUgbWVhbiBudW1iZXIgb2YgY2hhcmFjdGVycyB0aGF0IGEgQ29kZUNsYW4gdHdlZXQgY29udGFpbnMuIFlvdSBjYW4gZWl0aGVyIGZpbmQgYSB3YXkgdG8gY291bnQgdGhlIHRleHQgaW4gdGhlIHRleHQgdmFyaWFibGUsIG9yIHVzZSB0aGUgdmFyaWFibGUgZGlzcGxheV90ZXh0X3dpZHRoIHdoaWNoIGNvbnRhaW5zIGEgY291bnQuIENoZWNraW5nIGJvdGggd291bGQgYmUgYSBnb29kIGlkZWEgaWYgcG9zc2libGUgdG8gc2VlIGlmIHRoZXkgbWF0Y2ggKGJ1dCBpdOKAmXMgbm90IGVzc2VudGlhbCkuCgp0d2VldHMgJT4lCiAgc2VsZWN0KHRleHQpICU+JQogIG5jaGFyKCkgJT4lCgojNDUxMDEvMjM0ID0gMTkyCiNhbnN3ZXIKCmNvZGVjbGFuX3R3ZWV0cyAlPiUKICBzdW1tYXJpc2UoYXZnX3R3ZWV0X2xlbmd0aCA9IG1lYW4oZGlzcGxheV90ZXh0X3dpZHRoKSkKCiMgYWx0ZXJuYXRpdmUgYW5zd2VyLCB3aGljaCBpcyBtb3JlIGNvcnJlY3QKY29kZV9jbGFuX3R3ZWV0c190ZXh0IDwtIHR3ZWV0cyAlPiUKICBtdXRhdGUoY291bnRfc3RyX2xlbmd0aCA9IHN0cl9sZW5ndGgodGV4dCkpICU+JQogIHNlbGVjdChjb3VudF9zdHJfbGVuZ3RoLCBkaXNwbGF5X3RleHRfd2lkdGgpICU+JQogIHN1bW1hcmlzZShtZWFuX2NvdW50cyA9IG1lYW4oY291bnRfc3RyX2xlbmd0aCwgbmEucm0gPSBUUlVFKSkKCmBgYAoKYGBge3J9CiMgUXVlc3Rpb24gNi4KIyBUaGUgY29kZV9jbGFuX2luZm8uY3N2IGRhdGEgZmlsZSBjb250YWlucyBzdGF0dXNfdXJsIGFsb25nIHdpdGggb3RoZXIgaW5mby4gTG9hZCB0aGlzIGluLCBhbmQgam9pbiBpdCB0byB0aGUgY29kZV9jbGFuX3R3ZWV0cyB0aWJibGUsIHNvIHRoYXQgeW91IGhhdmUgYSBzdGF0dXNfdXJsIGZvciBlYWNoIHR3ZWV0LiBEZWNpZGUgd2hpY2ggdmFyaWFibGUgdG8gam9pbiB0aGUgdGliYmxlcyBvbi4KIwoKY2NfaW5mbyA8LSByZWFkX2NzdigiZGF0YS9jb2RlX2NsYW5faW5mby5jc3YiKQoKdHdlZXRzX2NjX2pvaW5lZCA8LSBpbm5lcl9qb2luKHR3ZWV0cywgY2NfaW5mbywgYnkgPSAidHdlZXRfaWQiKQoKI2Fuc3dlciAtIHNob3VsZCBoYXZlIGJlZW4gYSBsZWZ0X2pvaW4KY29kZWNsYW5fYWxsIDwtIGxlZnRfam9pbihjb2RlY2xhbl90d2VldHMsY29kZWNsYW5faW5mbywgYnkgPSAidHdlZXRfaWQiKQoKYGBgCgpgYGB7cn0KIyBRdWVzdGlvbiA3LgojIEZyb20geW91ciBuZXcgam9pbmVkIGRhdGEsIGNyZWF0ZSBhIG5ldyB0aWJibGUgY29kZWNsYW5faGFzaHRhZ3MgY29udGFpbmluZyBvbmx5IHRoZSB0d2VldF9pZCBhbmQgY29udmVydCB0aGUgaGFzaHRhZ3MgaW50byBsb3dlcmNhc2UgZm9yIGFuYWx5c2lzLiBLZWVwIG9ubHkgdGhvc2UgdHdlZXRzIHdpdGggaGFzaHRhZ3MuCgpjb2RlY2xhbl9oYXNodGFncyA8LSB0d2VldHNfY2Nfam9pbmVkICU+JQogIHNlbGVjdCh0ZXh0KQoKY29kZWNsYW5faGFzaHRhZ3MgJT4lCiAgc3RyX2V4dHJhY3RfYWxsKCJbI11bQS1aYS16XSsiKSAlPiUKICBmbGF0dGVuX2NocigpICU+JQogIHN0cl90b19sb3dlcigpCgpjb2RlY2xhbl9oYXNodGFncyAlPiUKICBmaWx0ZXIoc3RyX2RldGVjdCh0ZXh0LCAoIlsjXSIpKQogICkKCiNBTlNXRVIKCmhhc2h0YWdzIDwtIHR3ZWV0c19jY19qb2luZWQgJT4lIAogIHNlbGVjdCh0d2VldF9pZCwgaGFzaHRhZ3MpICU+JQogIG11dGF0ZShsb3djYXNlX2hhc2h0YWcgPSBzdHJfdG9fbG93ZXIoaGFzaHRhZ3MpKSAlPiUKICBzZWxlY3QoLWhhc2h0YWdzKSAlPiUKICBkcm9wX25hKGxvd2Nhc2VfaGFzaHRhZykKCiNBbnN3ZXIgZm91bmQgaW4gcmV2aWV3Cgpjb2RlY2xhbl9hbGxfZGF0YSAlPiUKICBmaWx0ZXIoc3RyX2RldGVjdCh0ZXh0LCAoIlsjXSIpKSkgJT4lIAogIG11dGF0ZShoYXNodGFncyA9IHN0cl9leHRyYWN0X2FsbCh0ZXh0LCAiI1tBLVphLXowLTldKiIpKSAlPiUgCiAgdW5uZXN0KCkgJT4lIAogIG11dGF0ZShoYXNodGFncyA9IHN0cl90b19sb3dlcihoYXNodGFncykpCgpgYGAKCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKYGBge3J9CiMgbXkgZGF0YToKIyB0ZW1wOiAxMSwgMTIsIDExCiMgcmFpbjogMTIsIDkwLCA0CiMgd2luZHNwZWVkOiAxMiwgMTMsIDcKYGBgCgoKYGBge3J9CiMgUXVlc3Rpb24gMS4KIyBGaW5kIHRoZSB3ZWF0aGVyIGZvcmVjYXN0IGZvciB0aGUgbmV4dCB0aHJlZSBkYXlzIG9ubGluZS4gQ3JlYXRlIGEgbGlzdCBvZiBsaXN0cyBpbiB3aGljaCBlYWNoIGlubmVyIGxpc3Qgc2hvdWxkIGJlIGxhYmVsbGVkIHdpdGggdGhlIG5hbWUgb2YgdGhlIGRheSBvZiB0aGUgd2Vlay4gRWFjaCBpbm5lciBsaXN0IHNob3VsZCBjb250YWluIG5hbWVkIGVsZW1lbnRzIHRlbGxpbmcgeW91IHRoZSB0ZW1wZXJhdHVyZSwgY2hhbmNlIG9mIHJhaW4gYW5kIHdpbmQgc3BlZWQuCgp3ZWF0aGVyX2xpc3QgPC0gbGlzdCgiVGh1cnNkYXkiID0gbGlzdCh0ZW1wZXJhdHVyZSA9IDExLCAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY2hhbmNlX29mX3JhaW4gPSAxMiwgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHdpbmRzcGVlZCA9IDEyKSwKICAgICAgICAgICAgICAgICAgICAgIkZyaWRheSIgPSBsaXN0KHRlbXBlcmF0dXJlID0gMTIsIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBjaGFuY2Vfb2ZfcmFpbiA9IDkwLCAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgd2luZHNwZWVkID0gMTMpLAogICAgICAgICAgICAgICAgICAgICAiU2F0dXJkYXkiID0gbGlzdCh0ZW1wZXJhdHVyZSA9IDExLCAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY2hhbmNlX29mX3JhaW4gPSA0LCAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgd2luZHNwZWVkID0gNykKKQogIAp3ZWF0aGVyX2xpc3QKYGBgCgoKYGBge3J9CiMgUXVlc3Rpb24gMi4KIyBVc2luZyB0aGUgbGlzdCB5b3XigJl2ZSBqdXN0IG1hZGUgZmluZDoKIyAgICAgVGhlIGNoYW5jZSBvZiByYWluIHRvbW9ycm93CiMgICAgIFRoZSB3aW5kIHNwZWVkIG9uIHRoZSBkYXkgYWZ0ZXIgdG9tb3Jyb3cKIyAgICAgVGhlIHRlbXBlcmF0dXJlIHRvbW9ycm93LgoKCiMgICAgIFRoZSBjaGFuY2Ugb2YgcmFpbiB0b21vcnJvdyAoVGh1cnNkYXkpCndlYXRoZXJfbGlzdFtbIlRodXJzZGF5Il1dW1siY2hhbmNlX29mX3JhaW4iXV0KCiMgICAgIFRoZSB3aW5kIHNwZWVkIG9uIHRoZSBkYXkgYWZ0ZXIgdG9tb3Jyb3cgKEZyaWRheSkKd2VhdGhlcl9saXN0W1siRnJpZGF5Il1dW1sid2luZHNwZWVkIl1dCgojICAgICBUaGUgdGVtcGVyYXR1cmUgdG9tb3Jyb3cuIChUaHVyc2RheSkKd2VhdGhlcl9saXN0W1siVGh1cnNkYXkiXV1bWyJ0ZW1wZXJhdHVyZSJdXQoKYGBgCgoKYGBge3J9CiMgUXVlc3Rpb24gMy4KIyBGaW5kIGEgMTQgZGF5IGZvcmVjYXN0IG9ubGluZSBhbmQgY3JlYXRlIGEgbWF0cml4IG9mIHRoZSBmb3JlY2FzdHMgZm9yIHRlbXBlcmF0dXJlLCB3aGVyZSBlYWNoIHdlZWsgaXMgb25lIHJvdyBhbmQgY29sdW1ucyBjb3JyZXNwb25kIHRvIGRheXMuCiMgCiMgWW91IHdpbGwgd2FudCB0byBnaXZlIGEgbmFtZSB0byB0aGUgbWF0cml4IHlvdSBjcmVhdGUuCgp0ZW1wZXJhdHVyZXMoYyggVE8gQkUgQ1JFQVRFRCApKQoKdGVtcGVyYXR1cmVfbWF0cml4IDwtIG1hdHJpeCg4OjE1LCBucm93ID0gMiwgbmNvbCA9IDcpCnRlbXBlcmF0dXJlX21hdHJpeAoKYGBgCgpgYGB7cn0KIyBRdWVzdGlvbiA0LgojIEZyb20gdGhlIG1hdHJpeCB5b3UganVzdCBtYWRlIHNlbGVjdDoKIyAKIyAgICAgVGhlIHRoaXJkIGRheSBvZiB0aGUgc2Vjb25kIHdlZWsKIyAgICAgVGhlIHdob2xlIHNlY29uZCB3ZWVrCiMgICAgIFRoZSBmaXJzdCwgdGhpcmQgYW5kIGZpZnRoIGRheXMgaW4gYm90aCB3ZWVrcy4KCiMgICAgIFRoZSB0aGlyZCBkYXkgb2YgdGhlIHNlY29uZCB3ZWVrIChbMiwzXSkKdGVtcGVyYXR1cmVfbWF0cml4WzIsM10KCiMgICAgIFRoZSB3aG9sZSBzZWNvbmQgd2Vlawp0ZW1wZXJhdHVyZV9tYXRyaXhbMixdCgojICAgICBUaGUgZmlyc3QsIHRoaXJkIGFuZCBmaWZ0aCBkYXlzIGluIGJvdGggd2Vla3MuCnRlbXBlcmF0dXJlX21hdHJpeFssYygxLDMsNSldCiAgICAKYGBgCgoKYGBge3J9CiMgUXVlc3Rpb24gNS4KIyBXcml0ZSBhIGZ1bmN0aW9uIHRoYXQgcHJlLWFwcGVuZHMg4oCcVGhlIGFuc3dlciBpczrigJ0gdG8gYW55IGNoYXJhY3RlciBpbnB1dCwgd2hpbGUgZm9yIG51bWVyaWMgaW5wdXQsIGl0IGVpdGhlciBqdXN0IHJldHVybnMgdGhlIG51bWJlciBmb3IgbnVtYmVycyBsZXNzIHRoYW4gMTAsIG9yIGRpdmlkZXMgdGhlIG51bWJlciBieSAxMCBmb3IgbnVtYmVycyBncmVhdGVyIHRoYW4gMTAuIEZvciBhbnl0aGluZyBlbHNlIHJldHVybiDigJxJbnZhbGlkIGlucHV04oCdLgoKYXBwZW5kX2Fuc3dlciA8LSBmdW5jdGlvbih4KSB7CiAgaWYgKGlzLmNoYXJhY3Rlcih4KSkgewogICAgcGhyYXNlIDwtIHBhc3RlKCJUaGUgYW5zd2VyIGlzIiwgeCkKICAgIHByaW50KHBocmFzZSkKICB9IGVsc2UgaWYgKGlzLm51bWVyaWMoeCkgJiB4IDwgMTApIHsgCiAgICBwcmludCh4KQogIH0gZWxzZSBpZiAoaXMubnVtZXJpYyh4KSAmIHggPj0gMTApIHsgCiAgICB4LzEwCiAgfSBlbHNlIHsKICAgIHByaW50KCJJbnZhbGlkIGlucHV0IikKICB9Cn0KCiN0ZXN0aW5nIHdpdGggYSBzdHJpbmcKYXBwZW5kX2Fuc3dlcigidGhpcyBpcyBhIHN0cmluZyIpCgojIHRlc3Rpbmcgd2l0aCBhIG51bWJlciB1bmRlciAxMAphcHBlbmRfYW5zd2VyKDUpCgojIHRlc3Rpbmcgd2l0aCBhIG51bWJlciBvdmVyIDEwCmFwcGVuZF9hbnN3ZXIoMTIpCgojdGVzdGluZyBmb3IgaW52YWxpZCBpbnB1dChib29sZWFuIHZhbHVlKQphcHBlbmRfYW5zd2VyKFRSVUUpCgpgYGAKCgpgYGB7cn0KIyBRdWVzdGlvbiA2LgojIFdyaXRlIGEgZnVuY3Rpb24gd2hpY2ggY2hlY2tzIGlmIHR3byB2ZWN0b3JzIGhhdmUgdGhlIHNhbWUgZWxlbWVudHMuCiMgCiMgICAgIElmIHRoZXkgaGF2ZSB0aGUgc2FtZSBlbGVtZW50cyBpbiB0aGUgc2FtZSBvcmRlciwgcmV0dXJuIOKAnEV4YWN0bHkgdGhlIHNhbWXigJ0KIyAgICAgSWYgdGhleSBoYXZlIHRoZSBzYW1lIGVsZW1lbnRzIGJ1dCBpbiBhIGRpZmZlcmVudCBvcmRlciwgcmV0dXJuIOKAnFRoZSBzYW1l4oCdCiMgICAgIElmIHRoZXkgZG9u4oCZdCBoYXZlIHRoZSBzYW1lIGVsZW1lbnRzLCByZXR1cm4g4oCcRGlmZmVyZW504oCdLgojIAojIEhpbnRzCiMgCiMgICAgIFlvdSBjYW4gY2hlY2sgaWYgdHdvIHZlY3RvcnMgaGF2ZSB0aGUgc2FtZSBlbGVtZW50cyBidXQgaW4gYSBkaWZmZXJlbnQgb3JkZXIgYnkgdXNpbmcgc29ydCB0byBzb3J0IGVhY2ggdmVjdG9yIGZpcnN0IGFuZCB0aGVuIGNoZWNraW5nIGlmIHRoZXkgYXJlIGVxdWFsLgojICAgICBIYXZlIGEgbG9vayBhdCB0aGUgYWxsKCkgZnVuY3Rpb24KCiN0ZXN0IHZlY3RvcnMKdmVjdG9yMSA8LSBjKDEsIDIsIDMpCnZlY3RvcjIgPC0gYyg0LCA1LCA2KQp2ZWN0b3IzIDwtIGMoMiwgMywgMSkKCnZlY3Rvcl9jaGVjayA8LSBmdW5jdGlvbih4LCB5KSB7CiAgaWYgKGFsbCh4ID09IHkpKSB7CiAgICBwcmludCgiRXhhY3RseSB0aGUgc2FtZSIpCiAgfSBlbHNlIGlmIChhbGwgKHggJWluJSB5KSkgewogICAgcHJpbnQoIlRoZSBzYW1lIikKICB9IGVsc2UgeyAKICAgIHByaW50KCJEaWZmZXJlbnQiKQogICAgfQp9CgojdGVzdGluZyBjb2RlCnZlY3Rvcl9jaGVjayh2ZWN0b3IxLCAidmVjdG9yMyIpCgoKYGBgCgo=</div>
 
 
 
@@ -433,7 +385,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
-  window.initializeSourceEmbed("week2_day2_homework.Rmd");
+  window.initializeSourceEmbed("week2_day3_homework.Rmd");
   window.initializeCodeFolding("show" === "show");
 });
 </script>

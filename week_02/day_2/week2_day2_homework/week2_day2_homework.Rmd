@@ -22,7 +22,6 @@ ncol(tweets)
 names(tweets)
 ```
 
-
 ```{r}
 # Question 2.
 # Find the total number of favourites (stored in favorite_count) that CodeClan tweets have got. Don’t add a tweet’s favorite_count to the total when the tweet was quoted (see the is_quote variable).
@@ -32,6 +31,7 @@ tweets %>%
   filter(is_quote == FALSE) %>%
   summarise(sum(favorite_count))
   
+# is correct
 ```
 
 ```{r}
@@ -49,7 +49,6 @@ tweets %>%
 
 ```
 
-
 ```{r}
 # Question 4.
 # Count the total number of likes (i.e. total of favorite_count), split by media type, and arrange them from most likes to least. Assume that any tweets without a listed media type are of type “text”.
@@ -66,6 +65,13 @@ tweets %>%
 
 # these aren't properly arranged and I haven't dealt with the NA's properly
 
+#answer
+
+tweets %>%
+  mutate(media_type = coalesce(media_type, "text")) %>%
+  group_by(media_type) %>%
+  summarise(favourite_count_total = sum(favorite_count)) %>%
+  arrange(desc(favourite_count_total))
 
 ```
 
@@ -78,12 +84,19 @@ tweets %>%
   select(text) %>%
   nchar() %>%
 
+#45101/234 = 192
+#answer
 
-45101/234 = 192
+codeclan_tweets %>%
+  summarise(avg_tweet_length = mean(display_text_width))
 
+# alternative answer, which is more correct
+code_clan_tweets_text <- tweets %>%
+  mutate(count_str_length = str_length(text)) %>%
+  select(count_str_length, display_text_width) %>%
+  summarise(mean_counts = mean(count_str_length, na.rm = TRUE))
 
 ```
-
 
 ```{r}
 # Question 6.
@@ -94,8 +107,10 @@ cc_info <- read_csv("data/code_clan_info.csv")
 
 tweets_cc_joined <- inner_join(tweets, cc_info, by = "tweet_id")
 
-```
+#answer - should have been a left_join
+codeclan_all <- left_join(codeclan_tweets,codeclan_info, by = "tweet_id")
 
+```
 
 ```{r}
 # Question 7.
@@ -112,6 +127,22 @@ codeclan_hashtags %>%
 codeclan_hashtags %>%
   filter(str_detect(text, ("[#]"))
   )
+
+#ANSWER
+
+hashtags <- tweets_cc_joined %>% 
+  select(tweet_id, hashtags) %>%
+  mutate(lowcase_hashtag = str_to_lower(hashtags)) %>%
+  select(-hashtags) %>%
+  drop_na(lowcase_hashtag)
+
+#Answer found in review
+
+codeclan_all_data %>%
+  filter(str_detect(text, ("[#]"))) %>% 
+  mutate(hashtags = str_extract_all(text, "#[A-Za-z0-9]*")) %>% 
+  unnest() %>% 
+  mutate(hashtags = str_to_lower(hashtags))
 
 ```
 
