@@ -10,7 +10,6 @@ output: html_notebook
 # windspeed: 12, 13, 7
 ```
 
-
 ```{r}
 # Question 1.
 # Find the weather forecast for the next three days online. Create a list of lists in which each inner list should be labelled with the name of the day of the week. Each inner list should contain named elements telling you the temperature, chance of rain and wind speed.
@@ -27,8 +26,11 @@ weather_list <- list("Thursday" = list(temperature = 11,
 )
   
 weather_list
-```
 
+#ANSWER
+#didn't put temperature etc as a string
+
+```
 
 ```{r}
 # Question 2.
@@ -41,6 +43,10 @@ weather_list
 #     The chance of rain tomorrow (Thursday)
 weather_list[["Thursday"]][["chance_of_rain"]]
 
+# OR
+# alternative answer
+# forecast_3_days_list$Thursday$chance_of_rain
+
 #     The wind speed on the day after tomorrow (Friday)
 weather_list[["Friday"]][["windspeed"]]
 
@@ -49,17 +55,27 @@ weather_list[["Thursday"]][["temperature"]]
 
 ```
 
-
 ```{r}
 # Question 3.
 # Find a 14 day forecast online and create a matrix of the forecasts for temperature, where each week is one row and columns correspond to days.
 # 
 # You will want to give a name to the matrix you create.
 
-temperatures(c( TO BE CREATED ))
-
 temperature_matrix <- matrix(8:15, nrow = 2, ncol = 7)
 temperature_matrix
+
+#alternative answer, WITH the full vector
+forecast_14_days_vector <- c(14L, 20L, 14L, 11L, 14L, 15L, 16L, 18L, 17L, 13L, 16L, 16L, 
+18L, 16L)
+
+forecast_14_days <- matrix(
+  forecast_14_days_vector,
+  nrow = 2,
+  ncol = 7, 
+  byrow = TRUE
+)
+
+forecast_14_days
 
 ```
 
@@ -79,9 +95,9 @@ temperature_matrix[2,]
 
 #     The first, third and fifth days in both weeks.
 temperature_matrix[,c(1,3,5)]
-    
-```
 
+#all correct
+```
 
 ```{r}
 # Question 5.
@@ -114,7 +130,6 @@ append_answer(TRUE)
 
 ```
 
-
 ```{r}
 # Question 6.
 # Write a function which checks if two vectors have the same elements.
@@ -144,8 +159,50 @@ vector_check <- function(x, y) {
 }
 
 #testing code
-vector_check(vector1, "vector3")
+vector_check(vector1, vector3)
 
+```
 
+```{r}
+# Extension 1
+# q7
+# Question 7.
+# Write code that prints a multiplication table for numbers up to 12. i.e. there will be 12 rows and 12 columns, and each element should be the row number multiplied by the column number.
+
+# did not complete this
+
+# create empty matrix
+mult_table <- matrix(nrow = 12, ncol = 12)
+
+for (outer_factor in 1:12){
+  for (inner_factor in 1:12){
+    mult_table[outer_factor, inner_factor] = outer_factor * inner_factor
+  }
+}
+
+mult_table
+
+```
+
+```{r}
+# Question 8
+# Write a function that takes a vector, and creates a text art histogram, like the one below.
+# 
+# You may want to use the function cat(). This is similar to print(), but prints directly, without vector markers. You can also include newlines "\n" when using cat().
+
+# did also not complete this
+
+make_histogram <- function(x){
+  distinct <- sort(unique(x))
+  for (i in distinct){
+    count <- sum(x == i)
+    cat(i)
+    cat(" | ")
+    cat(rep("*", count))
+    cat("\n")
+  }
+}
+numbers <- sample(1:5, size = 50, replace = TRUE) 
+numbers
 ```
 
