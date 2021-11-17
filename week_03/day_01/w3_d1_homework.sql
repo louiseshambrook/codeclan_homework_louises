@@ -113,4 +113,12 @@ Return a table containing each employees first_name, last_name, full-time equiva
 salary, and a new column effective_yearly_salary which should contain fte_hours multiplied by salary.
 */
 
+-- ANSWER
 
+SELECT 
+  first_name,
+  last_name,
+  fte_hours,
+  salary,
+  fte_hours * salary AS effective_yearly_salary
+FROM employees
