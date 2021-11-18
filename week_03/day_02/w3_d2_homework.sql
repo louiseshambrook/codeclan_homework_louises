@@ -86,10 +86,19 @@ ORDER BY employee_sum ASC
 -- Q4.a
 
 SELECT
-	COUNT (e.id) AS sum_employees,
+	COUNT (e.id),
 	t.name AS team_name,
 	t.id
 FROM employees AS e LEFT JOIN teams AS t ON e.team_id = t.id
+GROUP BY t.id
+
+SELECT 
+  t.id,  
+  t.name,
+  COUNT(e.id)
+FROM employees AS e
+INNER JOIN teams AS t
+ON e.team_id = t.id
 GROUP BY t.id
 
 -- MVP
@@ -99,7 +108,8 @@ SELECT
 	COUNT (t.id) AS employee_sum,
 	t.name AS team_name,
 	CAST (t.charge_cost AS INT4) * COUNT(t.id) AS total_day_charge
-FROM employees AS e LEFT JOIN teams AS t
+FROM employees AS e
+LEFT JOIN teams AS t
 ON e.team_id = t.id
 GROUP BY t.id;
 
@@ -124,5 +134,6 @@ SELECT
 	employee_id
 FROM employees_committees
 GROUP BY employee_id 
+
 
     
