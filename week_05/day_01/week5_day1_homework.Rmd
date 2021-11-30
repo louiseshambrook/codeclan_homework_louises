@@ -1,0 +1,342 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+```
+
+
+Background
+QikBit is a start-up company producing low cost fitness trackers. Their flagship product, the KwikBit Unit1 (spot the mistake on the patent form) reproduces the functionality of the best-in-class commercial fitness trackers, but is cheap to make. They are currently preparing to pitch to a potential investor and require a selection of charts to include in their presentation and promotional materials.
+
+```{r}
+qb_revenue_breakdown <- CodeClanData::qb_revenue_breakdown
+qb_monthly_sales <- CodeClanData::qb_monthly_sales
+qb_competitors <- CodeClanData::qb_competitors
+qb_device_data <- CodeClanData::qb_device_data
+```
+
+
+Q1. Take the data in the dataset qb_revenue_breakdown and make a stacked bar chart showing the sources of revenue across the two years in the dataset.
+```{r}
+qb_revenue_breakdown %>%
+  ggplot(aes(x = Year, y = Revenue, fill = Product)) +
+  geom_bar(stat = "identity")
+```
+
+Question 2.
+Make a line chart showing monthly sales of the “flagship product” - the ‘KwikBit Unit 1’ - over the last year. This data is inside qb_monthly_sales, but you will need to use filter() or subset() (base R).
+```{r}
+qb_monthly_sales %>%
+  filter(Cashflow == "Kwikbit Unit 1 Sales") %>%
+  ggplot() +
+  geom_line(aes(x = Date, y = Amount, colour = Cashflow))
+
+```
+
+Question 3.
+Make a line chart showing monthly revenue and costs over the last year. This data is also in qb_monthly_sales.
+```{r}
+qb_monthly_sales %>%
+  filter(Cashflow != "Kwikbit Unit 1 Sales") %>%
+  ggplot() +
+  geom_line(aes(x = Date, y = Amount, colour = Cashflow))
+
+```
+
+Question 4.
+Show annual sales of personal fitness trackers over the last 5 years broken down by company as a ribbon plot (use geom_area). This data is in qb_competitors.
+```{r}
+qb_competitors %>%
+  ggplot() +
+  geom_area(aes(x = Year, y = Revenue, fill = Company))
+
+```
+
+Question 5.
+Now show the sales from the four competitors as a line graph. Include an extra layer that shows the data points used to make the lines.
+```{r}
+qb_competitors %>%
+  ggplot() +
+  geom_line(aes(x = Year, y = Revenue, colour = Company)) +
+  geom_point(aes(x = Year, y = Revenue))
+
+```
+
+Question 6.
+Now the company wants to compare the number of steps that their device counts vs. their competitors. Make a line graph of the number of steps throughout time, and use faceting to compare between companies and people. The data for this is in qb_device_data.
+```{r}
+qb_device_data %>%
+  ggplot() +
+  geom_line(aes(x = hours, y = counts, colour = device)) +
+  facet_wrap(~ device, nrow = 4)
+
+# answer:
+
+qb_device_data <- 
+mutate(qb_device_data, decimal_hour = hours + (mins/60))
+
+ggplot(qb_device_data) +
+  aes(x = decimal_hour, y = counts) +
+  geom_line() + 
+  facet_grid(id ~ device)
+```
+Take the plots that you produced in part one and now polish them by:
+Adding appropriate labels
+
+Answer for Part 2.2
+
+```{r}
+theme_qb <- 
+  theme(
+    text = element_text(size = 12),
+    title = element_text(size = 14),
+    axis.text = element_text(size = 10),
+    panel.background = element_rect(fill = "white"),
+    panel.grid = element_line(colour = "grey90", linetype = "dashed")
+  )
+col_scheme <- c("#E89FE9", "#50434F", "#B6A7B5", "#F9A472", "#BD7040")
+
+# It is NOT possible to set the colour scheme in the theme
+
+
+ggplot(qb_revenue_breakdown) +
+  aes(x = Year, y = Revenue, fill = Product) +
+  geom_col() +
+  scale_fill_manual(values = col_scheme) +
+  ggtitle(
+    "Breakdown of QikBit Revenue by Product Line",
+    subtitle =  "2018 and 2019"
+  ) +
+  theme_qb
+
+#this answer uses the theme and colour scheme
+ggplot(qb_revenue_breakdown) +
+  aes(x = Year, y = Revenue, fill = Product) +
+  geom_col() +
+  scale_fill_manual(values = col_scheme) +
+  ggtitle(
+    "Breakdown of QikBit Revenue by Product Line",
+    subtitle =  "2018 and 2019"
+  ) +
+  theme_qb
+
+
+```
+
+```{r}
+# Q1. 
+qb_revenue_breakdown %>%
+  ggplot(aes(x = Year, y = Revenue, fill = Product)) +
+  geom_bar(stat = "identity") +
+  labs(y = "Sources of revenue")
+
+#Q2
+qb_monthly_sales %>%
+  filter(Cashflow == "Kwikbit Unit 1 Sales") %>%
+  ggplot() +
+  geom_line(aes(x = Date, y = Amount, colour = Cashflow)) +
+  labs(x = "Year", y = "Monthly revenue of Kwikbit Unit 1")
+
+#Q3 
+qb_monthly_sales %>%
+  filter(Cashflow != "Kwikbit Unit 1 Sales") %>%
+  ggplot() +
+  geom_line(aes(x = Date, y = Amount, colour = Cashflow)) +
+  labs(x = "Year", y = "Monthly amount")
+
+#q4
+qb_competitors %>%
+  ggplot() +
+  geom_area(aes(x = Year, y = Revenue, fill = Company)) +
+  labs(y = "Annual sales")
+
+#q5
+qb_competitors %>%
+  ggplot() +
+  geom_line(aes(x = Year, y = Revenue, colour = Company)) +
+  geom_point(aes(x = Year, y = Revenue))
+# no change made
+
+#q6
+qb_device_data %>%
+  ggplot() +
+  geom_line(aes(x = hours, y = counts, colour = device)) +
+  facet_wrap(~ device, nrow = 4) +
+  labs(x = "hours used per day", y = "daily stepcount")
+
+
+```
+
+Changing the scales and coordinates when appropriate.
+```{r}
+# Q1. 
+qb_revenue_breakdown %>%
+  ggplot(aes(x = Year, y = Revenue, fill = Product)) +
+  geom_bar(stat = "identity", width =.4) +
+  labs(y = "Sources of revenue")
+
+#q2.
+qb_monthly_sales %>%
+  filter(Cashflow == "Kwikbit Unit 1 Sales") %>%
+  ggplot() +
+  geom_line(aes(x = Date, y = Amount, colour = Cashflow)) +
+  ylim(300, 700)+
+  labs(x = "Year", y = "Monthly revenue of Kwikbit Unit 1")
+
+#Q3 
+qb_monthly_sales %>%
+  filter(Cashflow != "Kwikbit Unit 1 Sales") %>%
+  ggplot() +
+  geom_line(aes(x = Date, y = Amount, colour = Cashflow)) +
+  ylim(1000, 3000)
+  labs(x = "Year", y = "Monthly amount")
+
+#q4
+qb_competitors %>%
+  ggplot() +
+  geom_area(aes(x = Year, y = Revenue, fill = Company)) +
+  labs(y = "Annual sales")
+# no change
+
+#q5
+qb_competitors %>%
+  ggplot() +
+  geom_line(aes(x = Year, y = Revenue, colour = Company)) +
+  geom_point(aes(x = Year, y = Revenue))
+# no change
+
+#q6 was already amended.
+
+
+```
+Applying a unified theme, which is described below:
+    Graphs should have white backgrounds, and use colour sparingly.
+    There should be faint grid lines.
+    Font sizes should be ~12pt although titles should be slightly larger and axis labels can be slightly smaller.
+    All plots should use colours from the following company colour scheme.
+    col_scheme <- c("#E89FE9", "#50434F", "#B6A7B5", "#F9A472", "#BD7040")
+```{r}
+col_scheme <- c("#E89FE9", "#50434F", "#B6A7B5", "#F9A472", "#BD7040")
+theme(panel.background = element_rect(fill = "white", colour = NA))
+theme(panel.grid.major = element_line(colour = "light grey")) +
+theme(panel.grid.minor = element_line(colour = "light grey", size = 0.25))
+```
+
+```{r}
+# Q1. 
+qb_revenue_breakdown %>%
+  ggplot(aes(x = Year, y = Revenue, fill = Product)) +
+  geom_bar(stat = "identity", width =.4) +
+  scale_fill_manual(
+    values = c("Accessories" = "#E89FE9",
+                "Smart Watches" = "#50434F",
+                "Subscription Services" = "#B6A7B5",
+                "Trackers" = "#F9A472"))
+  labs(y = "Sources of revenue") +
+  theme(panel.background = element_rect(fill = "white", colour = NA)) +
+  theme(panel.grid.major = element_line(colour = "light grey")) +
+  theme(panel.grid.minor = element_line(colour = "light grey", size = 0.25)) +
+  theme(axis.title = element_text(size = rel(1.0))) +
+  theme(axis.title.x = element_text(size = rel(0.7))) +
+  theme(axis.title.y = element_text(size = rel(0.7)))
+  
+#Q2
+qb_monthly_sales %>%
+  filter(Cashflow == "Kwikbit Unit 1 Sales") %>%
+  ggplot() +
+  geom_line(aes(x = Date, y = Amount, colour = Cashflow), colour = "#E89FE9") +
+  ylim(300, 700)+
+  labs(x = "Year", y = "Monthly revenue of Kwikbit Unit 1") +
+  theme(panel.background = element_rect(fill = "white", colour = NA)) +
+  theme(panel.grid.major = element_line(colour = "light grey")) +
+  theme(panel.grid.minor = element_line(colour = "light grey", size = 0.25)) +
+  theme(axis.title = element_text(size = rel(1.0))) +
+  theme(axis.title.x = element_text(size = rel(0.7))) +
+  theme(axis.title.y = element_text(size = rel(0.7)))
+
+#Q3 
+qb_monthly_sales %>%
+  filter(Cashflow != "Kwikbit Unit 1 Sales") %>%
+  ggplot() +
+  geom_line(aes(x = Date, y = Amount, colour = Cashflow)) +
+  scale_fill_manual(values = c("Cost" = "#E89FE9",
+                "Total Revenue" = "#50434F"))
+  theme(panel.background = element_rect(fill = "white", colour = NA)) +
+  theme(panel.grid.major = element_line(colour = "light grey")) +
+  theme(panel.grid.minor = element_line(colour = "light grey", size = 0.25)) +
+  theme(axis.title = element_text(size = rel(1.0))) +
+  theme(axis.title.x = element_text(size = rel(0.7))) +
+  theme(axis.title.y = element_text(size = rel(0.7)))
+
+  # colour doesn't run
+
+#q4
+qb_competitors %>%
+  ggplot() +
+  geom_area(aes(x = Year, y = Revenue, fill = Company)) +
+  scale_fill_manual(
+    values = c("Competitor 1" = "#E89FE9",
+                "Competitor 2" = "#50434F",
+                "Competitor 3" = "#B6A7B5",
+                "Competitor 4" = "#F9A472"))+
+  labs(y = "Annual sales") +
+  theme(panel.background = element_rect(fill = "white", colour = NA)) +
+  theme(panel.grid.major = element_line(colour = "light grey")) +
+  theme(panel.grid.minor = element_line(colour = "light grey", size = 0.25)) +
+  theme(axis.title = element_text(size = rel(1.0))) +
+  theme(axis.title.x = element_text(size = rel(0.7))) +
+  theme(axis.title.y = element_text(size = rel(0.7)))
+
+
+#q5
+qb_competitors %>%
+  ggplot() +
+  geom_line(aes(x = Year, y = Revenue, colour = Company)) +
+  geom_point(aes(x = Year, y = Revenue))+
+  scale_fill_manual(
+    values = c("Competitor 1" = "#E89FE9",
+                "Competitor 2" = "#50434F",
+                "Competitor 3" = "#B6A7B5",
+                "Competitor 4" = "#F9A472")) +
+  theme(panel.background = element_rect(fill = "white", colour = NA)) +
+  theme(panel.grid.major = element_line(colour = "light grey")) +
+  theme(panel.grid.minor = element_line(colour = "light grey", size = 0.25)) +
+  theme(axis.title = element_text(size = rel(1.0))) +
+  theme(axis.title.x = element_text(size = rel(0.7))) +
+  theme(axis.title.y = element_text(size = rel(0.7)))
+
+# colour doesn't run
+
+#q6
+qb_device_data %>%
+  ggplot() +
+  geom_line(aes(x = hours, y = counts, colour = device), colour = "#E89FE9") +
+  facet_wrap(~ device, nrow = 4) +
+  labs(x = "hours used per day", y = "daily stepcount") +
+  theme(panel.background = element_rect(fill = "white", colour = NA)) +
+  theme(panel.grid.major = element_line(colour = "light grey")) +
+  theme(panel.grid.minor = element_line(colour = "light grey", size = 0.25)) +
+  theme(axis.title = element_text(size = rel(1.0))) +
+  theme(axis.title.x = element_text(size = rel(0.7))) +
+  theme(axis.title.y = element_text(size = rel(0.7)))
+
+# DONE
+
+```
+
+    
+3 Extension
+Question 1.
+Try out different ways of plotting these three datasets. Which graphs do you think are particularly effective at showing QikBit’s success?  
+```{r}
+
+```
+
+
+
+
+
+
