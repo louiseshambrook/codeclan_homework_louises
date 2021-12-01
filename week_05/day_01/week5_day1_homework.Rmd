@@ -83,11 +83,12 @@ ggplot(qb_device_data) +
   geom_line() + 
   facet_grid(id ~ device)
 ```
+
+
 Take the plots that you produced in part one and now polish them by:
 Adding appropriate labels
 
 Answer for Part 2.2
-
 ```{r}
 theme_qb <- 
   theme(
@@ -122,7 +123,6 @@ ggplot(qb_revenue_breakdown) +
     subtitle =  "2018 and 2019"
   ) +
   theme_qb
-
 
 ```
 
