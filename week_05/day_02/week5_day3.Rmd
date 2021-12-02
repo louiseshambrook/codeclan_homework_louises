@@ -1,0 +1,64 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+```{r}
+library(tidyverse)
+backpack <- CodeClanData::backpack
+```
+
+Take note of variable names and dimensions
+```{r}
+names(backpack)
+dim(backpack)
+```
+
+What is the distribution? Choose an appropriate graph to show the distribution
+```{r}
+backpack %>%
+  ggplot(aes(backpack_weight)) +
+  geom_histogram() +
+  theme_minimal() +
+  labs(x = "\n Backpack weight \n",
+       y = "\n Count \n",
+       title = "Distribution of backpackweight across the data")
+  
+```
+
+Are there differences in backpack weight between sex?
+```{r}
+backpack %>%
+  ggplot(aes(sex, backpack_weight)) +
+  geom_col() +
+  coord_flip() +
+  theme_minimal() +
+  labs(x = "\n Backpack weight \n",
+       y = "\n Sex \n",
+       title = "Difference in backpack weight distribution between sex")
+```
+What is the relationship between body weight and backpack weight?
+```{r}
+backpack %>%
+  ggplot(aes(body_weight, backpack_weight)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  theme_minimal() +
+  labs(x = "\n Bodyweight \n",
+       y = "\n Backpack weight\n",
+       title = "Relationship between bodyweight and backpack weight")
+  
+```
+
+Is this relationship different between men and women?
+```{r}
+backpack %>%
+  ggplot(aes(body_weight, backpack_weight)) +
+  geom_col() +
+  coord_flip() +
+  facet_wrap(~ sex) +
+  theme_minimal() +
+  labs(x = "Backpack weight",
+       y = "Bodyweight",
+       title = "Difference in relationship")
+```
+
