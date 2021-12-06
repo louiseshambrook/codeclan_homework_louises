@@ -22,7 +22,7 @@ game_data <- game_sales
 ui <- fluidPage(
 
   #creates title
-  titlePanel(tags$h1(tags$b("Best and worst reviewed games"))),
+  titlePanel(tags$h1(tags$b("Game search engine"))),
   theme = shinytheme("cerulean"),
   
 # Sidebar layout ----
@@ -57,7 +57,7 @@ ui <- fluidPage(
 # First tab (graphs) ----
 
         # creates first tab
-        tabPanel(tags$b("Graphs"),
+        tabPanel(tags$b("Platform and developer information"),
                  
         # sets up the fluid rows
         fluidRow(
@@ -77,7 +77,7 @@ ui <- fluidPage(
 # Second tab (data) ----
 
         # creates second tab
-        tabPanel(tags$b("Main data")
+        tabPanel(tags$b("Game list")
         , 
 
         # this adds the table directly in the second tab, which does not require fluid rows
