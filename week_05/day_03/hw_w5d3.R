@@ -6,7 +6,6 @@ olympics_overall_medals <- read_csv("data/olympics_overall_medals.csv")
 
 ui <- fluidPage(
   theme = shinytheme("yeti"),
-  
   titlePanel(tags$h1(tags$b("Five Country Medal Comparison"
   ))),
   tabsetPanel(
