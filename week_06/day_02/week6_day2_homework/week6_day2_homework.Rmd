@@ -1,0 +1,70 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(prob)
+library(tidyverse)
+library(janitor)
+```
+
+Load data
+```{r}
+shopping_data <- read_csv("20190928-items.csv")
+```
+
+Question 1.
+Load the data, clean_names() and explore it.
+```{r}
+clean_names(shopping_data)
+```
+
+Question 2.
+Find the brand with the highest numbers of phones in the dataset.
+```{r}
+
+```
+
+Subquestions, following notes from David in the chat
+
+Calculate: mean
+```{r}
+
+```
+
+Calculate: range
+```{r}
+
+```
+
+Calculate: standard deviation
+```{r}
+
+```
+
+Question 3.
+For your top brand, plot the distribution of phone ratings as a probability density, overlaying a fitted normal distribution. Do you think the normal distribution provides a good model of these ratings?
+Hint: You will need to calculate the mean() and sd() of the ratings to plot the appropriate normal distribution. Alternatively, investigate using the fitdistr() function in the MASS package]
+```{r}
+# to find the answer for the density, look under 5.1 in the notes
+# to fit the ND, look under 5.4
+
+```
+
+Question 4.
+We can be more quantitative in comparing the distribution of top brand ratings with a normal distribution. You calculated the mean() and sd() of your distribution in an earlier question. Use these values to calculate the proportions of ratings within one-, two- and three standard deviations of the mean. Compare these proportions with those you expect for a normal distribution.
+Hint
+You can use a filter() to get only the ratings within one-, two- and three standard deviations of the mean, and then think about how to calculate what proportion each of these filtered sets make of the total number of ratings. You’ll need to use three separate filter() and summarise() pipes to do this.
+Further hint - code to filter within one SD 
+```{r}
+
+```
+
+common distributions
+- discrete vs continuous
+- probability mass and density functions
+- fitting a normal distribution to a dataset
+- the empirical 3 sigma rule
+4:32
+All the lessons today come with handy recap questions at the end to help consolidate your understanding
