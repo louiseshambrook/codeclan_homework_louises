@@ -33,21 +33,44 @@ shopping_data %>%
   arrange(desc(number_of_phones)) %>%
   slice(1)
 ```
+```{r}
+samsung_data <- shopping_data %>%
+  select(asin, brand, rating, totalReviews) %>%
+  filter(brand == "Samsung")
+```
+
 
 Subquestions, following notes from David in the chat
 
 Calculate: mean of the ratings (of that brand?)
 ```{r}
+summary(samsung_data)
+# - shows that the mean is 3.573
 
+samsung_data %>%
+  summarise(mean_ratings = mean(rating))
+# confirms this, - calculates the mean as 3.5733
+
+mean = 3.5733
 ```
 
 Calculate: range
 ```{r}
+samsung_data %>%
+  summarise(max_rating = max(rating),
+            min_rating = min(rating),
+            range = max(rating) - min(rating))
+
+range = 4
 
 ```
 
 Calculate: standard deviation
 ```{r}
+samsung_data %>%
+  summarise(standard_deviation = sd(rating))
+
+SD = 0.6847859	
 
 ```
 
@@ -57,6 +80,9 @@ Hint: You will need to calculate the mean() and sd() of the ratings to plot the 
 ```{r}
 # to find the answer for the density, look under 5.1 in the notes
 # to fit the ND, look under 5.4
+
+
+
 
 ```
 
