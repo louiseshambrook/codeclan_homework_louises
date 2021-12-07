@@ -227,9 +227,6 @@ library(tidyverse)</code></pre>
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGl0YW5pY19kYXRhIDwtIHJlYWQuY3N2KFwidGl0YW5pYy5jc3ZcIilcbmBgYCJ9 -->
-<pre class="r"><code>titanic_data &lt;- read.csv(&quot;titanic.csv&quot;)</code></pre>
-<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Calculate the conditional probabilities prob(survived|crew) and prob(survived|passenger)</p>
@@ -245,10 +242,10 @@ titanic_data &lt;- titanic_data %&gt;%
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MSwibmNvbCI6MSwic3VtbWFyeSI6eyJEZXNjcmlwdGlvbiI6WyJkZiBbMSDDlyAxXSJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUExMVBRUXJDTUJEY3RJM1NnaUw0anZaU0VHOWV4QWVJUXEreFZpM1dwS1FwK2hOZkpIanlDOTU4aHJvcENXaE91enZNek00czUxa2FaUkVBK0JBUUFqN0ZGZWg2dFlpbkFJR0hCNEVBUWowdlNCcDNBTUJRejlranV6N3Z0NWREcEp5ZGlnYVgwUThZMUZKc0hHSW94VG14NUlGeEpxNWJYckhHZFl1MlRMRmtKMUdMMTl1UjlFV3RTc0ZSNU9tODFCRVQ2UUNqbHVzVTJ6Zy90UHdZVDFMOXdjU0IvMmh1VE85anZLang2aFY4WC9MQ2hxL1lwcWpNTWNTNlhkdWtsaVZYdGdxaVRhS0VZcFlYNWFLeVNGY08zbCt5K3I4enB3RUFBQT09In0= -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MSwibmNvbCI6MSwic3VtbWFyeSI6eyJEZXNjcmlwdGlvbiI6WyJkZiBbMSDDlyAxXSJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUExMVBRUXJDTUJEY3RJMWlRUkY4Und2cXhac1g4UUdpNE1WRFdxc1dhMUxTRkwxNTl5Ryt4cGY0Q091bUpLQTU3ZTR3TXp1eldteW40VFlFQUI4Q1FzQ251QUxkckpmUkRDRHc4Q0FRUUUvUEc1SkdMUUF3MEhQK2FwN3Z4MzNuRUNsbmw2ekNaZmdEQnFVVWlVUHNTWEdOTGJsdm5JbnJsaGFzY3QzQ1BWTXNQa2pVNHZWeEpGMVJxbHh3RkhrNkwzWEVSRHJBc09ZNnhUNUtUelUvUitPSi9tRGl3SDgwTjZiWEdDOXF2RG9aUCtZOHMrRUxsbVNGT1FaWXQyMGJsekxueWxaQnRJcVZVTXp5d2xRVUZtbkx3ZWNMRDIxWlZLY0JBQUE9In0= -->
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["prob"],"name":[1],"type":["dbl"],"align":["right"]}],"data":[{"1":"0.2370787"}],"options":{"columns":{"min":{},"max":[10],"total":[1]},"rows":{"min":[10],"max":[10],"total":[1]},"pages":{}}}
+{"columns":[{"label":["prob"],"name":[1],"type":["dbl"],"align":["right"]}],"data":[{"1":"0.2265519"}],"options":{"columns":{"min":{},"max":[10],"total":[1]},"rows":{"min":[10],"max":[10],"total":[1]},"pages":{}}}
   </script>
 </div>
 <!-- rnb-frame-end -->
@@ -257,13 +254,14 @@ titanic_data &lt;- titanic_data %&gt;%
 <p>Part 2 (written up from handwritten notes)</p>
 <p>Q1 1-2-3-4 (options of rolls under 6) - count = 4 5-6 (options above over 5) = count = 2</p>
 <p>4/6 = 2/3</p>
-<p>Q2 For 3 d6 {1,2,3,4,5,6,1,2,3,4,5,6,1,2,3,4,5,6}</p>
+<p>Q2 For 3 d6 {1,2,3,4,5,6,1,2,3,4,5,6,1,2,3,4,5,6} 6<em>6</em>6</p>
 <p>Q3 /</p>
-<p>Q4 5! = 1/3125</p>
+<p>Q4 5! = 1/3125 (note - wrong outcome, but correct calculation (5! is not 3125))</p>
 <p>Q5 p1 = 6! = 1/720 p2 = 6!/6<em>(6</em>6)! = 1/6!*6! = 1/518400</p>
+<p>(note - for p1, the answer is 6^6, which is not 720, because repeats are allowed) (note - for p2 - )</p>
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQpXZWVrIDYgZGF5IDEgaG9tZXdvcmsKCmBgYHtyfQpsaWJyYXJ5KHByb2IpCmxpYnJhcnkoZ3Rvb2xzKQpsaWJyYXJ5KHRpZHl2ZXJzZSkKYGBgCgpgYGB7cn0KdGl0YW5pY19kYXRhIDwtIHJlYWQuY3N2KCJ0aXRhbmljLmNzdiIpCmBgYAoKQ2FsY3VsYXRlIHRoZSBjb25kaXRpb25hbCBwcm9iYWJpbGl0aWVzIHByb2Ioc3Vydml2ZWR8Y3JldykgYW5kIHByb2Ioc3Vydml2ZWR8cGFzc2VuZ2VyKQoKCmBgYHtyfQojIGNyZWF0aW5nIGNyZXcgY29sdW1uCnRpdGFuaWNfZGF0YSA8LSB0aXRhbmljX2RhdGEgJT4lCiAgbXV0YXRlKGNyZXcgPSBjbGFzcyAhPSAiMXN0IiAmIGNsYXNzICE9ICIybmQiICYgY2xhc3MgIT0gIjNyZCIpCgpgYGAKCmBgYHtyfQojIGNyZXcgd2hvIHN1cnZpdmVkCiMgcHJvcF9jcmV3X3N1cnZpdmUgPC0gdGl0YW5pY19kYXRhICU+JQojICAgc3VtbWFyaXNlKHByb2IgPSBzdW0oY3JldyA9PSBUUlVFICYgc3Vydml2ZWQgPT0gInllcyIpIC8gbigpKQoKIyBwcm9iIHBhc3NlbmdlciBzdXJ2aXZlCiMgcHJvcF9wYXNzZW5nZXJfc3Vydml2ZSA8LSB0aXRhbmljX2RhdGEgJT4lCiMgICBzdW1tYXJpc2UocHJvYiA9IHN1bShjcmV3ICE9IFRSVUUgJiBzdXJ2aXZlZCA9PSAieWVzIikgLyBuKCkpCgoKcHJvYl9naXZlbl9jcmV3IDwtIHRpdGFuaWNfZGF0YSAlPiUKICBmaWx0ZXIoY3JldyA9PSBUUlVFKSAlPiUKICBzdW1tYXJpc2UocHJvYiA9IHN1bShzdXJ2aXZlZCA9PSAieWVzIikgLyBuKCkpCgpwcm9iX2dpdmVuX3Bhc3NlbmdlciA8LSB0aXRhbmljX2RhdGEgJT4lCiAgZmlsdGVyKGNyZXcgPT0gRkFMU0UpICU+JQogIHN1bW1hcmlzZShwcm9iID0gc3VtKHN1cnZpdmVkID09ICJ5ZXMiKSAvIG4oKSkKCmBgYAoKUGFydCAyCih3cml0dGVuIHVwIGZyb20gaGFuZHdyaXR0ZW4gbm90ZXMpCgpRMQoxLTItMy00IChvcHRpb25zIG9mIHJvbGxzIHVuZGVyIDYpIC0gY291bnQgPSA0CjUtNiAob3B0aW9ucyBhYm92ZSBvdmVyIDUpID0gY291bnQgPSAyCgo0LzYgPSAyLzMKClEyCkZvciAzIGQ2CnsxLDIsMyw0LDUsNiwxLDIsMyw0LDUsNiwxLDIsMyw0LDUsNn0KClEzCi8KClE0CjUhID0gMS8zMTI1IAoKUTUKcDEgPSA2ISA9IDEvNzIwCnAyID0gNiEvNiooNio2KSEgPSAxLzYhKjYhID0gMS81MTg0MDAKCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQpXZWVrIDYgZGF5IDEgaG9tZXdvcmsKCmBgYHtyfQpsaWJyYXJ5KHByb2IpCmxpYnJhcnkoZ3Rvb2xzKQpsaWJyYXJ5KHRpZHl2ZXJzZSkKYGBgCgpgYGB7cn0KdGl0YW5pY19kYXRhIDwtIHJlYWQuY3N2KCJ0aXRhbmljLmNzdiIpCmBgYAoKQ2FsY3VsYXRlIHRoZSBjb25kaXRpb25hbCBwcm9iYWJpbGl0aWVzIHByb2Ioc3Vydml2ZWR8Y3JldykgYW5kIHByb2Ioc3Vydml2ZWR8cGFzc2VuZ2VyKQpgYGB7cn0KIyBjcmVhdGluZyBjcmV3IGNvbHVtbgp0aXRhbmljX2RhdGEgPC0gdGl0YW5pY19kYXRhICU+JQogIG11dGF0ZShjcmV3ID0gY2xhc3MgIT0gIjFzdCIgJiBjbGFzcyAhPSAiMm5kIiAmIGNsYXNzICE9ICIzcmQiKQoKYGBgCgpgYGB7cn0KIyBjcmV3IHdobyBzdXJ2aXZlZAojIHByb3BfY3Jld19zdXJ2aXZlIDwtIHRpdGFuaWNfZGF0YSAlPiUKIyAgIHN1bW1hcmlzZShwcm9iID0gc3VtKGNyZXcgPT0gVFJVRSAmIHN1cnZpdmVkID09ICJ5ZXMiKSAvIG4oKSkKCnByb2IgcGFzc2VuZ2VyIHN1cnZpdmUKcHJvcF9wYXNzZW5nZXJfc3Vydml2ZSA8LSB0aXRhbmljX2RhdGEgJT4lCiAgc3VtbWFyaXNlKHByb2IgPSBzdW0oY3JldyAhPSBUUlVFICYgc3Vydml2ZWQgPT0gInllcyIpIC8gbigpKQoKCnByb2JfZ2l2ZW5fY3JldyA8LSB0aXRhbmljX2RhdGEgJT4lCiAgZmlsdGVyKGNyZXcgPT0gVFJVRSkgJT4lCiAgc3VtbWFyaXNlKHByb2IgPSBzdW0oc3Vydml2ZWQgPT0gInllcyIpIC8gbigpKQoKcHJvYl9naXZlbl9wYXNzZW5nZXIgPC0gdGl0YW5pY19kYXRhICU+JQogIGZpbHRlcihjcmV3ID09IEZBTFNFKSAlPiUKICBzdW1tYXJpc2UocHJvYiA9IHN1bShzdXJ2aXZlZCA9PSAieWVzIikgLyBuKCkpCgpgYGAKClBhcnQgMgood3JpdHRlbiB1cCBmcm9tIGhhbmR3cml0dGVuIG5vdGVzKQoKUTEKMS0yLTMtNCAob3B0aW9ucyBvZiByb2xscyB1bmRlciA2KSAtIGNvdW50ID0gNAo1LTYgKG9wdGlvbnMgYWJvdmUgb3ZlciA1KSA9IGNvdW50ID0gMgoKNC82ID0gMi8zCgpRMgpGb3IgMyBkNgp7MSwyLDMsNCw1LDYsMSwyLDMsNCw1LDYsMSwyLDMsNCw1LDZ9CjYqNio2CgpRMwovCgpRNAo1ISA9IDEvMzEyNSAKKG5vdGUgLSB3cm9uZyBvdXRjb21lLCBidXQgY29ycmVjdCBjYWxjdWxhdGlvbiAoNSEgaXMgbm90IDMxMjUpKQoKUTUKcDEgPSA2ISA9IDEvNzIwCnAyID0gNiEvNiooNio2KSEgPSAxLzYhKjYhID0gMS81MTg0MDAKCihub3RlIC0gZm9yIHAxLCB0aGUgYW5zd2VyIGlzIDZeNiwgd2hpY2ggaXMgbm90IDcyMCwgYmVjYXVzZSByZXBlYXRzIGFyZSBhbGxvd2VkKQoobm90ZSAtIGZvciBwMiAtICk=</div>
 
 
 
