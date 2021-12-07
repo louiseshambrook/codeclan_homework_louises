@@ -18,17 +18,25 @@ Question 1.
 Load the data, clean_names() and explore it.
 ```{r}
 clean_names(shopping_data)
+
+summary(shopping_data)
+glimpse(shopping_data)
+head(shopping_data)
 ```
 
 Question 2.
 Find the brand with the highest numbers of phones in the dataset.
 ```{r}
-
+shopping_data %>%
+  group_by(brand) %>%
+  summarise(number_of_phones = sum(n())) %>%
+  arrange(desc(number_of_phones)) %>%
+  slice(1)
 ```
 
 Subquestions, following notes from David in the chat
 
-Calculate: mean
+Calculate: mean of the ratings (of that brand?)
 ```{r}
 
 ```
