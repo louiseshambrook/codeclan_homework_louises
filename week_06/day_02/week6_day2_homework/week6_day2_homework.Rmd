@@ -79,12 +79,33 @@ For your top brand, plot the distribution of phone ratings as a probability dens
 Hint: You will need to calculate the mean() and sd() of the ratings to plot the appropriate normal distribution. Alternatively, investigate using the fitdistr() function in the MASS package]
 ```{r}
 # to find the answer for the density, look under 5.1 in the notes
-# to fit the ND, look under 5.4
 
+# type - continuous numerical?
 
+# fitting normal distribution
+samsung_data %>%
+  select(rating) %>%
+  ggplot(aes(x = rating)) +
+  geom_histogram(aes(y = ..density..), col = "white", bins = 25) +
+  stat_function(
+    fun = dnorm, 
+    args = list(
+      mean = 3.5733,
+      sd = 0.6847859),
+    col = "red"
+  ) +
+  plot(d, main="Density of ratings") +
+  polygon(d, col="red", border="blue") 
 
-
+# cumulative density function
+#??
+ 
+# response to question
+# No. To me, it looks like the rating(s) at 1 and 5 are distorting it too much,
+# and that the fitted normal distribution does not take the peak enough into
+# account. I feel that the density looks more like I would expect.
 ```
+
 
 Question 4.
 We can be more quantitative in comparing the distribution of top brand ratings with a normal distribution. You calculated the mean() and sd() of your distribution in an earlier question. Use these values to calculate the proportions of ratings within one-, two- and three standard deviations of the mean. Compare these proportions with those you expect for a normal distribution.
@@ -92,6 +113,36 @@ Hint
 You can use a filter() to get only the ratings within one-, two- and three standard deviations of the mean, and then think about how to calculate what proportion each of these filtered sets make of the total number of ratings. You’ll need to use three separate filter() and summarise() pipes to do this.
 Further hint - code to filter within one SD 
 ```{r}
+#proportion within 1 sd
+samsung_data %>%
+  filter(rating >= 2.888514 & rating <= 4.258086) %>%
+  summarise(proportion_of_total = sum(n()) / 397)
+#.79 - better than .68
+
+# proportion within 2 sd
+samsung_data %>%
+  filter(rating >= 2.203728 & rating <= 4.942872) %>%
+  summarise(proportion_of_total = sum(n()) / 397)
+#.919 - checks out
+
+# proportion within 3sd
+samsung_data %>%
+  filter(rating >= 1.518942 & rating <= 5.627658) %>%
+  summarise(proportion_of_total = sum(n()) / 397)
+
+#.979 - checks out
+
+#notes - the relevant sd distances
+# one_sd_away = 2.888514
+# one_sd_away = 4.258086
+# 
+# two_sd_away = 2.203728
+# two_sd_away = 4.942872
+# 
+# three_sd = 1.518942
+# three_sd = 5.627658
+
+
 
 ```
 
