@@ -94,8 +94,12 @@ samsung_data %>%
       sd = 0.6847859),
     col = "red"
   ) +
-  plot(d, main="Density of ratings") +
-  polygon(d, col="red", border="blue") 
+  
+  
+  # plot(d, main="Density of ratings") +
+  # polygon(d, col="red", border="blue") 
+# didn't need to plot this - the density in the plot already did this, as it 
+# changed the plot from a histogram to a density plot
 
 # cumulative density function
 #??
