@@ -215,7 +215,7 @@ Q2 Answer
 Test: Comparing means from two independent samples
 
 Hypothesis: On average, group A (banner at the right) will have CTR = 0
-On average, group B (banner at top) will have CTR > group A
+On average, group B (banner at top) will have > CTR
 
 Mathematical notation:
 H0: μ1−μ2=0
@@ -250,23 +250,27 @@ Bootstrap
 Question 1.
 Coffee shop problem. Significance level: 0.05, calculated p
 -value: 0.07
-```{r}
 
-```
+Answer:
+p value is less than 0.05 and therefore the null hypothesis is failed to be
+rejected, so on average 40% of the population of 30000 know about the 
+coffee shop.
+
 
 Question 2.
 Website company problem. Significance level: 0.01, p
 -value: 0.006
-```{r}
 
-```
+Answer:
+The null hypothesis is rejected, so on average the CTR when the banner is 
+at the top is greater
 
 
 Question 3.
 Manufacturing company problem. Significance level: 0.05, p
 -value: 0.55
-```{r}
-
-```
 
 
+Answer:
+The null hypothesis is failed to be rejected, meaning there is not significant
+evidence of a difference in the mean.
