@@ -4,3 +4,269 @@ output: html_notebook
 ---
 
 Week 6 Weekend Homework
+
+```{r}
+library(tidyverse)
+library(infer)
+data("msleep")
+```
+
+Question 1.
+Explore the dataset and familiarise yourself with it.
+```{r}
+head(msleep)
+
+glimpse(msleep)
+
+msleep %>%
+  ggplot(aes(x = sleep_total)) +
+  geom_histogram()
+```
+
+Question 2.
+Jabberwockies sleep for around 7 hours a night, on average. Perform an appropriate statistical test to determine whether the mean sleep_total in the sampled population of animal types differs from the typical value for jabberwockies.
+```{r}
+# one sample test. We assume that jabberwockies are = 7 hrs/night, and are testing
+# for a difference in the sample (either way, i.e. both, and on the mean)
+
+Hypothesis
+# H0 - the sample mean of the sampled population is the same as jabberwockies
+# Ha - the sample mean of the sampled population is not the same as jabberwockies
+
+# Sensitivity level - 0.05
+
+# calculating the observed statistic
+obs_stat_sleep <- msleep %>%
+  summarise(mean = mean(sleep_total))
+
+# Generating the null distribution
+null_dist_sleep <- msleep %>%
+  specify(response = sleep_total) %>%
+  hypothesise(null = "point", mu = 7.0) %>%
+  generate(reps = 10000, type = "bootstrap") %>%
+  calculate(stat = "mean")
+
+# visualising the observed stat and null distribution
+null_dist_sleep %>%
+  visualise(bins = 30) +
+  shade_p_value(obs_stat = obs_stat_sleep,
+                direction = "both")
+
+# calculating the p value
+p_value_sleep <- null_dist_sleep %>%
+  get_p_value(obs_stat = obs_stat_sleep,
+              direction = "both")
+p_value_sleep
+
+# Conclusion
+# The p value is 0, and therefore the null hypothesis has been rejected (although
+# this is a p value of 0, and more tests would be best).
+```
+
+Question 3.
+Perform an appropriate statistical test to determine whether omnivores sleep for significantly longer than herbivores, on average.
+```{r}
+# Two sample independent test, so we are testing if omnivores > herbivores
+# test for difference in sample means
+
+# Hypothesis
+# H0 - mean sleep of omnivores = the mean sleep of herbivores
+# HA - mean sleep omnvivores > mean sleep herbivores 
+
+# Set sensitivity: 0.05
+
+# Wrangling the data to mark each variable
+sleep_omni_herb <- msleep %>%
+  select(vore, sleep_total) %>%
+  filter(vore != "carni", vore != "insecti")
+
+# visualising the data prior to statistical analysis
+sleep_omni_herb %>%
+  ggplot(aes(x = vore, y = sleep_total)) +
+  geom_boxplot()
+
+# calculating the observed statistic
+obs_stat_omni_herb <- sleep_omni_herb %>%
+  specify(sleep_total ~ vore) %>%
+  calculate(stat = "diff in means",
+            order = c("omni", "herbi"))
+obs_stat_omni_herb
+
+# Generating the null distribution
+null_dist_omni_herbi <- sleep_omni_herb %>%
+  specify(sleep_total ~ vore) %>%
+  hypothesise(null = "independence") %>%
+  generate(reps = 10000, type = "permute") %>%
+  calculate(stat = "diff in means",
+            order = c("omni", "herbi"))
+head(null_dist_omni_herbi)
+
+# visualising the observed stat and null distribution
+null_dist_omni_herbi %>%
+  visualise() +
+  shade_p_value(obs_stat = obs_stat_omni_herb,
+                direction = "right")
+
+# calculating the p value
+p_value_omni_herbi <- null_dist_omni_herbi %>%
+  get_p_value(obs_stat = obs_stat_omni_herb,
+              direction = "right")
+p_value_omni_herbi
+
+# Conclusion
+# The p value is 0.1322, and therefore the null hypothesis has failed to be rejected. 
+
+```
+
+Question 4. Perform an appropriate statistical test to determine whether the proportion of domesticated animal types in the population of animal types is greater than 5%.
+Hint 
+```{r}
+# One sample proportion test 
+# test for difference in sample proportions
+
+# Hypothesis
+# H0 - the proportion of domesticated animals = 5%
+# HA - the proportion of domesticated animals > 5%
+
+# Set sensitivity: 0.05
+
+# Wrangling the data to mark each variable
+domesticated_prop <- msleep %>%
+  filter(!is.na(conservation)) %>%
+  mutate(is_domesticated_flag = if_else(conservation == "domesticated",
+                                        "is_domesticated",
+                                        "not_domesticated"))
+
+
+# visualising the data prior to statistical analysi
+domesticated_prop %>%
+  ggplot(aes(x = is_domesticated_flag)) +
+  geom_boxplot()
+
+# calculating the observed statistic
+obs_stat_domest <- domesticated_prop %>%
+  group_by(is_domesticated_flag) %>%
+  summarise(prop = n()/nrow(domesticated_prop)) %>%
+  filter(is_domesticated_flag == "is_domesticated") %>%
+  pull()
+
+# Generating the null distribution
+null_dist_domest <- domesticated_prop %>%
+  specify(response = is_domesticated_flag, success = "is_domesticated") %>%
+  hypothesise(null = "point", p = 0.05) %>%
+  generate(reps = 10000, type = "draw") %>%
+  calculate(stat = "prop")
+
+head(null_dist_domest)
+
+# visualising the observed stat and null distribution
+null_dist_domest %>%
+  visualise(bins = 30) +
+  shade_p_value(obs_stat = obs_stat_domest,
+                direction = "right")
+
+# calculating the p value
+p_value_domest <- null_dist_domest %>%
+  get_p_value(obs_stat = obs_stat_domest,
+              direction = "right")
+p_value_domest
+
+# Conclusion
+# the p value is nearly 0, and therefore the null hypothesis is rejected
+
+```
+
+
+# Part 2 - Hypothesis testing - Defining the Hypothesis
+
+For the following three business problems write out:
+What kind of test you would use
+H0 and Ha in both mathematical notation and in words.
+Also state the method you would use to generate the null distribution (bootstrap, permutation or simulation).
+
+Question 1.
+You work for a independent coffee shop. The boss tells you that she thinks that around 40% of people in the town (population 30,000) know of the coffee shop, but you are skeptical of the estimate. You conduct a random survey of 200 people in the town, asking if respondents are aware of your coffee shop. You want to use the sample to test the hypothesis that 40% or more of the town’s population have heard of the coffee shop.
+
+
+Q1 Answer:
+Test: One sample proportion (testing whether 40%, i.e 4/10, of the one sample)
+have heard about the coffee shop. This will then be inferred to the 30k population.
+
+Hypothesis:
+H0: On average, = 40% know about the coffee shop
+HA: > 40% know about the coffee shop
+
+Mathmatical notation:
+H0: H0:μ0.4 = a
+HA: H0:μ0.4 > a
+
+Method: bootstrap
+
+
+Question 2.
+You work for a website design company and have performed an A/B test on the position of a banner on a website promoting a particular item.
+
+A/B testing A method comparing two versions of a web page, email, flyer or other marketing device against each other to determine which version performs better. As it is essentially a controlled experiment, the design should try to ensure that the groups experiencing both versions of the marketing device are equivalent and representative of the population.
+
+You selected five days at random last month and then randomly selected 200 of each sampled day’s users into group A and another 200 of that day’s users into group B. Group A continued to be shown the banner at the right hand side of the webpage (its usual position) while group B was shown the banner at the top of the page. You monitored each sampled user’s interactions with the website, in particular the ‘click through rate’ (CTR) on the banner, i.e. what proportion of sampled users clicked on the banner. You want to use the sampled data to test the hypothesis that website users overall are more likely to click on the banner if positioned at the top of the page
+
+
+Q2 Answer
+Test: Comparing means from two independent samples
+
+Hypothesis: On average, group A (banner at the right) will have CTR = 0
+On average, group B (banner at top) will have CTR > group A
+
+Mathematical notation:
+H0: μ1−μ2=0
+HA: x¯1−x¯2
+
+Method:
+Permute
+
+
+Question 3.
+You work as an analyst for a car manufacturing company - they have specific standards they must meet for standards and regulation purposes. You have been asked to check the quality control of the manufacture of a particular car part. You have been given data on a sample of 200 parts produced over the period of a week (the sampled parts were pulled at random from the production line and measured: the factory produced a lot more than 200 parts that week). The specification of the part stipulates a width of 145mm, and the manufacturing process is said to have ‘drifted’ if the mean width of parts differs significantly from 145mm. You want to use the sampled measurements to test whether the process overall has drifted.
+
+Q3 Answer
+Test: One sample mean (the sample of 200, and checking the mean of that week, the 200 samples),
+two sided test (checking for if it differs)
+
+Hypothesis
+H0: The mean is = 145 mm
+HA: The mean =/= 145
+
+Mathematical notation
+H0:μ0= 145mm
+HA:μ0=/= 145mm
+
+Method
+Bootstrap
+
+
+# Part 3 - For the 3 business problems stated above, imagine we performed you got the following p-values (with the given significance levels) write out your interpretation of the results.
+
+
+Question 1.
+Coffee shop problem. Significance level: 0.05, calculated p
+-value: 0.07
+```{r}
+
+```
+
+Question 2.
+Website company problem. Significance level: 0.01, p
+-value: 0.006
+```{r}
+
+```
+
+
+Question 3.
+Manufacturing company problem. Significance level: 0.05, p
+-value: 0.55
+```{r}
+
+```
+
+

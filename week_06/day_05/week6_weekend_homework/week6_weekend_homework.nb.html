@@ -217,8 +217,229 @@ pre code {
 <!-- rnb-text-begin -->
 <p>Week 6 Weekend Homework</p>
 <!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeSh0aWR5dmVyc2UpXG5saWJyYXJ5KGluZmVyKVxuZGF0YShcIm1zbGVlcFwiKVxuYGBgIn0= -->
+<pre class="r"><code>library(tidyverse)
+library(infer)
+data(&quot;msleep&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Question 1. Explore the dataset and familiarise yourself with it.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaGVhZChtc2xlZXApXG5cbmdsaW1wc2UobXNsZWVwKVxuXG5tc2xlZXAgJT4lXG4gIGdncGxvdChhZXMoeCA9IHNsZWVwX3RvdGFsKSkgK1xuICBnZW9tX2hpc3RvZ3JhbSgpXG5gYGAifQ== -->
+<pre class="r"><code>head(msleep)
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKV2VlayA2IFdlZWtlbmQgSG9tZXdvcms=</div>
+glimpse(msleep)
+
+msleep %&gt;%
+  ggplot(aes(x = sleep_total)) +
+  geom_histogram()</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Question 2. Jabberwockies sleep for around 7 hours a night, on average. Perform an appropriate statistical test to determine whether the mean sleep_total in the sampled population of animal types differs from the typical value for jabberwockies.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBvbmUgc2FtcGxlIHRlc3QuIFdlIGFzc3VtZSB0aGF0IGphYmJlcndvY2tpZXMgYXJlID0gNyBocnMvbmlnaHQsIGFuZCBhcmUgdGVzdGluZ1xuIyBmb3IgYSBkaWZmZXJlbmNlIGluIHRoZSBzYW1wbGUgKGVpdGhlciB3YXksIGkuZS4gYm90aCwgYW5kIG9uIHRoZSBtZWFuKVxuXG5IeXBvdGhlc2lzXG4jIEgwIC0gdGhlIHNhbXBsZSBtZWFuIG9mIHRoZSBzYW1wbGVkIHBvcHVsYXRpb24gaXMgdGhlIHNhbWUgYXMgamFiYmVyd29ja2llc1xuIyBIYSAtIHRoZSBzYW1wbGUgbWVhbiBvZiB0aGUgc2FtcGxlZCBwb3B1bGF0aW9uIGlzIG5vdCB0aGUgc2FtZSBhcyBqYWJiZXJ3b2NraWVzXG5cbiMgU2Vuc2l0aXZpdHkgbGV2ZWwgLSAwLjA1XG5cbiMgY2FsY3VsYXRpbmcgdGhlIG9ic2VydmVkIHN0YXRpc3RpY1xub2JzX3N0YXRfc2xlZXAgPC0gbXNsZWVwICU+JVxuICBzdW1tYXJpc2UobWVhbiA9IG1lYW4oc2xlZXBfdG90YWwpKVxuXG4jIEdlbmVyYXRpbmcgdGhlIG51bGwgZGlzdHJpYnV0aW9uXG5udWxsX2Rpc3Rfc2xlZXAgPC0gbXNsZWVwICU+JVxuICBzcGVjaWZ5KHJlc3BvbnNlID0gc2xlZXBfdG90YWwpICU+JVxuICBoeXBvdGhlc2lzZShudWxsID0gXCJwb2ludFwiLCBtdSA9IDcuMCkgJT4lXG4gIGdlbmVyYXRlKHJlcHMgPSAxMDAwMCwgdHlwZSA9IFwiYm9vdHN0cmFwXCIpICU+JVxuICBjYWxjdWxhdGUoc3RhdCA9IFwibWVhblwiKVxuXG4jIHZpc3VhbGlzaW5nIHRoZSBvYnNlcnZlZCBzdGF0IGFuZCBudWxsIGRpc3RyaWJ1dGlvblxubnVsbF9kaXN0X3NsZWVwICU+JVxuICB2aXN1YWxpc2UoYmlucyA9IDMwKSArXG4gIHNoYWRlX3BfdmFsdWUob2JzX3N0YXQgPSBvYnNfc3RhdF9zbGVlcCxcbiAgICAgICAgICAgICAgICBkaXJlY3Rpb24gPSBcImJvdGhcIilcblxuIyBjYWxjdWxhdGluZyB0aGUgcCB2YWx1ZVxucF92YWx1ZV9zbGVlcCA8LSBudWxsX2Rpc3Rfc2xlZXAgJT4lXG4gIGdldF9wX3ZhbHVlKG9ic19zdGF0ID0gb2JzX3N0YXRfc2xlZXAsXG4gICAgICAgICAgICAgIGRpcmVjdGlvbiA9IFwiYm90aFwiKVxucF92YWx1ZV9zbGVlcFxuXG4jIENvbmNsdXNpb25cbiMgVGhlIHAgdmFsdWUgaXMgMCwgYW5kIHRoZXJlZm9yZSB0aGUgbnVsbCBoeXBvdGhlc2lzIGhhcyBiZWVuIHJlamVjdGVkIChhbHRob3VnaFxuIyB0aGlzIGlzIGEgcCB2YWx1ZSBvZiAwLCBhbmQgbW9yZSB0ZXN0cyB3b3VsZCBiZSBiZXN0KS5cbmBgYCJ9 -->
+<pre class="r"><code># one sample test. We assume that jabberwockies are = 7 hrs/night, and are testing
+# for a difference in the sample (either way, i.e. both, and on the mean)
+
+Hypothesis
+# H0 - the sample mean of the sampled population is the same as jabberwockies
+# Ha - the sample mean of the sampled population is not the same as jabberwockies
+
+# Sensitivity level - 0.05
+
+# calculating the observed statistic
+obs_stat_sleep &lt;- msleep %&gt;%
+  summarise(mean = mean(sleep_total))
+
+# Generating the null distribution
+null_dist_sleep &lt;- msleep %&gt;%
+  specify(response = sleep_total) %&gt;%
+  hypothesise(null = &quot;point&quot;, mu = 7.0) %&gt;%
+  generate(reps = 10000, type = &quot;bootstrap&quot;) %&gt;%
+  calculate(stat = &quot;mean&quot;)
+
+# visualising the observed stat and null distribution
+null_dist_sleep %&gt;%
+  visualise(bins = 30) +
+  shade_p_value(obs_stat = obs_stat_sleep,
+                direction = &quot;both&quot;)
+
+# calculating the p value
+p_value_sleep &lt;- null_dist_sleep %&gt;%
+  get_p_value(obs_stat = obs_stat_sleep,
+              direction = &quot;both&quot;)
+p_value_sleep
+
+# Conclusion
+# The p value is 0, and therefore the null hypothesis has been rejected (although
+# this is a p value of 0, and more tests would be best).</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Question 3. Perform an appropriate statistical test to determine whether omnivores sleep for significantly longer than herbivores, on average.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBUd28gc2FtcGxlIGluZGVwZW5kZW50IHRlc3QsIHNvIHdlIGFyZSB0ZXN0aW5nIGlmIG9tbml2b3JlcyA+IGhlcmJpdm9yZXNcbiMgdGVzdCBmb3IgZGlmZmVyZW5jZSBpbiBzYW1wbGUgbWVhbnNcblxuIyBIeXBvdGhlc2lzXG4jIEgwIC0gbWVhbiBzbGVlcCBvZiBvbW5pdm9yZXMgPSB0aGUgbWVhbiBzbGVlcCBvZiBoZXJiaXZvcmVzXG4jIEhBIC0gbWVhbiBzbGVlcCBvbW52aXZvcmVzID4gbWVhbiBzbGVlcCBoZXJiaXZvcmVzIFxuXG4jIFNldCBzZW5zaXRpdml0eTogMC4wNVxuXG4jIFdyYW5nbGluZyB0aGUgZGF0YSB0byBtYXJrIGVhY2ggdmFyaWFibGVcbnNsZWVwX29tbmlfaGVyYiA8LSBtc2xlZXAgJT4lXG4gIHNlbGVjdCh2b3JlLCBzbGVlcF90b3RhbCkgJT4lXG4gIGZpbHRlcih2b3JlICE9IFwiY2FybmlcIiwgdm9yZSAhPSBcImluc2VjdGlcIilcblxuIyB2aXN1YWxpc2luZyB0aGUgZGF0YSBwcmlvciB0byBzdGF0aXN0aWNhbCBhbmFseXNpc1xuc2xlZXBfb21uaV9oZXJiICU+JVxuICBnZ3Bsb3QoYWVzKHggPSB2b3JlLCB5ID0gc2xlZXBfdG90YWwpKSArXG4gIGdlb21fYm94cGxvdCgpXG5cbiMgY2FsY3VsYXRpbmcgdGhlIG9ic2VydmVkIHN0YXRpc3RpY1xub2JzX3N0YXRfb21uaV9oZXJiIDwtIHNsZWVwX29tbmlfaGVyYiAlPiVcbiAgc3BlY2lmeShzbGVlcF90b3RhbCB+IHZvcmUpICU+JVxuICBjYWxjdWxhdGUoc3RhdCA9IFwiZGlmZiBpbiBtZWFuc1wiLFxuICAgICAgICAgICAgb3JkZXIgPSBjKFwib21uaVwiLCBcImhlcmJpXCIpKVxub2JzX3N0YXRfb21uaV9oZXJiXG5cbiMgR2VuZXJhdGluZyB0aGUgbnVsbCBkaXN0cmlidXRpb25cbm51bGxfZGlzdF9vbW5pX2hlcmJpIDwtIHNsZWVwX29tbmlfaGVyYiAlPiVcbiAgc3BlY2lmeShzbGVlcF90b3RhbCB+IHZvcmUpICU+JVxuICBoeXBvdGhlc2lzZShudWxsID0gXCJpbmRlcGVuZGVuY2VcIikgJT4lXG4gIGdlbmVyYXRlKHJlcHMgPSAxMDAwMCwgdHlwZSA9IFwicGVybXV0ZVwiKSAlPiVcbiAgY2FsY3VsYXRlKHN0YXQgPSBcImRpZmYgaW4gbWVhbnNcIixcbiAgICAgICAgICAgIG9yZGVyID0gYyhcIm9tbmlcIiwgXCJoZXJiaVwiKSlcbmhlYWQobnVsbF9kaXN0X29tbmlfaGVyYmkpXG5cbiMgdmlzdWFsaXNpbmcgdGhlIG9ic2VydmVkIHN0YXQgYW5kIG51bGwgZGlzdHJpYnV0aW9uXG5udWxsX2Rpc3Rfb21uaV9oZXJiaSAlPiVcbiAgdmlzdWFsaXNlKCkgK1xuICBzaGFkZV9wX3ZhbHVlKG9ic19zdGF0ID0gb2JzX3N0YXRfb21uaV9oZXJiLFxuICAgICAgICAgICAgICAgIGRpcmVjdGlvbiA9IFwicmlnaHRcIilcblxuIyBjYWxjdWxhdGluZyB0aGUgcCB2YWx1ZVxucF92YWx1ZV9vbW5pX2hlcmJpIDwtIG51bGxfZGlzdF9vbW5pX2hlcmJpICU+JVxuICBnZXRfcF92YWx1ZShvYnNfc3RhdCA9IG9ic19zdGF0X29tbmlfaGVyYixcbiAgICAgICAgICAgICAgZGlyZWN0aW9uID0gXCJyaWdodFwiKVxucF92YWx1ZV9vbW5pX2hlcmJpXG5cbiMgQ29uY2x1c2lvblxuIyBUaGUgcCB2YWx1ZSBpcyAwLjEzMjIsIGFuZCB0aGVyZWZvcmUgdGhlIG51bGwgaHlwb3RoZXNpcyBoYXMgZmFpbGVkIHRvIGJlIHJlamVjdGVkLiBcblxuYGBgIn0= -->
+<pre class="r"><code># Two sample independent test, so we are testing if omnivores &gt; herbivores
+# test for difference in sample means
+
+# Hypothesis
+# H0 - mean sleep of omnivores = the mean sleep of herbivores
+# HA - mean sleep omnvivores &gt; mean sleep herbivores 
+
+# Set sensitivity: 0.05
+
+# Wrangling the data to mark each variable
+sleep_omni_herb &lt;- msleep %&gt;%
+  select(vore, sleep_total) %&gt;%
+  filter(vore != &quot;carni&quot;, vore != &quot;insecti&quot;)
+
+# visualising the data prior to statistical analysis
+sleep_omni_herb %&gt;%
+  ggplot(aes(x = vore, y = sleep_total)) +
+  geom_boxplot()
+
+# calculating the observed statistic
+obs_stat_omni_herb &lt;- sleep_omni_herb %&gt;%
+  specify(sleep_total ~ vore) %&gt;%
+  calculate(stat = &quot;diff in means&quot;,
+            order = c(&quot;omni&quot;, &quot;herbi&quot;))
+obs_stat_omni_herb
+
+# Generating the null distribution
+null_dist_omni_herbi &lt;- sleep_omni_herb %&gt;%
+  specify(sleep_total ~ vore) %&gt;%
+  hypothesise(null = &quot;independence&quot;) %&gt;%
+  generate(reps = 10000, type = &quot;permute&quot;) %&gt;%
+  calculate(stat = &quot;diff in means&quot;,
+            order = c(&quot;omni&quot;, &quot;herbi&quot;))
+head(null_dist_omni_herbi)
+
+# visualising the observed stat and null distribution
+null_dist_omni_herbi %&gt;%
+  visualise() +
+  shade_p_value(obs_stat = obs_stat_omni_herb,
+                direction = &quot;right&quot;)
+
+# calculating the p value
+p_value_omni_herbi &lt;- null_dist_omni_herbi %&gt;%
+  get_p_value(obs_stat = obs_stat_omni_herb,
+              direction = &quot;right&quot;)
+p_value_omni_herbi
+
+# Conclusion
+# The p value is 0.1322, and therefore the null hypothesis has failed to be rejected. 
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Question 4. Perform an appropriate statistical test to determine whether the proportion of domesticated animal types in the population of animal types is greater than 5%. Hint</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBPbmUgc2FtcGxlIHByb3BvcnRpb24gdGVzdCBcbiMgdGVzdCBmb3IgZGlmZmVyZW5jZSBpbiBzYW1wbGUgcHJvcG9ydGlvbnNcblxuIyBIeXBvdGhlc2lzXG4jIEgwIC0gdGhlIHByb3BvcnRpb24gb2YgZG9tZXN0aWNhdGVkIGFuaW1hbHMgPSA1JVxuIyBIQSAtIHRoZSBwcm9wb3J0aW9uIG9mIGRvbWVzdGljYXRlZCBhbmltYWxzID4gNSVcblxuIyBTZXQgc2Vuc2l0aXZpdHk6IDAuMDVcblxuIyBXcmFuZ2xpbmcgdGhlIGRhdGEgdG8gbWFyayBlYWNoIHZhcmlhYmxlXG5kb21lc3RpY2F0ZWRfcHJvcCA8LSBtc2xlZXAgJT4lXG4gIGZpbHRlcighaXMubmEoY29uc2VydmF0aW9uKSkgJT4lXG4gIG11dGF0ZShpc19kb21lc3RpY2F0ZWRfZmxhZyA9IGlmX2Vsc2UoY29uc2VydmF0aW9uID09IFwiZG9tZXN0aWNhdGVkXCIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJpc19kb21lc3RpY2F0ZWRcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcIm5vdF9kb21lc3RpY2F0ZWRcIikpXG5cblxuIyB2aXN1YWxpc2luZyB0aGUgZGF0YSBwcmlvciB0byBzdGF0aXN0aWNhbCBhbmFseXNpXG5kb21lc3RpY2F0ZWRfcHJvcCAlPiVcbiAgZ2dwbG90KGFlcyh4ID0gaXNfZG9tZXN0aWNhdGVkX2ZsYWcpKSArXG4gIGdlb21fYm94cGxvdCgpXG5cbiMgY2FsY3VsYXRpbmcgdGhlIG9ic2VydmVkIHN0YXRpc3RpY1xub2JzX3N0YXRfZG9tZXN0IDwtIGRvbWVzdGljYXRlZF9wcm9wICU+JVxuICBncm91cF9ieShpc19kb21lc3RpY2F0ZWRfZmxhZykgJT4lXG4gIHN1bW1hcmlzZShwcm9wID0gbigpL25yb3coZG9tZXN0aWNhdGVkX3Byb3ApKSAlPiVcbiAgZmlsdGVyKGlzX2RvbWVzdGljYXRlZF9mbGFnID09IFwiaXNfZG9tZXN0aWNhdGVkXCIpICU+JVxuICBwdWxsKClcblxuIyBHZW5lcmF0aW5nIHRoZSBudWxsIGRpc3RyaWJ1dGlvblxubnVsbF9kaXN0X2RvbWVzdCA8LSBkb21lc3RpY2F0ZWRfcHJvcCAlPiVcbiAgc3BlY2lmeShyZXNwb25zZSA9IGlzX2RvbWVzdGljYXRlZF9mbGFnLCBzdWNjZXNzID0gXCJpc19kb21lc3RpY2F0ZWRcIikgJT4lXG4gIGh5cG90aGVzaXNlKG51bGwgPSBcInBvaW50XCIsIHAgPSAwLjA1KSAlPiVcbiAgZ2VuZXJhdGUocmVwcyA9IDEwMDAwLCB0eXBlID0gXCJkcmF3XCIpICU+JVxuICBjYWxjdWxhdGUoc3RhdCA9IFwicHJvcFwiKVxuXG5oZWFkKG51bGxfZGlzdF9kb21lc3QpXG5cbiMgdmlzdWFsaXNpbmcgdGhlIG9ic2VydmVkIHN0YXQgYW5kIG51bGwgZGlzdHJpYnV0aW9uXG5udWxsX2Rpc3RfZG9tZXN0ICU+JVxuICB2aXN1YWxpc2UoYmlucyA9IDMwKSArXG4gIHNoYWRlX3BfdmFsdWUob2JzX3N0YXQgPSBvYnNfc3RhdF9kb21lc3QsXG4gICAgICAgICAgICAgICAgZGlyZWN0aW9uID0gXCJyaWdodFwiKVxuXG4jIGNhbGN1bGF0aW5nIHRoZSBwIHZhbHVlXG5wX3ZhbHVlX2RvbWVzdCA8LSBudWxsX2Rpc3RfZG9tZXN0ICU+JVxuICBnZXRfcF92YWx1ZShvYnNfc3RhdCA9IG9ic19zdGF0X2RvbWVzdCxcbiAgICAgICAgICAgICAgZGlyZWN0aW9uID0gXCJyaWdodFwiKVxucF92YWx1ZV9kb21lc3RcblxuIyBDb25jbHVzaW9uXG4jIHRoZSBwIHZhbHVlIGlzIG5lYXJseSAwLCBhbmQgdGhlcmVmb3JlIHRoZSBudWxsIGh5cG90aGVzaXMgaXMgcmVqZWN0ZWRcblxuYGBgIn0= -->
+<pre class="r"><code># One sample proportion test 
+# test for difference in sample proportions
+
+# Hypothesis
+# H0 - the proportion of domesticated animals = 5%
+# HA - the proportion of domesticated animals &gt; 5%
+
+# Set sensitivity: 0.05
+
+# Wrangling the data to mark each variable
+domesticated_prop &lt;- msleep %&gt;%
+  filter(!is.na(conservation)) %&gt;%
+  mutate(is_domesticated_flag = if_else(conservation == &quot;domesticated&quot;,
+                                        &quot;is_domesticated&quot;,
+                                        &quot;not_domesticated&quot;))
+
+
+# visualising the data prior to statistical analysi
+domesticated_prop %&gt;%
+  ggplot(aes(x = is_domesticated_flag)) +
+  geom_boxplot()
+
+# calculating the observed statistic
+obs_stat_domest &lt;- domesticated_prop %&gt;%
+  group_by(is_domesticated_flag) %&gt;%
+  summarise(prop = n()/nrow(domesticated_prop)) %&gt;%
+  filter(is_domesticated_flag == &quot;is_domesticated&quot;) %&gt;%
+  pull()
+
+# Generating the null distribution
+null_dist_domest &lt;- domesticated_prop %&gt;%
+  specify(response = is_domesticated_flag, success = &quot;is_domesticated&quot;) %&gt;%
+  hypothesise(null = &quot;point&quot;, p = 0.05) %&gt;%
+  generate(reps = 10000, type = &quot;draw&quot;) %&gt;%
+  calculate(stat = &quot;prop&quot;)
+
+head(null_dist_domest)
+
+# visualising the observed stat and null distribution
+null_dist_domest %&gt;%
+  visualise(bins = 30) +
+  shade_p_value(obs_stat = obs_stat_domest,
+                direction = &quot;right&quot;)
+
+# calculating the p value
+p_value_domest &lt;- null_dist_domest %&gt;%
+  get_p_value(obs_stat = obs_stat_domest,
+              direction = &quot;right&quot;)
+p_value_domest
+
+# Conclusion
+# the p value is nearly 0, and therefore the null hypothesis is rejected
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<div id="part-2---hypothesis-testing---defining-the-hypothesis" class="section level1">
+<h1>Part 2 - Hypothesis testing - Defining the Hypothesis</h1>
+<p>For the following three business problems write out: What kind of test you would use H0 and Ha in both mathematical notation and in words. Also state the method you would use to generate the null distribution (bootstrap, permutation or simulation).</p>
+<p>Question 1. You work for a independent coffee shop. The boss tells you that she thinks that around 40% of people in the town (population 30,000) know of the coffee shop, but you are skeptical of the estimate. You conduct a random survey of 200 people in the town, asking if respondents are aware of your coffee shop. You want to use the sample to test the hypothesis that 40% or more of the town’s population have heard of the coffee shop.</p>
+<p>Q1 Answer: Test: One sample proportion (testing whether 40%, i.e 4/10, of the one sample) have heard about the coffee shop. This will then be inferred to the 30k population.</p>
+<p>Hypothesis: H0: On average, = 40% know about the coffee shop HA: &gt; 40% know about the coffee shop</p>
+<p>Mathmatical notation: H0: H0:μ0.4 = a HA: H0:μ0.4 &gt; a</p>
+<p>Method: bootstrap</p>
+<p>Question 2. You work for a website design company and have performed an A/B test on the position of a banner on a website promoting a particular item.</p>
+<p>A/B testing A method comparing two versions of a web page, email, flyer or other marketing device against each other to determine which version performs better. As it is essentially a controlled experiment, the design should try to ensure that the groups experiencing both versions of the marketing device are equivalent and representative of the population.</p>
+<p>You selected five days at random last month and then randomly selected 200 of each sampled day’s users into group A and another 200 of that day’s users into group B. Group A continued to be shown the banner at the right hand side of the webpage (its usual position) while group B was shown the banner at the top of the page. You monitored each sampled user’s interactions with the website, in particular the ‘click through rate’ (CTR) on the banner, i.e. what proportion of sampled users clicked on the banner. You want to use the sampled data to test the hypothesis that website users overall are more likely to click on the banner if positioned at the top of the page</p>
+<p>Q2 Answer Test: Comparing means from two independent samples</p>
+<p>Hypothesis: On average, group A (banner at the right) will have CTR = 0 On average, group B (banner at top) will have CTR &gt; group A</p>
+<p>Mathematical notation: H0: μ1−μ2=0 HA: x¯1−x¯2</p>
+<p>Method: Permute</p>
+<p>Question 3. You work as an analyst for a car manufacturing company - they have specific standards they must meet for standards and regulation purposes. You have been asked to check the quality control of the manufacture of a particular car part. You have been given data on a sample of 200 parts produced over the period of a week (the sampled parts were pulled at random from the production line and measured: the factory produced a lot more than 200 parts that week). The specification of the part stipulates a width of 145mm, and the manufacturing process is said to have ‘drifted’ if the mean width of parts differs significantly from 145mm. You want to use the sampled measurements to test whether the process overall has drifted.</p>
+<p>Q3 Answer Test: One sample mean (the sample of 200, and checking the mean of that week, the 200 samples), two sided test (checking for if it differs)</p>
+<p>Hypothesis H0: The mean is = 145 mm HA: The mean =/= 145</p>
+<p>Mathematical notation H0:μ0= 145mm HA:μ0=/= 145mm</p>
+<p>Method Bootstrap</p>
+</div>
+<div id="part-3---for-the-3-business-problems-stated-above-imagine-we-performed-you-got-the-following-p-values-with-the-given-significance-levels-write-out-your-interpretation-of-the-results." class="section level1">
+<h1>Part 3 - For the 3 business problems stated above, imagine we performed you got the following p-values (with the given significance levels) write out your interpretation of the results.</h1>
+<p>Question 1. Coffee shop problem. Significance level: 0.05, calculated p -value: 0.07</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Question 2. Website company problem. Significance level: 0.01, p -value: 0.006</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Question 3. Manufacturing company problem. Significance level: 0.05, p -value: 0.55</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+</div>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKV2VlayA2IFdlZWtlbmQgSG9tZXdvcmsKCmBgYHtyfQpsaWJyYXJ5KHRpZHl2ZXJzZSkKbGlicmFyeShpbmZlcikKZGF0YSgibXNsZWVwIikKYGBgCgpRdWVzdGlvbiAxLgpFeHBsb3JlIHRoZSBkYXRhc2V0IGFuZCBmYW1pbGlhcmlzZSB5b3Vyc2VsZiB3aXRoIGl0LgpgYGB7cn0KaGVhZChtc2xlZXApCgpnbGltcHNlKG1zbGVlcCkKCm1zbGVlcCAlPiUKICBnZ3Bsb3QoYWVzKHggPSBzbGVlcF90b3RhbCkpICsKICBnZW9tX2hpc3RvZ3JhbSgpCmBgYAoKUXVlc3Rpb24gMi4KSmFiYmVyd29ja2llcyBzbGVlcCBmb3IgYXJvdW5kIDcgaG91cnMgYSBuaWdodCwgb24gYXZlcmFnZS4gUGVyZm9ybSBhbiBhcHByb3ByaWF0ZSBzdGF0aXN0aWNhbCB0ZXN0IHRvIGRldGVybWluZSB3aGV0aGVyIHRoZSBtZWFuIHNsZWVwX3RvdGFsIGluIHRoZSBzYW1wbGVkIHBvcHVsYXRpb24gb2YgYW5pbWFsIHR5cGVzIGRpZmZlcnMgZnJvbSB0aGUgdHlwaWNhbCB2YWx1ZSBmb3IgamFiYmVyd29ja2llcy4KYGBge3J9CiMgb25lIHNhbXBsZSB0ZXN0LiBXZSBhc3N1bWUgdGhhdCBqYWJiZXJ3b2NraWVzIGFyZSA9IDcgaHJzL25pZ2h0LCBhbmQgYXJlIHRlc3RpbmcKIyBmb3IgYSBkaWZmZXJlbmNlIGluIHRoZSBzYW1wbGUgKGVpdGhlciB3YXksIGkuZS4gYm90aCwgYW5kIG9uIHRoZSBtZWFuKQoKSHlwb3RoZXNpcwojIEgwIC0gdGhlIHNhbXBsZSBtZWFuIG9mIHRoZSBzYW1wbGVkIHBvcHVsYXRpb24gaXMgdGhlIHNhbWUgYXMgamFiYmVyd29ja2llcwojIEhhIC0gdGhlIHNhbXBsZSBtZWFuIG9mIHRoZSBzYW1wbGVkIHBvcHVsYXRpb24gaXMgbm90IHRoZSBzYW1lIGFzIGphYmJlcndvY2tpZXMKCiMgU2Vuc2l0aXZpdHkgbGV2ZWwgLSAwLjA1CgojIGNhbGN1bGF0aW5nIHRoZSBvYnNlcnZlZCBzdGF0aXN0aWMKb2JzX3N0YXRfc2xlZXAgPC0gbXNsZWVwICU+JQogIHN1bW1hcmlzZShtZWFuID0gbWVhbihzbGVlcF90b3RhbCkpCgojIEdlbmVyYXRpbmcgdGhlIG51bGwgZGlzdHJpYnV0aW9uCm51bGxfZGlzdF9zbGVlcCA8LSBtc2xlZXAgJT4lCiAgc3BlY2lmeShyZXNwb25zZSA9IHNsZWVwX3RvdGFsKSAlPiUKICBoeXBvdGhlc2lzZShudWxsID0gInBvaW50IiwgbXUgPSA3LjApICU+JQogIGdlbmVyYXRlKHJlcHMgPSAxMDAwMCwgdHlwZSA9ICJib290c3RyYXAiKSAlPiUKICBjYWxjdWxhdGUoc3RhdCA9ICJtZWFuIikKCiMgdmlzdWFsaXNpbmcgdGhlIG9ic2VydmVkIHN0YXQgYW5kIG51bGwgZGlzdHJpYnV0aW9uCm51bGxfZGlzdF9zbGVlcCAlPiUKICB2aXN1YWxpc2UoYmlucyA9IDMwKSArCiAgc2hhZGVfcF92YWx1ZShvYnNfc3RhdCA9IG9ic19zdGF0X3NsZWVwLAogICAgICAgICAgICAgICAgZGlyZWN0aW9uID0gImJvdGgiKQoKIyBjYWxjdWxhdGluZyB0aGUgcCB2YWx1ZQpwX3ZhbHVlX3NsZWVwIDwtIG51bGxfZGlzdF9zbGVlcCAlPiUKICBnZXRfcF92YWx1ZShvYnNfc3RhdCA9IG9ic19zdGF0X3NsZWVwLAogICAgICAgICAgICAgIGRpcmVjdGlvbiA9ICJib3RoIikKcF92YWx1ZV9zbGVlcAoKIyBDb25jbHVzaW9uCiMgVGhlIHAgdmFsdWUgaXMgMCwgYW5kIHRoZXJlZm9yZSB0aGUgbnVsbCBoeXBvdGhlc2lzIGhhcyBiZWVuIHJlamVjdGVkIChhbHRob3VnaAojIHRoaXMgaXMgYSBwIHZhbHVlIG9mIDAsIGFuZCBtb3JlIHRlc3RzIHdvdWxkIGJlIGJlc3QpLgpgYGAKClF1ZXN0aW9uIDMuClBlcmZvcm0gYW4gYXBwcm9wcmlhdGUgc3RhdGlzdGljYWwgdGVzdCB0byBkZXRlcm1pbmUgd2hldGhlciBvbW5pdm9yZXMgc2xlZXAgZm9yIHNpZ25pZmljYW50bHkgbG9uZ2VyIHRoYW4gaGVyYml2b3Jlcywgb24gYXZlcmFnZS4KYGBge3J9CiMgVHdvIHNhbXBsZSBpbmRlcGVuZGVudCB0ZXN0LCBzbyB3ZSBhcmUgdGVzdGluZyBpZiBvbW5pdm9yZXMgPiBoZXJiaXZvcmVzCiMgdGVzdCBmb3IgZGlmZmVyZW5jZSBpbiBzYW1wbGUgbWVhbnMKCiMgSHlwb3RoZXNpcwojIEgwIC0gbWVhbiBzbGVlcCBvZiBvbW5pdm9yZXMgPSB0aGUgbWVhbiBzbGVlcCBvZiBoZXJiaXZvcmVzCiMgSEEgLSBtZWFuIHNsZWVwIG9tbnZpdm9yZXMgPiBtZWFuIHNsZWVwIGhlcmJpdm9yZXMgCgojIFNldCBzZW5zaXRpdml0eTogMC4wNQoKIyBXcmFuZ2xpbmcgdGhlIGRhdGEgdG8gbWFyayBlYWNoIHZhcmlhYmxlCnNsZWVwX29tbmlfaGVyYiA8LSBtc2xlZXAgJT4lCiAgc2VsZWN0KHZvcmUsIHNsZWVwX3RvdGFsKSAlPiUKICBmaWx0ZXIodm9yZSAhPSAiY2FybmkiLCB2b3JlICE9ICJpbnNlY3RpIikKCiMgdmlzdWFsaXNpbmcgdGhlIGRhdGEgcHJpb3IgdG8gc3RhdGlzdGljYWwgYW5hbHlzaXMKc2xlZXBfb21uaV9oZXJiICU+JQogIGdncGxvdChhZXMoeCA9IHZvcmUsIHkgPSBzbGVlcF90b3RhbCkpICsKICBnZW9tX2JveHBsb3QoKQoKIyBjYWxjdWxhdGluZyB0aGUgb2JzZXJ2ZWQgc3RhdGlzdGljCm9ic19zdGF0X29tbmlfaGVyYiA8LSBzbGVlcF9vbW5pX2hlcmIgJT4lCiAgc3BlY2lmeShzbGVlcF90b3RhbCB+IHZvcmUpICU+JQogIGNhbGN1bGF0ZShzdGF0ID0gImRpZmYgaW4gbWVhbnMiLAogICAgICAgICAgICBvcmRlciA9IGMoIm9tbmkiLCAiaGVyYmkiKSkKb2JzX3N0YXRfb21uaV9oZXJiCgojIEdlbmVyYXRpbmcgdGhlIG51bGwgZGlzdHJpYnV0aW9uCm51bGxfZGlzdF9vbW5pX2hlcmJpIDwtIHNsZWVwX29tbmlfaGVyYiAlPiUKICBzcGVjaWZ5KHNsZWVwX3RvdGFsIH4gdm9yZSkgJT4lCiAgaHlwb3RoZXNpc2UobnVsbCA9ICJpbmRlcGVuZGVuY2UiKSAlPiUKICBnZW5lcmF0ZShyZXBzID0gMTAwMDAsIHR5cGUgPSAicGVybXV0ZSIpICU+JQogIGNhbGN1bGF0ZShzdGF0ID0gImRpZmYgaW4gbWVhbnMiLAogICAgICAgICAgICBvcmRlciA9IGMoIm9tbmkiLCAiaGVyYmkiKSkKaGVhZChudWxsX2Rpc3Rfb21uaV9oZXJiaSkKCiMgdmlzdWFsaXNpbmcgdGhlIG9ic2VydmVkIHN0YXQgYW5kIG51bGwgZGlzdHJpYnV0aW9uCm51bGxfZGlzdF9vbW5pX2hlcmJpICU+JQogIHZpc3VhbGlzZSgpICsKICBzaGFkZV9wX3ZhbHVlKG9ic19zdGF0ID0gb2JzX3N0YXRfb21uaV9oZXJiLAogICAgICAgICAgICAgICAgZGlyZWN0aW9uID0gInJpZ2h0IikKCiMgY2FsY3VsYXRpbmcgdGhlIHAgdmFsdWUKcF92YWx1ZV9vbW5pX2hlcmJpIDwtIG51bGxfZGlzdF9vbW5pX2hlcmJpICU+JQogIGdldF9wX3ZhbHVlKG9ic19zdGF0ID0gb2JzX3N0YXRfb21uaV9oZXJiLAogICAgICAgICAgICAgIGRpcmVjdGlvbiA9ICJyaWdodCIpCnBfdmFsdWVfb21uaV9oZXJiaQoKIyBDb25jbHVzaW9uCiMgVGhlIHAgdmFsdWUgaXMgMC4xMzIyLCBhbmQgdGhlcmVmb3JlIHRoZSBudWxsIGh5cG90aGVzaXMgaGFzIGZhaWxlZCB0byBiZSByZWplY3RlZC4gCgpgYGAKClF1ZXN0aW9uIDQuIFBlcmZvcm0gYW4gYXBwcm9wcmlhdGUgc3RhdGlzdGljYWwgdGVzdCB0byBkZXRlcm1pbmUgd2hldGhlciB0aGUgcHJvcG9ydGlvbiBvZiBkb21lc3RpY2F0ZWQgYW5pbWFsIHR5cGVzIGluIHRoZSBwb3B1bGF0aW9uIG9mIGFuaW1hbCB0eXBlcyBpcyBncmVhdGVyIHRoYW4gNSUuCkhpbnQgCmBgYHtyfQojIE9uZSBzYW1wbGUgcHJvcG9ydGlvbiB0ZXN0IAojIHRlc3QgZm9yIGRpZmZlcmVuY2UgaW4gc2FtcGxlIHByb3BvcnRpb25zCgojIEh5cG90aGVzaXMKIyBIMCAtIHRoZSBwcm9wb3J0aW9uIG9mIGRvbWVzdGljYXRlZCBhbmltYWxzID0gNSUKIyBIQSAtIHRoZSBwcm9wb3J0aW9uIG9mIGRvbWVzdGljYXRlZCBhbmltYWxzID4gNSUKCiMgU2V0IHNlbnNpdGl2aXR5OiAwLjA1CgojIFdyYW5nbGluZyB0aGUgZGF0YSB0byBtYXJrIGVhY2ggdmFyaWFibGUKZG9tZXN0aWNhdGVkX3Byb3AgPC0gbXNsZWVwICU+JQogIGZpbHRlcighaXMubmEoY29uc2VydmF0aW9uKSkgJT4lCiAgbXV0YXRlKGlzX2RvbWVzdGljYXRlZF9mbGFnID0gaWZfZWxzZShjb25zZXJ2YXRpb24gPT0gImRvbWVzdGljYXRlZCIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiaXNfZG9tZXN0aWNhdGVkIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJub3RfZG9tZXN0aWNhdGVkIikpCgoKIyB2aXN1YWxpc2luZyB0aGUgZGF0YSBwcmlvciB0byBzdGF0aXN0aWNhbCBhbmFseXNpCmRvbWVzdGljYXRlZF9wcm9wICU+JQogIGdncGxvdChhZXMoeCA9IGlzX2RvbWVzdGljYXRlZF9mbGFnKSkgKwogIGdlb21fYm94cGxvdCgpCgojIGNhbGN1bGF0aW5nIHRoZSBvYnNlcnZlZCBzdGF0aXN0aWMKb2JzX3N0YXRfZG9tZXN0IDwtIGRvbWVzdGljYXRlZF9wcm9wICU+JQogIGdyb3VwX2J5KGlzX2RvbWVzdGljYXRlZF9mbGFnKSAlPiUKICBzdW1tYXJpc2UocHJvcCA9IG4oKS9ucm93KGRvbWVzdGljYXRlZF9wcm9wKSkgJT4lCiAgZmlsdGVyKGlzX2RvbWVzdGljYXRlZF9mbGFnID09ICJpc19kb21lc3RpY2F0ZWQiKSAlPiUKICBwdWxsKCkKCiMgR2VuZXJhdGluZyB0aGUgbnVsbCBkaXN0cmlidXRpb24KbnVsbF9kaXN0X2RvbWVzdCA8LSBkb21lc3RpY2F0ZWRfcHJvcCAlPiUKICBzcGVjaWZ5KHJlc3BvbnNlID0gaXNfZG9tZXN0aWNhdGVkX2ZsYWcsIHN1Y2Nlc3MgPSAiaXNfZG9tZXN0aWNhdGVkIikgJT4lCiAgaHlwb3RoZXNpc2UobnVsbCA9ICJwb2ludCIsIHAgPSAwLjA1KSAlPiUKICBnZW5lcmF0ZShyZXBzID0gMTAwMDAsIHR5cGUgPSAiZHJhdyIpICU+JQogIGNhbGN1bGF0ZShzdGF0ID0gInByb3AiKQoKaGVhZChudWxsX2Rpc3RfZG9tZXN0KQoKIyB2aXN1YWxpc2luZyB0aGUgb2JzZXJ2ZWQgc3RhdCBhbmQgbnVsbCBkaXN0cmlidXRpb24KbnVsbF9kaXN0X2RvbWVzdCAlPiUKICB2aXN1YWxpc2UoYmlucyA9IDMwKSArCiAgc2hhZGVfcF92YWx1ZShvYnNfc3RhdCA9IG9ic19zdGF0X2RvbWVzdCwKICAgICAgICAgICAgICAgIGRpcmVjdGlvbiA9ICJyaWdodCIpCgojIGNhbGN1bGF0aW5nIHRoZSBwIHZhbHVlCnBfdmFsdWVfZG9tZXN0IDwtIG51bGxfZGlzdF9kb21lc3QgJT4lCiAgZ2V0X3BfdmFsdWUob2JzX3N0YXQgPSBvYnNfc3RhdF9kb21lc3QsCiAgICAgICAgICAgICAgZGlyZWN0aW9uID0gInJpZ2h0IikKcF92YWx1ZV9kb21lc3QKCiMgQ29uY2x1c2lvbgojIHRoZSBwIHZhbHVlIGlzIG5lYXJseSAwLCBhbmQgdGhlcmVmb3JlIHRoZSBudWxsIGh5cG90aGVzaXMgaXMgcmVqZWN0ZWQKCmBgYAoKCiMgUGFydCAyIC0gSHlwb3RoZXNpcyB0ZXN0aW5nIC0gRGVmaW5pbmcgdGhlIEh5cG90aGVzaXMKCkZvciB0aGUgZm9sbG93aW5nIHRocmVlIGJ1c2luZXNzIHByb2JsZW1zIHdyaXRlIG91dDoKV2hhdCBraW5kIG9mIHRlc3QgeW91IHdvdWxkIHVzZQpIMCBhbmQgSGEgaW4gYm90aCBtYXRoZW1hdGljYWwgbm90YXRpb24gYW5kIGluIHdvcmRzLgpBbHNvIHN0YXRlIHRoZSBtZXRob2QgeW91IHdvdWxkIHVzZSB0byBnZW5lcmF0ZSB0aGUgbnVsbCBkaXN0cmlidXRpb24gKGJvb3RzdHJhcCwgcGVybXV0YXRpb24gb3Igc2ltdWxhdGlvbikuCgpRdWVzdGlvbiAxLgpZb3Ugd29yayBmb3IgYSBpbmRlcGVuZGVudCBjb2ZmZWUgc2hvcC4gVGhlIGJvc3MgdGVsbHMgeW91IHRoYXQgc2hlIHRoaW5rcyB0aGF0IGFyb3VuZCA0MCUgb2YgcGVvcGxlIGluIHRoZSB0b3duIChwb3B1bGF0aW9uIDMwLDAwMCkga25vdyBvZiB0aGUgY29mZmVlIHNob3AsIGJ1dCB5b3UgYXJlIHNrZXB0aWNhbCBvZiB0aGUgZXN0aW1hdGUuIFlvdSBjb25kdWN0IGEgcmFuZG9tIHN1cnZleSBvZiAyMDAgcGVvcGxlIGluIHRoZSB0b3duLCBhc2tpbmcgaWYgcmVzcG9uZGVudHMgYXJlIGF3YXJlIG9mIHlvdXIgY29mZmVlIHNob3AuIFlvdSB3YW50IHRvIHVzZSB0aGUgc2FtcGxlIHRvIHRlc3QgdGhlIGh5cG90aGVzaXMgdGhhdCA0MCUgb3IgbW9yZSBvZiB0aGUgdG93buKAmXMgcG9wdWxhdGlvbiBoYXZlIGhlYXJkIG9mIHRoZSBjb2ZmZWUgc2hvcC4KCgpRMSBBbnN3ZXI6ClRlc3Q6IE9uZSBzYW1wbGUgcHJvcG9ydGlvbiAodGVzdGluZyB3aGV0aGVyIDQwJSwgaS5lIDQvMTAsIG9mIHRoZSBvbmUgc2FtcGxlKQpoYXZlIGhlYXJkIGFib3V0IHRoZSBjb2ZmZWUgc2hvcC4gVGhpcyB3aWxsIHRoZW4gYmUgaW5mZXJyZWQgdG8gdGhlIDMwayBwb3B1bGF0aW9uLgoKSHlwb3RoZXNpczoKSDA6IE9uIGF2ZXJhZ2UsID0gNDAlIGtub3cgYWJvdXQgdGhlIGNvZmZlZSBzaG9wCkhBOiA+IDQwJSBrbm93IGFib3V0IHRoZSBjb2ZmZWUgc2hvcAoKTWF0aG1hdGljYWwgbm90YXRpb246CkgwOiBIMDrOvDAuNCA9IGEKSEE6IEgwOs68MC40ID4gYQoKTWV0aG9kOiBib290c3RyYXAKCgpRdWVzdGlvbiAyLgpZb3Ugd29yayBmb3IgYSB3ZWJzaXRlIGRlc2lnbiBjb21wYW55IGFuZCBoYXZlIHBlcmZvcm1lZCBhbiBBL0IgdGVzdCBvbiB0aGUgcG9zaXRpb24gb2YgYSBiYW5uZXIgb24gYSB3ZWJzaXRlIHByb21vdGluZyBhIHBhcnRpY3VsYXIgaXRlbS4KCkEvQiB0ZXN0aW5nIEEgbWV0aG9kIGNvbXBhcmluZyB0d28gdmVyc2lvbnMgb2YgYSB3ZWIgcGFnZSwgZW1haWwsIGZseWVyIG9yIG90aGVyIG1hcmtldGluZyBkZXZpY2UgYWdhaW5zdCBlYWNoIG90aGVyIHRvIGRldGVybWluZSB3aGljaCB2ZXJzaW9uIHBlcmZvcm1zIGJldHRlci4gQXMgaXQgaXMgZXNzZW50aWFsbHkgYSBjb250cm9sbGVkIGV4cGVyaW1lbnQsIHRoZSBkZXNpZ24gc2hvdWxkIHRyeSB0byBlbnN1cmUgdGhhdCB0aGUgZ3JvdXBzIGV4cGVyaWVuY2luZyBib3RoIHZlcnNpb25zIG9mIHRoZSBtYXJrZXRpbmcgZGV2aWNlIGFyZSBlcXVpdmFsZW50IGFuZCByZXByZXNlbnRhdGl2ZSBvZiB0aGUgcG9wdWxhdGlvbi4KCllvdSBzZWxlY3RlZCBmaXZlIGRheXMgYXQgcmFuZG9tIGxhc3QgbW9udGggYW5kIHRoZW4gcmFuZG9tbHkgc2VsZWN0ZWQgMjAwIG9mIGVhY2ggc2FtcGxlZCBkYXnigJlzIHVzZXJzIGludG8gZ3JvdXAgQSBhbmQgYW5vdGhlciAyMDAgb2YgdGhhdCBkYXnigJlzIHVzZXJzIGludG8gZ3JvdXAgQi4gR3JvdXAgQSBjb250aW51ZWQgdG8gYmUgc2hvd24gdGhlIGJhbm5lciBhdCB0aGUgcmlnaHQgaGFuZCBzaWRlIG9mIHRoZSB3ZWJwYWdlIChpdHMgdXN1YWwgcG9zaXRpb24pIHdoaWxlIGdyb3VwIEIgd2FzIHNob3duIHRoZSBiYW5uZXIgYXQgdGhlIHRvcCBvZiB0aGUgcGFnZS4gWW91IG1vbml0b3JlZCBlYWNoIHNhbXBsZWQgdXNlcuKAmXMgaW50ZXJhY3Rpb25zIHdpdGggdGhlIHdlYnNpdGUsIGluIHBhcnRpY3VsYXIgdGhlIOKAmGNsaWNrIHRocm91Z2ggcmF0ZeKAmSAoQ1RSKSBvbiB0aGUgYmFubmVyLCBpLmUuIHdoYXQgcHJvcG9ydGlvbiBvZiBzYW1wbGVkIHVzZXJzIGNsaWNrZWQgb24gdGhlIGJhbm5lci4gWW91IHdhbnQgdG8gdXNlIHRoZSBzYW1wbGVkIGRhdGEgdG8gdGVzdCB0aGUgaHlwb3RoZXNpcyB0aGF0IHdlYnNpdGUgdXNlcnMgb3ZlcmFsbCBhcmUgbW9yZSBsaWtlbHkgdG8gY2xpY2sgb24gdGhlIGJhbm5lciBpZiBwb3NpdGlvbmVkIGF0IHRoZSB0b3Agb2YgdGhlIHBhZ2UKCgpRMiBBbnN3ZXIKVGVzdDogQ29tcGFyaW5nIG1lYW5zIGZyb20gdHdvIGluZGVwZW5kZW50IHNhbXBsZXMKCkh5cG90aGVzaXM6IE9uIGF2ZXJhZ2UsIGdyb3VwIEEgKGJhbm5lciBhdCB0aGUgcmlnaHQpIHdpbGwgaGF2ZSBDVFIgPSAwCk9uIGF2ZXJhZ2UsIGdyb3VwIEIgKGJhbm5lciBhdCB0b3ApIHdpbGwgaGF2ZSBDVFIgPiBncm91cCBBCgpNYXRoZW1hdGljYWwgbm90YXRpb246CkgwOiDOvDHiiJLOvDI9MApIQTogeMKvMeKIknjCrzIKCk1ldGhvZDoKUGVybXV0ZQoKClF1ZXN0aW9uIDMuCllvdSB3b3JrIGFzIGFuIGFuYWx5c3QgZm9yIGEgY2FyIG1hbnVmYWN0dXJpbmcgY29tcGFueSAtIHRoZXkgaGF2ZSBzcGVjaWZpYyBzdGFuZGFyZHMgdGhleSBtdXN0IG1lZXQgZm9yIHN0YW5kYXJkcyBhbmQgcmVndWxhdGlvbiBwdXJwb3Nlcy4gWW91IGhhdmUgYmVlbiBhc2tlZCB0byBjaGVjayB0aGUgcXVhbGl0eSBjb250cm9sIG9mIHRoZSBtYW51ZmFjdHVyZSBvZiBhIHBhcnRpY3VsYXIgY2FyIHBhcnQuIFlvdSBoYXZlIGJlZW4gZ2l2ZW4gZGF0YSBvbiBhIHNhbXBsZSBvZiAyMDAgcGFydHMgcHJvZHVjZWQgb3ZlciB0aGUgcGVyaW9kIG9mIGEgd2VlayAodGhlIHNhbXBsZWQgcGFydHMgd2VyZSBwdWxsZWQgYXQgcmFuZG9tIGZyb20gdGhlIHByb2R1Y3Rpb24gbGluZSBhbmQgbWVhc3VyZWQ6IHRoZSBmYWN0b3J5IHByb2R1Y2VkIGEgbG90IG1vcmUgdGhhbiAyMDAgcGFydHMgdGhhdCB3ZWVrKS4gVGhlIHNwZWNpZmljYXRpb24gb2YgdGhlIHBhcnQgc3RpcHVsYXRlcyBhIHdpZHRoIG9mIDE0NW1tLCBhbmQgdGhlIG1hbnVmYWN0dXJpbmcgcHJvY2VzcyBpcyBzYWlkIHRvIGhhdmUg4oCYZHJpZnRlZOKAmSBpZiB0aGUgbWVhbiB3aWR0aCBvZiBwYXJ0cyBkaWZmZXJzIHNpZ25pZmljYW50bHkgZnJvbSAxNDVtbS4gWW91IHdhbnQgdG8gdXNlIHRoZSBzYW1wbGVkIG1lYXN1cmVtZW50cyB0byB0ZXN0IHdoZXRoZXIgdGhlIHByb2Nlc3Mgb3ZlcmFsbCBoYXMgZHJpZnRlZC4KClEzIEFuc3dlcgpUZXN0OiBPbmUgc2FtcGxlIG1lYW4gKHRoZSBzYW1wbGUgb2YgMjAwLCBhbmQgY2hlY2tpbmcgdGhlIG1lYW4gb2YgdGhhdCB3ZWVrLCB0aGUgMjAwIHNhbXBsZXMpLAp0d28gc2lkZWQgdGVzdCAoY2hlY2tpbmcgZm9yIGlmIGl0IGRpZmZlcnMpCgpIeXBvdGhlc2lzCkgwOiBUaGUgbWVhbiBpcyA9IDE0NSBtbQpIQTogVGhlIG1lYW4gPS89IDE0NQoKTWF0aGVtYXRpY2FsIG5vdGF0aW9uCkgwOs68MD0gMTQ1bW0KSEE6zrwwPS89IDE0NW1tCgpNZXRob2QKQm9vdHN0cmFwCgoKIyBQYXJ0IDMgLSBGb3IgdGhlIDMgYnVzaW5lc3MgcHJvYmxlbXMgc3RhdGVkIGFib3ZlLCBpbWFnaW5lIHdlIHBlcmZvcm1lZCB5b3UgZ290IHRoZSBmb2xsb3dpbmcgcC12YWx1ZXMgKHdpdGggdGhlIGdpdmVuIHNpZ25pZmljYW5jZSBsZXZlbHMpIHdyaXRlIG91dCB5b3VyIGludGVycHJldGF0aW9uIG9mIHRoZSByZXN1bHRzLgoKClF1ZXN0aW9uIDEuCkNvZmZlZSBzaG9wIHByb2JsZW0uIFNpZ25pZmljYW5jZSBsZXZlbDogMC4wNSwgY2FsY3VsYXRlZCBwCi12YWx1ZTogMC4wNwpgYGB7cn0KCmBgYAoKUXVlc3Rpb24gMi4KV2Vic2l0ZSBjb21wYW55IHByb2JsZW0uIFNpZ25pZmljYW5jZSBsZXZlbDogMC4wMSwgcAotdmFsdWU6IDAuMDA2CmBgYHtyfQoKYGBgCgoKUXVlc3Rpb24gMy4KTWFudWZhY3R1cmluZyBjb21wYW55IHByb2JsZW0uIFNpZ25pZmljYW5jZSBsZXZlbDogMC4wNSwgcAotdmFsdWU6IDAuNTUKYGBge3J9CgpgYGAKCgo=</div>
 
 
 
