@@ -150,6 +150,8 @@ obs_stat_domest <- domesticated_prop %>%
   filter(is_domesticated_flag == "is_domesticated") %>%
   pull()
 
+# this should also have been simulate 
+
 # Generating the null distribution
 null_dist_domest <- domesticated_prop %>%
   specify(response = is_domesticated_flag, success = "is_domesticated") %>%
@@ -197,11 +199,12 @@ H0: On average, = 40% know about the coffee shop
 HA: > 40% know about the coffee shop
 
 Mathmatical notation:
-H0: H0:μ0.4 = a
-HA: H0:μ0.4 > a
+H0: μ0.4 = a
+HA: μ0.4 > a
 
 Method: bootstrap
-
+Note after answers released: this should have been simulation, not bootstrap.
+Note: in the HA, the > in the alternative is flipped
 
 Question 2.
 You work for a website design company and have performed an A/B test on the position of a banner on a website promoting a particular item.
@@ -209,7 +212,6 @@ You work for a website design company and have performed an A/B test on the posi
 A/B testing A method comparing two versions of a web page, email, flyer or other marketing device against each other to determine which version performs better. As it is essentially a controlled experiment, the design should try to ensure that the groups experiencing both versions of the marketing device are equivalent and representative of the population.
 
 You selected five days at random last month and then randomly selected 200 of each sampled day’s users into group A and another 200 of that day’s users into group B. Group A continued to be shown the banner at the right hand side of the webpage (its usual position) while group B was shown the banner at the top of the page. You monitored each sampled user’s interactions with the website, in particular the ‘click through rate’ (CTR) on the banner, i.e. what proportion of sampled users clicked on the banner. You want to use the sampled data to test the hypothesis that website users overall are more likely to click on the banner if positioned at the top of the page
-
 
 Q2 Answer
 Test: Comparing means from two independent samples
@@ -220,6 +222,7 @@ On average, group B (banner at top) will have > CTR
 Mathematical notation:
 H0: μ1−μ2=0
 HA: x¯1−x¯2
+Note after answers: HA should have been X1 < X2
 
 Method:
 Permute
@@ -237,8 +240,8 @@ H0: The mean is = 145 mm
 HA: The mean =/= 145
 
 Mathematical notation
-H0:μ0= 145mm
-HA:μ0=/= 145mm
+H0:μ = 145mm
+HA:μ =/= 145mm
 
 Method
 Bootstrap
@@ -248,28 +251,22 @@ Bootstrap
 
 
 Question 1.
-Coffee shop problem. Significance level: 0.05, calculated p
--value: 0.07
+Coffee shop problem. Significance level: 0.05, calculated p-value: 0.07
 
 Answer:
 p value is less than 0.05 and therefore the null hypothesis is failed to be
 rejected, so on average 40% of the population of 30000 know about the 
 coffee shop.
 
-
 Question 2.
-Website company problem. Significance level: 0.01, p
--value: 0.006
+Website company problem. Significance level: 0.01, p-value: 0.006
 
 Answer:
 The null hypothesis is rejected, so on average the CTR when the banner is 
 at the top is greater
 
-
 Question 3.
-Manufacturing company problem. Significance level: 0.05, p
--value: 0.55
-
+Manufacturing company problem. Significance level: 0.05, p-value: 0.55
 
 Answer:
 The null hypothesis is failed to be rejected, meaning there is not significant
