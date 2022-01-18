@@ -3,52 +3,164 @@ title: "R Notebook"
 output: html_notebook
 ---
 
+```{r}
+library(tidyverse)
+library(GGally)
+```
+
+
 Week 10 Day 2 Homework
 
 1 MVP
 
 Load the diamonds.csv data set and undertake an initial exploration of the data. You will find a description of the meanings of the variables on the relevant Kaggle page
 ```{r}
+diamonds <- read_csv("data/diamonds.csv")
 
+head(diamonds)
+summary(diamonds)
+
+# there are no NA values.
+
+# the x, y, z, columns appear a bit confusing, but from the information on Kaggle,
+# these are the sizes.
 ```
 
-We expect the carat of the diamonds to be strong correlated with the physical dimensions x, y and z. Use ggpairs() to investigate correlations between these four variables.
+We expect the carat of the diamonds to be strongly correlated with the physical dimensions x, y and z. Use ggpairs() to investigate correlations between these four variables.
 ```{r}
+ggpairs(diamonds)
+# running ggpairs() with diamonds directly took a long time to load, it generated a lot of graphs, which were difficult to interpret.
+# reflecting on this, and re-reading the question, I will narrow down which columns are included when I run the function, and try again.
+
+diamonds %>%
+  select(carat, x, y, z) %>%
+  ggpairs()
+
+# This is better - it was quicker to load, and easier to interpret. The automatically calculated correlation values are very high,
+# and the graphs show a correlation.
 
 ```
 
 So, we do find significant correlations. Let’s drop columns x, y and z from the dataset, in preparation to use only carat going forward.
 ```{r}
+diamonds_trim <- diamonds %>%
+  select(-c(x, y, z))
+
+# dropping columns x, y, z, from dataset and saving to a new variable
 
 ```
 
 We are interested in developing a regression model for the price of a diamond in terms of the possible predictor variables in the dataset.
-```{r}
-
-```
-
 Use ggpairs() to investigate correlations between price and the predictors (this may take a while to run, don’t worry, make coffee or something).
 ```{r}
+ggpairs(diamonds_trim)
+# this is what I ran earlier, which I know takes a while, and is difficult to interpret.
+
+# along the same lines as with carat, x, y, and z, I've narrowed down what I'm looking at to make it
+# easier to read and quicker to run (the groups are by categorical / continuous)
+
+diamonds_trim %>%
+  select(price, cut, color, clarity) %>%
+  ggpairs()
+  
+diamonds_trim %>%
+  select(price, depth, table, carat) %>%
+  ggpairs()
+
+
+# From my plots, carat appears to be a good predictor. Table could also be (from the
+# information on Kaggle, table is the width of the top of the diamond, relative to the widest point)
+# As for cut and color, these don't give automatic calculations so it is difficult to interpret these results.
+# It appears that cut and clarity could be normally distributed (but this could also be 
+# by chance) - so these might be good indicators.
 
 ```
 
 Perform further ggplot visualisations of any significant correlations you find.
 ```{r}
+diamonds_trim %>%
+  ggplot(aes(x = price, y = carat)) +
+  geom_point() +
+  theme_minimal()
+
+# there appears to be a correlation between price and carat, as evidenced here
+
+diamonds_trim %>%
+  ggplot(aes(x = price, y = carat, color = clarity)) +
+  geom_point() +
+  theme_minimal() +
+  facet_wrap(~clarity)
+
+# this is a plot I have added in after completing the regression
+# This is a visualization of the relationship between price, carat, and clarity
+
+diamonds_trim %>%
+  ggplot(aes(x = depth, y = table)) +
+  geom_point() +
+  theme_minimal()
+
+# there could be a correlation between table and depth, as evidenced here
 
 ```
 
 Shortly we may try a regression fit using one or more of the categorical predictors cut, clarity and color, so let’s investigate these predictors. Investigate the levels of these predictors. How many dummy variables do you expect for each of them?
 ```{r}
+# cut
+# consists of: Fair, Good, Very Good, Premium, Ideal
+# = 5, therefore I would expect 4 dummy variables
+# these are all in the dataset
+diamonds_trim %>%
+  distinct(cut)
+
+# clarity
+# consists of: SI2, SI1, VS2, VS1, VVS2, VVS1, IF
+# = 7, therefore I would expect 6 BUT when running distinct(), there is an I1 in
+# the dataset (this may be a SI2 which was mistakenly entered as I2, but it is
+# not possible to know, therefore I must assume that the data is correct) - therefore I expect 7
+diamonds_trim %>%
+  distinct(clarity)
+
+# color 
+# consists of J (worst) to D (best)
+# Going by alphabet, I would expect 6 (7 letters berween J and D)
+# these are all in the dataset
+diamonds_trim %>%
+  distinct(color)
 
 ```
 
 Start with simple linear regression. Regress price on carat and check the regression diagnostics.
 ```{r}
+model_price_carat <- lm(price ~ carat, data = diamonds_trim)
+
+summary(model_price_carat)
+
+# the p-value is low (under 0.05)
+# the R value is 84.9%
+# the error rate is very high
+
+# The fitted coeffcient seems too high; it's 7756, but when I swap the order of
+# price and carat), it's too low (1.095e-04). It also doesn't make sense why
+# price would be in the table, when price is what I'm trying to predict;
+# price is the response, and I'm using carat as a predictor, so I'll accept the value 7756. 
 
 ```
 
 Add another predictor of your choice. Check your assumptions, diagnostics, and interpret the model.
 ```{r}
+model_carat_price_clarity <- lm(price ~ carat + clarity, data = diamonds_trim)
+
+summary(model_carat_price_clarity)
 
 ```
+It has given me 7 dummy variables for clarity, which I expected.
 
+The r2 value is 89.4%, so 89.4% of the variation is accounted for by this model.
+Additionally, the p-value is below 0.05, meaning it is statistically significant.
+
+Interpretation:
+When all other predictor variables are held constant, an increase in 1 carat unit
+increases the price by 8440
+
+
+The R2 value is 89.4%, so there is a very good fit of this model, and the p-value is below 0.05.
