@@ -1,0 +1,54 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+Week 10 Day 2 Homework
+
+1 MVP
+
+Load the diamonds.csv data set and undertake an initial exploration of the data. You will find a description of the meanings of the variables on the relevant Kaggle page
+```{r}
+
+```
+
+We expect the carat of the diamonds to be strong correlated with the physical dimensions x, y and z. Use ggpairs() to investigate correlations between these four variables.
+```{r}
+
+```
+
+So, we do find significant correlations. Let’s drop columns x, y and z from the dataset, in preparation to use only carat going forward.
+```{r}
+
+```
+
+We are interested in developing a regression model for the price of a diamond in terms of the possible predictor variables in the dataset.
+```{r}
+
+```
+
+Use ggpairs() to investigate correlations between price and the predictors (this may take a while to run, don’t worry, make coffee or something).
+```{r}
+
+```
+
+Perform further ggplot visualisations of any significant correlations you find.
+```{r}
+
+```
+
+Shortly we may try a regression fit using one or more of the categorical predictors cut, clarity and color, so let’s investigate these predictors. Investigate the levels of these predictors. How many dummy variables do you expect for each of them?
+```{r}
+
+```
+
+Start with simple linear regression. Regress price on carat and check the regression diagnostics.
+```{r}
+
+```
+
+Add another predictor of your choice. Check your assumptions, diagnostics, and interpret the model.
+```{r}
+
+```
+
