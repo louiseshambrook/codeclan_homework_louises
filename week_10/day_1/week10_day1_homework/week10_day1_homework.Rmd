@@ -35,9 +35,13 @@ cor(project_management$estimated_length, project_management$actual_length)
 
 Perform a simple linear regression using actual_length as the dependent variable, and estimated_length as the independent variable. Save the model object to a variable.
 ```{r}
-project_model <- lm(estimated_length ~ actual_length, project_management)
+project_model <- lm(actual_length ~ estimated_length, project_management)
 
-# estimated_length is a FUNCTION of actual, ie it depends on the actual length, hence why it is first (because R is a functional language, and states its intended output first)
+# estimated_length is a FUNCTION of actual, ie it depends on the actual length, hence why it is first
+
+# after reading answers - it is the OTHER way around.
+# if estimated_length is a FUNCTION OF actual_length, actual_length is stated FIRST
+# just like, if height is a FUNCTION of weight, it will be (height ~ weight)
 ```
 
 Interpret the regression coefficient of estimated_length (i.e. slope, gradient) you obtain from the model. How do you interpret the r2 value reported by the model?
@@ -58,6 +62,8 @@ janitor::clean_names(glance(project_model))
 ```
 In this case, r2 is 65% - there is a good fit of the line, but it isn't very high.
 
+the object estimated_length, and, estimate = regression. So 1.22 is the regression number.
+
 Is the relationship statistically significant? Remember, to assess this you need to check the p-value of the regression coefficient (or slope/gradient). But you should first check the regression diagnostic plots to see if the p-value will be reliable (don’t worry about any outlier points you see in the diagnostic plots, we’ll return to them in the extension).
 ```{r}
 autoplot(project_model)
@@ -66,5 +72,3 @@ autoplot(project_model)
 Is it statistically significant?
 
 No. It is above 0.05 (on both counts).
-
-Even then, before being able to check if we can rely on the p value, the QQ plot does not follow the line.
