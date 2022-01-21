@@ -1,0 +1,23 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+Week 10 - Weekend Homework - Model Building
+
+Investigate the avocado dataset, in particular, the AveragePrice of avocados.
+
+Focus on either explanatory, or predictive model.
+
+As part of MVP, to not just run the code and build the model, but also interpret results and write thinking and comments in the script.
+
+```{r}
+library(tidyverse)
+library(modelr)
+library(GGally)
+```
+
+```{r}
+
+```
+

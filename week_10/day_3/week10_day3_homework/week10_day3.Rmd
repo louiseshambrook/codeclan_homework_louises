@@ -1,0 +1,90 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+Building an explantory model
+
+
+```{r}
+library(tidyverse)
+library(car)
+library(modelr)
+library(GGally)
+
+house_data <- read_csv("data/kc_house_data.csv")
+```
+
+Q1 - Tidy up the data
+
+```{r}
+clean_house_data <- house_data %>%
+  select(-c("id", "date", "zipcode", "sqft_living15", "sqft_lot")) %>%
+  mutate(waterfront = as.logical(waterfront),
+         renovated = as.logical(yr_renovated)) %>%
+  mutate(condition = as.factor(condition),
+         grade = as.factor(grade))
+```
+
+Q3  - use alias to check for aliased variables, and then remove these
+```{r}
+alias(price ~ ., data = clean_house_data)
+```
+So, I can see that:
+
+sqft_basement is interacting with sqft_living positively
+sqft_basement is interacting with sqft_above negatively
+
+
+sqft_basement can be computed from just sqft_living - sqft_above.
+
+The answers suggest to drop only sqft_living, I would probably have dropped both living and above. 
+
+```{r}
+clean_house_data <- clean_house_data %>%
+  select(-sqft_living)
+
+```
+
+Q4 - build model manually and systematically, to include up to four main effects.
+```{r}
+clean_house_data %>%
+  select_if(is.numeric) %>%
+  ggpairs()
+
+# from these, I would include:
+# bathroom
+# sqft_above (highest)
+
+houses_tidy_nonnumeric <- clean_house_data %>%
+  select_if(function(x) !is.numeric(x))
+
+houses_tidy_nonnumeric$price <- clean_house_data$price
+
+ggpairs(houses_tidy_nonnumeric)
+# from these, I would include
+# grade
+# waterfront
+
+```
+
+So my choices are
+
+sqft_above
+bathroom
+grade
+waterfront
+
+
+Plot them in these order:
+
+grade (but try my other ones)
+
+
+then add in bathroom
+
+sqft_above
+
+waterfront
+
+
