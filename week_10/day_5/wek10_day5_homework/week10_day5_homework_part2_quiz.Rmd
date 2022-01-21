@@ -1,0 +1,67 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+Week 10 Day 5 - Weekend Homework
+Part 2 - Homework Quiz
+
+# Q1.
+I want to predict how well 6 year-olds are going to do in their final school exams. Using the following variables am I likely under-fitting, fitting well or over-fitting? Postcode, gender, reading level, score in maths test, date of birth, family income.
+
+### Answer
+This would likely be overfitting as there are too many variables being used.
+
+
+# Q2.
+If I have two models, one with an AIC score of 34,902 and the other with an AIC score of 33,559 which model should I use?
+
+### Answer
+The second one - with AIC scores, lower is better.
+
+
+#Q3.
+I have two models, the first with: r-squared: 0.44, adjusted r-squared: 0.43. The second with: r-squared: 0.47, adjusted r-squared: 0.41. Which one should I use?
+
+### Answer
+The first one, as for adjusted r-squared values, larger values are better. In the first model, the adj r-sq is very close to the r-sq, but in the second one, it has gone below the r-sq value of the first one, and therefore could appear that there are too many variables which the model is penalising (although that model may have the higher r-sq value).
+
+# Q4.
+I have a model with the following errors: RMSE error on test set: 10.3, RMSE error on training data: 10.4. Do you think this model is over-fitting?
+
+### Answer
+Yes - the RMSE should be smaller in the training data set, as this is the data that has been used to train the model and the model be able to predict this data better than the test set(which it is not, according to the RMSE values).
+
+
+# Q5.
+How does k-fold validation work?
+
+### Answer
+
+K-fold validation works by dividing a sample into 5 groups (a,b,c,d,e). One group (b,c,d,e) is used to train the model, and the remaining group is used to test the model (a). This is then repeated split by group a,c,d,e and tested by group b. This continues through all 5 groups. 
+
+
+# Q6.
+What is a validation set? When do you need one?
+
+### Answer
+
+A sample may be split into a test/train split, 20/80. The train split may then be split into a k-fold validation group. This will test and train the model with internal data. Once the data is verified, external testers may then validate the model with the test group that were not a part of training the model to verify the model before releasing to production.
+
+
+# Q7.
+Describe how backwards selection works.
+
+### Answer
+
+Similar to forwards selection in the methodical and stage wise selection, except from the starting point, all variables are entered into the model, and only the variables which are found to have no or little to no impact or difference to the outcome of the model are removed.
+
+
+
+# Q8.
+Describe how best subset selection works.
+  
+### Answer
+
+  
+

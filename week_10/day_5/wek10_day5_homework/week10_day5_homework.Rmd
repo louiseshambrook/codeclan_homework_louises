@@ -199,4 +199,226 @@ There are still two distinct groups in residual vs fitted, and scale v location 
 As this is the best accounting for variation I have found so far, I will proceed with this model.
 
 
+I will now progress with adding the second variable, i.e. building the second part onto the model.
+To do so, I will begin with exploring the correlations in ggpairs again (and in this, removing is_organic, which has already been used, and region, which has too many)
+
+```{r}
+clean_avocado %>%
+  select(-c("x1", "region", "is_organic")) %>%
+  ggpairs()
+
+```
+It's a similar story, the following look good to explore:
+total_volume
+four_046
+four_225
+four_770
+total_bags
+small_bags
+large_bags
+x_large_bags
+
+In this case, I will begin with total_volume and four_046
+
+```{r}
+model_2_a <- lm(average_price ~ is_organic + total_volume, data = clean_avocado)
+model_2_a
+```
+
+Checking the summary and diagnostic plot
+```{r}
+summary(model_2_a)
+```
+The model is still statisticall significant, but the variation covered has only gone up incrementally from the first model.
+
+```{r}
+par(mfrow = c(2, 2))
+plot(model_2_a)
+```
+Looking at the diagnostic plots, there are now 3 distinct groups, and it is more evident that the model struggles as the values get higher (can be seen in residuals v fitted). The QQ plot still doesn't look too bad though.
+
+
+I will now look at the four_046
+```{r}
+model_2_b <- lm(average_price ~ is_organic + four_046, data = clean_avocado)
+model_2_b
+```
+
+Looking at the summary stats for this plot
+```{r}
+summary(model_2_b)
+```
+This is marginally better; 38.43 vs 38.19.
+
+I will check the diagnostic plots
+```{r}
+par(mfrow = c(2, 2))
+plot(model_2_b)
+```
+This is the same story as total_volume.
+
+I will check month to see if this has any impact on the performance of the model, as it seems that this model does not response well to continuous variables.
+
+```{r}
+model_2_c <- lm(average_price ~ is_organic + month, data = clean_avocado)
+model_2_c
+```
+Checking the summary statistics
+```{r}
+summary(model_2_c)
+```
+Surprisingly, this does increase the r-sq value somewhat, and it also remains statistically significant.
+
+I will now check the diagnostic plots.
+```{r}
+par(mfrow = c(2, 2))
+plot(model_2_c)
+```
+There is good, and bad news in this plot. There are still two distinct groups in the model, however the spread across the y axis in the residual v fitted has resolved and they are better distributed. The downside is, the residuals v leverage plot is not looking as good.
+
+
+Nonetheless, I will proceed with these two variables. Prior to doing so, I will check them against the single variable, using anova.
+```{r}
+anova(model_1_c, model_2_c)
+```
+This is also positive, the model is remaining statistically significant, with the added variable. I will proceed with these two (is_organic + month)
+
+
+Similarly to going on to the 2nd variable, I will check the ggpairs again.
+
+```{r}
+clean_avocado %>%
+  select(-c("x1", "region", "is_organic", "month")) %>%
+  ggpairs()
+
+```
+The correlation with year appears low; however, I do wonder whether this will be different if this is implemented in the model.
+Aside from this, the remainders remain the same, so I will consider adding:
+year
+total_volume
+total_bags
+
+
+First build of third part of model
+```{r}
+model_3_a <- lm(average_price ~ is_organic + month + year, data = clean_avocado)
+model_3_a
+```
+
+Checking summary stats
+```{r}
+summary(model_3_a)
+```
+Similarly to month, year had a relatively good impact on the model - it increased from 40.57% to 42.1%, while remaining statistically significant.
+
+Checking the plots
+```{r}
+par(mfrow = c(2, 2))
+plot(model_3_a)
+```
+This has improved on the distribution in res v fitted, and has also improved the res v leverage plot. This is a strong contender.
+
+
+Next I will add total_volume.
+```{r}
+model_3_b <- lm(average_price ~ is_organic + month + total_volume, data = clean_avocado)
+model_3_b
+```
+
+Checking summary stats
+```{r}
+summary(model_3_b)
+```
+This only marginally increases the model from 2_c (from 40.5 to 40.7).
+
+Checking the plots
+```{r}
+par(mfrow = c(2, 2))
+plot(model_3_b)
+```
+This improves residuals v leverage greatly compared to 3_a, but otherwise does not have the same benefits. This may be an option for a 4th variable.
+
+I will lastly check total_bags
+```{r}
+model_3_c <- lm(average_price ~ is_organic + month + total_bags, data = clean_avocado)
+model_3_c
+```
+
+Checking summary stats
+```{r}
+summary(model_3_c)
+```
+This has the same stats as model 3_b
+
+Checking the plots
+```{r}
+par(mfrow = c(2, 2))
+plot(model_3_c)
+```
+This is also similar to model 3_b. 
+
+Before settling on year, I will check the anova.
+```{r}
+anova(model_2_c, model_3_a)
+```
+This confirms that 3_a is statistically significant compared to 2_c, so I will progress with this model, which is:
+is_organic + month + total_bags
+
+As I now have 3 variables in my model, I need to be cautious of overfitting, so I will begin to watch the adjusted r2 values relative to the r2 values.
+
+I feel confident in saying that the options I can explore are:
+total_volume
+four_046
+
+
+First build of fourth part of model
+```{r}
+model_4_a <- lm(average_price ~ is_organic + month + year + total_volume, data = clean_avocado)
+model_4_a
+```
+
+Checking summary stats
+```{r}
+summary(model_4_a)
+```
+There is again only 0.2 improvement (42.34 from 42.1).
+
+Checking plots
+```{r}
+par(mfrow = c(2, 2))
+plot(model_4_a)
+```
+This is similar to the previous one with total_volume, improvement in res v leverage.
+
+I will now check four_046
+```{r}
+model_4_b <- lm(average_price ~ is_organic + month + year + four_046, data = clean_avocado)
+model_4_b
+```
+
+
+Summary stats
+```{r}
+summary(model_4_b)
+```
+This is an improvement of .4, but the adjusted r2 has begun declining in the r2; 42.55 / 42.53 vs 42.1 / 42.09 in model 3_a. This indicates that the model is overfitting.
+
+For comprehension, I will check the plots.
+```{r}
+par(mfrow = c(2, 2))
+plot(model_4_b)
+```
+These plots are still not as strong as they were in model 3_a. Now there is a split in two groups, and the funnel in res v fitted has returned.
+
+There is one final option to consider to add to this model which are regions, which I will attempt - although there are many, and the model may struggle with these, I will explore this for the sake of completeness.
+```{r}
+model_4_c <- lm(average_price ~ is_organic + month + year + region, data = clean_avocado)
+model_4_c
+```
+
+Summary stats
+```{r}
+summary(model_4_c)
+```
+
 
