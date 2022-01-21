@@ -12,12 +12,191 @@ Focus on either explanatory, or predictive model.
 As part of MVP, to not just run the code and build the model, but also interpret results and write thinking and comments in the script.
 
 ```{r}
+# reading in libraries
+
 library(tidyverse)
 library(modelr)
 library(GGally)
+library(janitor)
+library(lubridate)
 ```
 
 ```{r}
+# reading in data
+
+avocado <- read_csv("data/avocado.csv")
+
+avocado <- avocado %>%
+  clean_names()
+
+# cleaning the variable names
+```
+
+```{r}
+# exploring the data
+
+# 4046 - is total number of avocados with PLU 4046 sold
+# 4225 - same
+# 4770 - same
+
+summary(avocado)
+# there doesn't appear to be missing values
+
+avocado %>%
+  filter(x_large_bags == 0.00)
+# there are 12048 of these obsverations - worth bearing in mind
+
+avocado %>%
+  distinct(region)
+# there are 54 distinct values in this category - worth bearing in mind
+
+avocado %>%
+  distinct(type)
+# this can be converted to column type "organic" and then TRUE/FALSE
+
+# date won't be needed, but the month can be extracted from this.
 
 ```
+
+
+```{r}
+# changing the type column to is_organic, and restructuring the data to match.
+# extracting the month from the date and dropping the date column
+# renaming the number columns - from experience, having columns start with x can be problematic in analysis
+# I have also come back and renamed these when beginning the model, as it is
+# unable to accept the names of variables as numbers, so to make life easier
+# as I'm renaming them anyways, I've renamed them with characters
+
+clean_avocado <- avocado %>%
+  mutate(month = month(date, label = FALSE, abbr = FALSE),
+         is_organic = if_else(type == "organic", TRUE, FALSE)
+         ) %>%
+  select(-c("date", "type")) %>%
+  rename("four_046" = x4046,
+    "four_225" = x4225,
+    "four_770" = x4770)
+
+```
+
+I will attempt to build an explanatory model.
+
+Steps
+
+Use ggpairs() to explore correlations (grouped, if need be)
+I will probably exclude region to begin with, as there are too many possibilities under this
+Choose my initial predictors
+Select a predictor, and build the first model
+Use summary() to explore the stats
+Use par(mfrow = c(2, 2)) and plot() to check the plots
+Check these for my first options and make my final selection for my first one
+Run ggpairs() again to select my second predictor, excluding the first predictor I added in
+Build the model
+Use par(mfrow = c(2, 2)) and plot() to check the plots
+Check these for my first options and make my final selection for my first one
+Use anova() to check for statistical significance / difference
+Repeat, until I have added 3 / 4
+
+```{r}
+clean_avocado %>%
+  select(-region) %>%
+  ggpairs()
+```
+
+It's a bit hard to read from this graph / overview, but the following ones could be good indicators:
+volume
+4046
+4225
+4770
+total
+small
+large
+x_large
+month
+
+Slimming it down a bit to look again, and be able to see better
+```{r}
+clean_avocado %>%
+  select(-c("x1", "region", "year", "is_organic")) %>%
+  ggpairs()
+```
+
+Now I can see that the follow indicators are good:
+total_volume
+four_046 (this has the highest, so this will be my first choice)
+four_225
+four_770
+total_bags
+small_bags
+large_bags
+
+Month may be good, but it's very in between.
+
+x_large_bags is not good.
+
+Getting a closer look at is_organic
+```{r}
+clean_avocado %>%
+  select(average_price, is_organic) %>%
+  ggpairs()
+```
+There appears to be some variation in this graph, so this is also a good one to go for.
+
+
+Time to build the first model.
+```{r}
+model_1_a <- lm(average_price ~ four_046, data = clean_avocado)
+model_1_a
+```
+
+```{r}
+summary(model_1_a)
+```
+From these statistics, what can be inferred is that there is a good p-value (under 0.05) so the model is statistically significant, but it also only accounts for 4.3% of the variation, which is very low.
+
+```{r}
+par(mfrow = c(2, 2))
+plot(model_1_a)
+```
+The diagnostic plots also aren't very good - the QQ plot is in a straight line, but in the residuals vs fitted, there are two clear groups (which is also seen in the scale/location plot). Time to try a different variable.
+
+I'll go back and look at the total_volume; the above variable is quite specific, so it could very well be throwing the model off.
+```{r}
+model_1_b <- lm(average_price ~ total_volume, data = clean_avocado)
+model_1_b
+```
+
+Checking the summary of the 2nd model
+```{r}
+summary(model_1_b)
+```
+This model is also statistically significant, but account for even less than the previous, only 3.7% here.
+
+Checking the diagnostic plots
+```{r}
+par(mfrow = c(2, 2))
+plot(model_1_b)
+```
+This is no better. There still appears to be two distinct groups.
+
+I will check the is_organic variable.
+```{r}
+model_1_c <- lm(average_price ~ is_organic, data = clean_avocado)
+model_1_c
+```
+
+```{r}
+summary(model_1_c)
+```
+This is the best variation I have uncovered so far, accounting for 37.9% of the variation, and the model is also statistically significant.
+
+I will proceed to check the diagnostic plots.
+```{r}
+par(mfrow = c(2, 2))
+plot(model_1_b)
+```
+There are still two distinct groups in residual vs fitted, and scale v location - but the QQ plot looks pretty well fitted.
+
+As this is the best accounting for variation I have found so far, I will proceed with this model.
+
+
 
