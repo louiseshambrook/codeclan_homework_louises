@@ -10,7 +10,7 @@ Part 2 - Homework Quiz
 I want to predict how well 6 year-olds are going to do in their final school exams. Using the following variables am I likely under-fitting, fitting well or over-fitting? Postcode, gender, reading level, score in maths test, date of birth, family income.
 
 ### Answer
-This would likely be overfitting as there are too many variables being used.
+This would likely be overfitting as there are too many variables being used in the model. 
 
 
 # Q2.
@@ -25,6 +25,7 @@ I have two models, the first with: r-squared: 0.44, adjusted r-squared: 0.43. Th
 
 ### Answer
 The first one, as for adjusted r-squared values, larger values are better. In the first model, the adj r-sq is very close to the r-sq, but in the second one, it has gone below the r-sq value of the first one, and therefore could appear that there are too many variables which the model is penalising (although that model may have the higher r-sq value).
+
 
 # Q4.
 I have a model with the following errors: RMSE error on test set: 10.3, RMSE error on training data: 10.4. Do you think this model is over-fitting?
@@ -54,14 +55,13 @@ Describe how backwards selection works.
 
 ### Answer
 
-Similar to forwards selection in the methodical and stage wise selection, except from the starting point, all variables are entered into the model, and only the variables which are found to have no or little to no impact or difference to the outcome of the model are removed.
-
+Similar to forwards selection in the methodical and stage wise selection, except the starting point is that all variables are entered into the model, and only the variables which are found to have no or little to no impact or difference to the outcome of the model are removed.
 
 
 # Q8.
 Describe how best subset selection works.
   
 ### Answer
-
+Whereas in forwards selection and backwards selection, there is a principle of once a variable has been entered into / removed from a model, it stays that way for keeps, in exhaustive model building and best variable selection, all variables are cross-referenced against the current model and the r-squared value they produce, such that the variable that is entered into the model will always be the one with the highest r-squared value. 
   
 

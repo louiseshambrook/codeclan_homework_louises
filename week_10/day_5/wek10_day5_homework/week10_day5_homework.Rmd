@@ -420,5 +420,24 @@ Summary stats
 ```{r}
 summary(model_4_c)
 ```
+This improves the model's r-squared rating, quite significantly, to 58.91. Additionally, many of the regions are statistically significant, some not - to check if they are overall, as a group, I will compare to 3_a using anova.
 
+```{r}
+anova(model_3_a, model_4_c)
+```
+This confirms that model_4_c is statistically significant compared to model 3_a.
+
+As a final check, I will explore the plots.
+
+```{r}
+par(mfrow = c(2, 2))
+plot(model_4_c)
+```
+This is an excellent distribution across res v fitted, and the same for scale v location. There is some tail off on the QQ plot, but on the whole, it fits the normal distribution.
+The model doesn't seem to fit the res v leverage plot great, but the other plots are strong enough to counter-balance, from my perspective.
+
+Therefore, my final explanatory model, is:
+
+lm(formula = average_price ~ is_organic + month + year + region, 
+    data = clean_avocado)
 
