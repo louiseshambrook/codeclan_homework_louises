@@ -189,4 +189,7 @@ titanic_test_pred %>%
   sensitivity(truth = survived_flag, estimate = pred)
 ```
 
+TPR - prob of someone surviving
+TNR - prob of someone not surviving
 
+Sensitivity and specificity depend on the question that you're setting, i.e. we are trying to predict the probability of someone not dying. 
