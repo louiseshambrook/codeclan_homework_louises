@@ -1,0 +1,205 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+```{r}
+# reading in libraries
+
+library(tidyverse)
+library(cluster)
+library(factoextra)
+library(dendextend)
+library(corrplot)
+library(janitor)
+library(broom)
+```
+
+Week 11 Day 3 Homework
+
+Clustering
+
+#1
+You have been provided some customer data from a shopping centre. Do some exploratory analysis on the data. Comment on findings.
+
+```{r}
+# reading in data
+customer_data <- read_csv("data/mall_customers.csv")
+
+# initial cleaning of data
+customer_data <- customer_data %>%
+  clean_names()
+
+```
+
+```{r}
+# initial exploration
+head(customer_data)
+
+```
+There are 5 variables, 200 observations. There is an annual income, and a spending score.
+
+```{r}
+customer_data %>%
+  ggplot(aes(x = annual_income_k, fill = gender)) +
+  geom_bar()
+```
+
+```{r}
+customer_data %>%
+  ggplot(aes(y = annual_income_k, x = age)) +
+  geom_point()
+```
+
+```{r}
+customer_data %>%
+  ggplot(aes(x = spending_score_1_100, y = gender)) +
+  geom_col()
+```
+```{r}
+# scaling the data
+
+customer_scale <- customer_data %>%
+  select(annual_income_k, spending_score_1_100) %>%
+  mutate_if(is.numeric, scale)
+```
+
+Visualising the scaled data initially, to check for clusters
+```{r}
+ggplot(customer_scale, aes(x = annual_income_k, y = spending_score_1_100)) +
+  geom_point()
+```
+Based on this, it appears that there could be 5(?) clusters. There definitely appear to be some groupings.
+
+
+#2
+We are interested in creating a marketing campaign to target customers based on their spending score and annual income. Perform a k-means clustering to find if there are meaningful clusters in the data to target the customers.
+
+
+Based on the above notes, I will set my centers (number of clusters) initially to 5.
+
+```{r}
+clustered_customer <- kmeans(customer_scale,
+                             centers = 5,
+                             nstart = 25)
+clustered_customer
+```
+
+To get this information in a better format, I'll use the tidy() function
+```{r}
+tidy(clustered_customer,
+     col.names = colnames(customer_scale))
+```
+
+Gathering my cluster information.
+```{r}
+max_k <- 20 
+
+k_customer_clusters <- tibble(k = 1:max_k) %>%
+  mutate(
+    kclust = map(k, ~ kmeans(customer_scale, .x, nstart = 25)), 
+    tidied = map(kclust, tidy),
+    glanced = map(kclust, glance),
+    augmented = map(kclust, augment, customer_data)
+  )
+
+k_customer_clusters
+```
+
+To begin to evaluate this model, I will first use the elbow method.
+```{r}
+clusterings <- k_customer_clusters %>%
+  unnest(glanced)
+
+clusterings
+```
+
+```{r}
+ggplot(clusterings, aes(x=k, y=tot.withinss)) +
+  geom_point() +
+    geom_line() +
+    scale_x_continuous(breaks = seq(1, 20, by = 1))
+```
+This doesn't really give me a clear answer. It just trails off - maybe there's a bend after 5.
+
+Next, I'll try the silhouette coefficient.
+```{r}
+fviz_nbclust(customer_scale, 
+             kmeans, 
+             method = "silhouette", 
+             nstart = 25)
+```
+This gives a clearer line of 5, which is in line with what I initially thought from my plot.
+
+Lastly, I'll try the gap statistic.
+
+```{r}
+fviz_nbclust(customer_scale, 
+             kmeans, 
+             method = "gap_stat", 
+             nstart = 25, 
+             k.max = 10)
+```
+This plot shows that 1 is best.
+
+An important note, is that the 3 methods are giving different results, so the model may not be well suited for k-means clustering.
+
+However, I will proceed with 5, which is what I had from the initial plot, and what two of the above tests suggest.
+
+
+#3
+Perform k-means clustering and chose a value of k.
+
+I will now completed the k-means clustering again, with the chosen number of 5.
+```{r}
+clustered_customer_confirmed <- kmeans(customer_scale,
+                             centers = 5,
+                             nstart = 25)
+clustered_customer_confirmed
+```
+
+```{r}
+tidy(clustered_customer_confirmed,
+     col.names = colnames(customer_scale))
+```
+
+
+Gathering my confirmed cluster information.
+```{r}
+max_k <- 20 
+
+k_customer_clusters <- tibble(k = 1:max_k) %>%
+  mutate(
+    kclust = map(k, ~ kmeans(customer_scale, .x, nstart = 25)), 
+    tidied = map(kclust, tidy),
+    glanced = map(kclust, glance),
+    augmented = map(kclust, augment, customer_data)
+  )
+
+k_customer_clusters
+```
+
+#4
+Visualise the clustering for your chosen value of k.
+
+I will now visualise the clustering.
+```{r}
+k_customer_clusters %>% 
+  unnest(cols = c(augmented)) %>%
+  filter(k <= 5) %>%
+  ggplot(aes(x = annual_income_k, y = spending_score_1_100)) +
+  geom_point(aes(color = .cluster))
+```
+
+#5
+Do you think the clustering seems a good fit for this data?
+
+Yes - it seems to fit the data pretty well. I've been able to model 5 distinct groups (see more below), which I was able to formulate a clear hypothesis about in my data exploration, through my testing (elbow test etc) to my final plot, where I would argue I have been able to model these.
+
+
+#6
+Comment on the attributes on one or two of the clusters (maybe even give them a label if you like - like in section 4.1 of the ‘Segmentation & clustering intro’ lesson).
+
+There are 5 clear clusters, A1, A2, B1, C1, C2.
+A1 have lower incomes, with low spending scores. 
+B1 are median incomes, with median spending scores. They are likely to be middle class, possibly young professional couples, as they sit across the middle of the dataset.
+C1 are higher incomes, low spending scores. They are likely to be single career-focused professionals, with no children.
