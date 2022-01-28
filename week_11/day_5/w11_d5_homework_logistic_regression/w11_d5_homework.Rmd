@@ -5,3 +5,149 @@ output: html_notebook
 
 Week 11 Day 5 Logistic Regression Homework
 
+You have been provided with a set of data on customer purchases of either ‘Citrus Hill’ (purchase = 'CH') or ‘Minute Maid’ (purchase = 'MM') orange juice, together with some further attributes of both the customer and the store of purchase. A data dictionary is also provided in the data directory.
+
+We would like you to build the best predictive classifier you can of whether a customer is likely to buy Citrus Hill or Minute Maid juice. Use logistic regression to do this. You should use either train-test splitting or cross-validation to evaluate your classifier. The metric for ‘best classifier’ will be highest AUC value either in the test set (for train-test splitting) or from cross-validation.
+
+Tips:
+- can do automated, or manual
+- the purchase variable will require wrangling
+- wrangle other categorical variables into factors
+- weekofpurchase is also tough; decide on a stategy
+- check for aliased variables
+
+```{r}
+# loading libraries
+
+library(tidyverse)
+library(janitor)
+library(GGally)
+library(janitor)
+library(modelr)
+library(broom)
+library(pROC)
+library(caret)
+
+```
+
+```{r}
+# loading data
+
+juice <- read_csv("data/orange_juice.csv")
+```
+
+```{r}
+# getting overview of data / EDA
+head(juice)
+```
+
+```{r}
+# looking closer at weekofpurchase - the problem is similar to the one in the PDA task
+
+juice %>%
+  select(WeekofPurchase) %>%
+  distinct(WeekofPurchase) %>%
+  arrange(WeekofPurchase)
+
+# there are 52 distinct rows, i.e. 1 per week. They can't be converted into months (would be 4.3), but they CAN be converted into quarters (13)
+```
+
+```{r}
+# cleaning the data
+
+juice_clean <- juice %>%
+  clean_names() %>%
+  mutate(purchase_mm = as.logical(ifelse(purchase == "MM", TRUE, FALSE)),
+         store_id = as.factor(store_id),
+         special_ch = as.factor(special_ch),
+         special_mm = as.factor(special_mm),
+         store7 = as.factor(store7),
+         store = as.factor(store)) %>%
+  select(-purchase, -weekof_purchase)
+
+
+```
+
+Checking for aliased variables
+```{r}
+alias(purchase_mm ~ ., data = juice_clean)
+```
+There are multiple here which are aliased.
+
+```{r}
+# removing aliased variables
+juice_clean <- juice_clean %>%
+  select(-store_id, -price_ch, -sale_price_ch, -disc_mm, -list_price_diff, -store7)
+
+```
+
+Examining relationships using ggpairs
+```{r}
+juice_clean %>%
+  ggpairs()
+```
+
+This initial plot is hard to read, so I will split it up
+```{r}
+juice_clean %>%
+  select(purchase_mm, price_mm, disc_ch, special_ch, special_mm, store) %>%
+  ggpairs()
+```
+
+```{r}
+juice_clean %>%
+  select(purchase_mm, loyal_ch, sale_price_mm, price_diff, pct_disc_mm, pct_disc_ch) %>%
+  ggpairs()
+```
+
+Based on the plots, the variables price_diff appears to have an impact.
+As does loyal_ch (there is a large variance in the mean).
+The store could also have an impact, but this could vary across the 5 levels.
+Lastly, sale_price, and special_ch, and special_mm, could also impact the model.
+
+Therefore, I will include in my model:
+loyal_ch
+store
+sale_price
+special
+
+```{r}
+juice_model <- glm(purchase_mm ~ loyal_ch,
+                   data = juice_clean,
+                   family = binomial(link = "logit"))
+
+
+
+
+
+
+
+
+
+
+```
+
+```{r}
+telecomms_model_1<- glm(churn ~ tenure,
+                        data = telecomms_clean,
+                        family = binomial(link = 'logit'))
+telecomms_model_1
+
+telecomms_1_with_pred <- telecomms_clean %>%
+  add_predictions(telecomms_model_1, type = "response")
+
+head(telecomms_1_with_pred)
+
+summary(telecomms_model_1)
+# the p value is less than 0.05, therefore stat sig
+
+tidy(telecomms_model_1) 
+# IS stat sig
+
+tidy(telecomms_model_2)
+# IS
+
+tidy(telecomms_model_3)
+# IS
+```
+
