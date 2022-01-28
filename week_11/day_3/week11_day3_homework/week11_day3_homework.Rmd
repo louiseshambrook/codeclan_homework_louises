@@ -167,7 +167,7 @@ Gathering my confirmed cluster information.
 ```{r}
 max_k <- 20 
 
-k_customer_clusters <- tibble(k = 1:max_k) %>%
+k_customer_clusters <- tibble(k = 2:max_k) %>%
   mutate(
     kclust = map(k, ~ kmeans(customer_scale, .x, nstart = 25)), 
     tidied = map(kclust, tidy),
