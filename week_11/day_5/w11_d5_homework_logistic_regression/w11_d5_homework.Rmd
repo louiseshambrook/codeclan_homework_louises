@@ -111,43 +111,165 @@ store
 sale_price
 special
 
+Building 1st test model, with loyal_ch
 ```{r}
-juice_model <- glm(purchase_mm ~ loyal_ch,
+juice_model_1a <- glm(purchase_mm ~ loyal_ch,
                    data = juice_clean,
                    family = binomial(link = "logit"))
 
+juice_1a_with_pred <- juice_clean %>%
+  add_predictions(juice_model_1a, type = "response")
 
+tidy(juice_model_1a)
 
+roc_1a_pred <- juice_1a_with_pred %>%
+  roc(response = purchase_mm, predictor = pred)
 
-
-
-
-
-
+auc(roc_1a_pred)
 
 ```
+
+Building 2nd test model, with store
+```{r}
+juice_model_1b <- glm(purchase_mm ~ store,
+                   data = juice_clean,
+                   family = binomial(link = "logit"))
+
+juice_1b_with_pred <- juice_clean %>%
+  add_predictions(juice_model_1b, type = "response")
+
+tidy(juice_model_1b)
+
+roc_1b_pred <- juice_1b_with_pred %>%
+  roc(response = purchase_mm, predictor = pred)
+
+auc(roc_1b_pred)
+
+```
+This is a stat sig model - but the AUC is less than loyal_ch.
 
 ```{r}
-telecomms_model_1<- glm(churn ~ tenure,
-                        data = telecomms_clean,
-                        family = binomial(link = 'logit'))
-telecomms_model_1
+juice_model_1c <- glm(purchase_mm ~ sale_price_mm,
+                   data = juice_clean,
+                   family = binomial(link = "logit"))
 
-telecomms_1_with_pred <- telecomms_clean %>%
-  add_predictions(telecomms_model_1, type = "response")
+juice_1c_with_pred <- juice_clean %>%
+  add_predictions(juice_model_1c, type = "response")
 
-head(telecomms_1_with_pred)
+tidy(juice_model_1c)
 
-summary(telecomms_model_1)
-# the p value is less than 0.05, therefore stat sig
+roc_1c_pred <- juice_1c_with_pred %>%
+  roc(response = purchase_mm, predictor = pred)
 
-tidy(telecomms_model_1) 
-# IS stat sig
+auc(roc_1c_pred)
+```
+This is also less than the 1st model.
 
-tidy(telecomms_model_2)
-# IS
+```{r}
+juice_model_1d <- glm(purchase_mm ~ special_mm,
+                   data = juice_clean,
+                   family = binomial(link = "logit"))
 
-tidy(telecomms_model_3)
-# IS
+juice_1d_with_pred <- juice_clean %>%
+  add_predictions(juice_model_1d, type = "response")
+
+tidy(juice_model_1d)
+
+roc_1d_pred <- juice_1d_with_pred %>%
+  roc(response = purchase_mm, predictor = pred)
+
+auc(roc_1d_pred)
+```
+This is the lowest. Therefore, I will go with the first one, loyal_ch.
+
+The first one I will try to add on, is store.
+```{r}
+juice_model_2a <- glm(purchase_mm ~ loyal_ch + store,
+                   data = juice_clean,
+                   family = binomial(link = "logit"))
+
+juice_2a_with_pred <- juice_clean %>%
+  add_predictions(juice_model_2a, type = "response")
+
+tidy(juice_model_2a)
+
+roc_2a_pred <- juice_2a_with_pred %>%
+  roc(response = purchase_mm, predictor = pred)
+
+auc(roc_2a_pred)
+```
+This is marginally higher than loyal_ch alone, but still stat sign.
+
+I will next try with sale_price_mm.
+```{r}
+juice_model_2b <- glm(purchase_mm ~ loyal_ch + sale_price_mm,
+                   data = juice_clean,
+                   family = binomial(link = "logit"))
+
+juice_2b_with_pred <- juice_clean %>%
+  add_predictions(juice_model_2b, type = "response")
+
+tidy(juice_model_2b)
+
+roc_2b_pred <- juice_2b_with_pred %>%
+  roc(response = purchase_mm, predictor = pred)
+
+auc(roc_2b_pred)
+```
+This is also stat sign, and marginally higher still than store.
+
+I will next try with special_mm.
+```{r}
+juice_model_2c <- glm(purchase_mm ~ loyal_ch + special_mm,
+                   data = juice_clean,
+                   family = binomial(link = "logit"))
+
+juice_2c_with_pred <- juice_clean %>%
+  add_predictions(juice_model_2c, type = "response")
+
+tidy(juice_model_2c)
+
+roc_2c_pred <- juice_2c_with_pred %>%
+  roc(response = purchase_mm, predictor = pred)
+
+auc(roc_2c_pred)
+```
+This is lower. Therefore, the best model so far is purchase_mm ~ loyal_ch + sale_price_mm.
+
+
+Still to do
+
+Plotting the data
+
+```{r}
+
+# telecomms_1_plot <- ggroc(data = list(model_1_tenure = roc_1_pred,
+#                                       model_2_senior = roc_2_pred,
+#                                       model_3_total_charges = roc_3_pred),
+#                           legacy.axes = TRUE) +
+#   coord_fixed()
 ```
 
+Completing cross validation
+
+
+```{r}
+# training the model
+# train_control <- trainControl(method = "repeatedcv",
+#                               number = 5,
+#                               repeats = 100,
+#                               savePredictions = TRUE,
+#                               classProbs = TRUE,
+#                               summaryFunction = twoClassSummary)
+
+# testing model 1, with tenure 
+# 
+# validation_model_1 <- train(churn ~ tenure,
+#                data = telecomms_clean,
+#                trControl = train_control,
+#                method = "glm",
+#                family = binomial(link = "logit"))
+# 
+# summary(validation_model_1)
+# validation_model_1$results
+```
