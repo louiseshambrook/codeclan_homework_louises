@@ -57,7 +57,7 @@ juice %>%
 
 juice_clean <- juice %>%
   clean_names() %>%
-  mutate(purchase_mm = as.logical(ifelse(purchase == "MM", TRUE, FALSE)),
+  mutate(purchase_mm = as.factor(ifelse(purchase == "MM", "T", "F")),
          store_id = as.factor(store_id),
          special_ch = as.factor(special_ch),
          special_mm = as.factor(special_mm),
@@ -234,42 +234,56 @@ roc_2c_pred <- juice_2c_with_pred %>%
 
 auc(roc_2c_pred)
 ```
-This is lower. Therefore, the best model so far is purchase_mm ~ loyal_ch + sale_price_mm.
+This is lower. Therefore, the best model so far is purchase_mm ~ loyal_ch + sale_price_mm, which is model juice_model_2c.
+
+Next, I will plot the data.
+```{r}
+ggroc(data = list(juice_model_2c = roc_2c_pred),
+      legacy.axes = TRUE) +
+  coord_fixed()
+```
+Visually, this looks like a good model.
 
 
-Still to do
+For the sake of comparison, I'll compare it to the other models.
+```{r}
+ggroc(data = list(juice_model_2c = roc_2c_pred,
+                  juice_model_2b = roc_2b_pred,
+                  juice_model_2a = roc_2a_pred,
+                  juice_model_1d = roc_1d_pred,
+                  juice_model_1c = roc_1c_pred,
+                  juice_model_1b = roc_1b_pred,
+                  juice_model_1a = roc_1a_pred),
+      legacy.axes = TRUE) +
+  coord_fixed()
+```
+Interestingly, this shows that one model may have had a higher AUC (2b). I will check.
 
-Plotting the data
+From checking the AUC values I calculated above, it is correct that model 2b is higher. Having used model 2c is a typographical error in my documentation, so it was good that I checked using the plot.
+
+The correct model is 2b, as the AUC is slightly higher than 2c (as above in my calculations).
+
+Lastly, I will now complete cross validation.
 
 ```{r}
-
-# telecomms_1_plot <- ggroc(data = list(model_1_tenure = roc_1_pred,
-#                                       model_2_senior = roc_2_pred,
-#                                       model_3_total_charges = roc_3_pred),
-#                           legacy.axes = TRUE) +
-#   coord_fixed()
+# train the model
+train_control <- trainControl(method = "repeatedcv",
+                              number = 5,
+                              repeats = 100,
+                              savePredictions = TRUE,
+                              classProbs = TRUE,
+                              summaryFunction = twoClassSummary)
 ```
-
-Completing cross validation
-
 
 ```{r}
-# training the model
-# train_control <- trainControl(method = "repeatedcv",
-#                               number = 5,
-#                               repeats = 100,
-#                               savePredictions = TRUE,
-#                               classProbs = TRUE,
-#                               summaryFunction = twoClassSummary)
+validation_model_1 <- train(purchase_mm ~ loyal_ch + sale_price_mm,
+               data = juice_clean,
+               trControl = train_control,
+               method = "glm",
+               family = binomial(link = "logit"))
 
-# testing model 1, with tenure 
-# 
-# validation_model_1 <- train(churn ~ tenure,
-#                data = telecomms_clean,
-#                trControl = train_control,
-#                method = "glm",
-#                family = binomial(link = "logit"))
-# 
-# summary(validation_model_1)
-# validation_model_1$results
+summary(validation_model_1)
+validation_model_1$results
+# this is throwing an error for the logical type column. ??
 ```
+I've used cross-validation to test/validate my model; it has a sensitivity of 86% and specificity of 73%. Therefore, it is reasonably good at using purchase_mm as a classifier for whether a customer is likely to buy citrus hill, or minute maid. 
